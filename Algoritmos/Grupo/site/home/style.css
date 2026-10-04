@@ -1,0 +1,398 @@
+*{
+    margin: 0;
+}
+
+
+body {
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    padding-top: 98px;
+}
+
+.header {
+background-color: #08253f;
+    color: #00CED1;
+    margin: 0px;
+    height: 95px;
+    display: flex;
+    justify-content: space-between;
+    border-bottom: solid 3px; color: #1565af;
+
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000;
+}
+
+/* .header {
+  
+} */
+
+.container{
+    background-image: url('icons/fundo2.svg');
+    /* height: 100vh; */
+    height: calc(100vh - 90px);
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+
+.textinho{
+    position: absolute;
+    top: 18%;
+    left: 130px;
+    color: white;
+    background-color: rgba(0, 20, 35, 0.65);
+    /* padding: 8px;
+    border-radius: 20px;
+    border: solid 1px; color: #ced7e6;  */
+    font-size: larger;
+    padding: 20px;
+    border-radius: 20px;
+    border: solid 1px; color: #ced7e6;
+}
+
+.texto-home{
+    position: absolute;
+    top: 25%;
+    left: 110px;
+    color: white;
+    font-size: larger;
+    font-size: 30px;
+    font-weight: 40px;
+    transform: scaleY(1.4);
+    transform: scaleX(1.0);
+    /* background-color: rgba(0, 20, 35, 0.65); */
+    padding: 20px;
+    /* border-radius: 20px;
+    border: solid 1px; color: #ced7e6;  */
+
+}
+
+h2{
+    position: absolute;
+    top: 75%;
+    left: 21px;
+    color: rgba(34, 140, 202, 0.89);
+    /* color: rgba(34, 141, 202, 0.623); */
+}
+
+.embaixo{
+     position: absolute;
+    top: 42%;
+    left: 165px;
+    font-size: 25px;
+    transform: scaleX(1.1);
+    color: rgb(175, 174, 174);
+    max-width: 900px;
+}
+
+.contexto{
+    position: absolute;
+    top: 47%;
+    left: 170px;
+    font-size: 25px;
+    transform: scaleX(1.1);
+    color: rgb(185, 184, 184);
+    max-width: 900px;
+}
+
+/* barra cinza */
+.contexto hr {
+    position: absolute;
+    top: 108px;
+    left: 0%;
+    border: none;
+    border-top: 3px solid rgba(255, 255, 255, 0.15);
+    border-radius: 5px;
+    margin: 40px 0;
+    
+    width: 230%;
+        
+    }
+
+    /* PARTE DE BAIXO */
+
+    .icones_baixo {
+    
+  
+
+    position: absolute;
+    bottom: 40px;
+    left: 0;
+    top: 650px;
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+    gap: 120px;
+    align-items: center;
+    text-align: center;
+
+    }
+
+    .icones_baixo img{
+
+    width: 128px;
+    height: 110px;
+    object-fit: contain;
+    filter: brightness(0) saturate(100%) invert(67%) sepia(50%) saturate(4646%) hue-rotate(143deg) brightness(101%) contrast(101%);
+    
+
+    }
+
+
+    
+
+
+
+    .icones_baixo h2{
+    
+    
+    position: static;      /* desfaz o position: absolute do h2 geral */
+    margin-top: 15px;      /* espaço entre o ícone e o texto */
+    max-width: 250px;      /* evita o texto ficar muito largo */
+    font-size: 40px;
+    color: rgba(254, 255, 255, 0.89);
+    
+    }
+
+       .icones_baixo p{
+        
+position: static;      /* desfaz o position: absolute do h2 geral */
+    margin-top: 15px;      /* espaço entre o ícone e o texto */
+    max-width: 250px;      /* evita o texto ficar muito largo */
+    font-size: 27px;
+    color: rgba(189, 202, 202, 0.89);
+    
+    }
+
+
+
+
+
+
+    /* .botoes{
+    display: flex;
+    gap: 34px;
+    margin-top: 90px;
+    }
+
+    .botoes button{
+     padding: 14px 30px;
+    background-color:rgba(43, 120, 165, 0.623);
+    color: white;
+    border: none;
+    border-radius: 15px;
+    font-size: larger;
+    cursor: pointer;
+   
+    
+    padding: 50px;
+    } */
+
+/* @media (max-width: 800px) {
+    .header {
+        background-color: red;
+    }
+} */
+
+/* LATERAL DO SITE */
+
+.logo img{
+    padding-left: 15px;
+    width: 90px;
+    height: 90px;
+   
+}
+
+.icone img{
+    display: flex;
+    padding-right: 15px;
+    padding-left: 22px;
+    width: 60px;
+    height: 60px;
+    margin-right: 20px;
+    
+    
+}
+
+.icone {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    
+    
+}
+
+.logo{
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    
+}
+.titulo{
+    color: #00CED1;
+}
+
+.navibar{
+    font-family: "Asap Sharp", sans-serif;
+    display: flex;
+    gap: 35px;
+    padding: 20px;
+    margin: 0;
+    list-style: none;
+    color: cyan;
+}
+
+li{
+    color: #00CED1;
+}
+
+.navibar a:hover,
+.agora{
+    color: #00CED1;
+    /* font-weight: bold; */
+    /* text-decoration: underline; */
+    font-size: 20px;
+    
+}
+a{
+    color: white;
+    text-decoration: none;
+    font-size: 20px;
+
+}
+
+.botoes{
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+    position: absolute;
+    top: 41%;
+    left: 1420px;
+    font-size: 17px;
+}
+
+
+
+.btn{
+    padding: 30px 45px;
+    background-color:  #2355a0;
+    /* border-bottom: solid; color: #1565af;  */
+    color: rgb(255, 255, 255);
+    border-radius: 15px;
+    font-size: larger;
+    cursor: pointer;
+    border: none; 
+    font-weight: bold;
+     font-family: Arial, Helvetica, sans-serif;
+    
+     
+}
+
+
+.botao-solucao,
+.botao-rato {
+    position: relative;
+}
+
+
+/* ÍCONE SOLUÇÃO */
+.botao-solucao img {
+    position: absolute;
+    width: 130px;
+    height: 130px;
+    object-fit: contain;
+    left: 50%;
+    bottom: calc(100% + 10px);
+    transform: translateX(-50%);
+}
+
+
+/* ÍCONE RATO */
+.botao-rato img {
+    position: absolute;
+    width: 150px;
+    height: 150px;
+    object-fit: contain;
+    left: 50%;
+    bottom: calc(100% + 10px);
+    transform: translateX(-50%);
+}
+
+/* EFEITOS PARA OS BOTOES */
+
+.btn:active {
+    transform: scale(0.95);
+    border: none;
+}
+
+.btn:hover {
+    background-color: rgba(34, 140, 202, 0.89);
+}
+
+.btn:active {
+    transform: translateY(4px);
+}
+
+
+
+
+
+
+
+
+
+
+/* ADAPTAÇÃO PARA OUTRO MONITOR */
+
+/* 
+@media (max-width: 1400px) {
+
+    .textinho {
+        top: 105px;
+        left: 45px;
+        padding: 15px;
+        font-size: 16px;
+    }
+
+    .texto-home {
+        top: 170px;
+        left: 45px;
+    }
+
+    .texto-home h1 {
+        font-size: 42px;
+    }
+
+    .texto-home h2 {
+        font-size: 39px;
+    }
+
+    .embaixo {
+        top: 305px;
+        left: 45px;
+        font-size: 19px;
+    }
+
+    .contexto {
+        top: 350px;
+        left: 45px;
+        font-size: 17px;
+        max-width: 650px;
+    }
+
+    .botoes {
+        top: 280px;
+        right: 25px;
+        left: auto;
+        gap: 20px;
+    }
+
+    .btn {
+        width: 220px;
+        height: 100px;
+        padding: 0;
+        font-size: 18px;
+    }
+} */
