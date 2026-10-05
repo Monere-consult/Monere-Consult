@@ -1,330 +1,217 @@
-*{
-    margin: 0;
+/* =========================================================
+   Monere Consult - página inicial
+   Layout proporcional: tudo escala com a largura da tela (vw),
+   com limites mínimo/máximo via clamp(). Sem @media.
+   Para aumentar/diminuir algo, mexa no valor do meio (vw).
+   ========================================================= */
+
+:root {
+    --header-h: clamp(56px, 3.4vw, 96px);
+    --ciano: #00CED1;
 }
 
+* {
+    margin: 0;
+    box-sizing: border-box;
+}
 
 body {
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
-    padding-top: 98px;
+    padding-top: var(--header-h);
 }
 
-.header {
-background-color: #08253f;
-    color: #00CED1;
-    margin: 0px;
-    height: 95px;
-    display: flex;
-    justify-content: space-between;
-    border-bottom: solid 3px; color: #1565af;
+a {
+    color: white;
+    text-decoration: none;
+    font-size: clamp(13px, 0.85vw, 22px);
+    transition: color 0.3s ease;
+}
 
+li {
+    color: var(--ciano);
+}
+
+/* ---------- HEADER ---------- */
+
+.header {
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
+    height: var(--header-h);
     z-index: 1000;
-}
-
-/* .header {
-  
-} */
-
-.container{
-    background-image: url('icons/fundo2.svg');
-    /* height: 100vh; */
-    height: calc(100vh - 90px);
-    background-repeat: no-repeat;
-    background-size: cover;
-}
-
-
-.textinho{
-    position: absolute;
-    top: 18%;
-    left: 130px;
-    color: white;
-    background-color: rgba(0, 20, 35, 0.65);
-    /* padding: 8px;
-    border-radius: 20px;
-    border: solid 1px; color: #ced7e6;  */
-    font-size: larger;
-    padding: 20px;
-    border-radius: 20px;
-    border: solid 1px; color: #ced7e6;
-}
-
-.texto-home{
-    position: absolute;
-    top: 25%;
-    left: 110px;
-    color: white;
-    font-size: larger;
-    font-size: 30px;
-    font-weight: 40px;
-    transform: scaleY(1.4);
-    transform: scaleX(1.0);
-    /* background-color: rgba(0, 20, 35, 0.65); */
-    padding: 20px;
-    /* border-radius: 20px;
-    border: solid 1px; color: #ced7e6;  */
-
-}
-
-h2{
-    position: absolute;
-    top: 75%;
-    left: 21px;
-    color: rgba(34, 140, 202, 0.89);
-    /* color: rgba(34, 141, 202, 0.623); */
-}
-
-.embaixo{
-     position: absolute;
-    top: 42%;
-    left: 165px;
-    font-size: 25px;
-    transform: scaleX(1.1);
-    color: rgb(175, 174, 174);
-    max-width: 900px;
-}
-
-.contexto{
-    position: absolute;
-    top: 47%;
-    left: 170px;
-    font-size: 25px;
-    transform: scaleX(1.1);
-    color: rgb(185, 184, 184);
-    max-width: 900px;
-}
-
-/* barra cinza */
-.contexto hr {
-    position: absolute;
-    top: 108px;
-    left: 0%;
-    border: none;
-    border-top: 3px solid rgba(255, 255, 255, 0.15);
-    border-radius: 5px;
-    margin: 40px 0;
-    
-    width: 230%;
-        
-    }
-
-    /* PARTE DE BAIXO */
-
-    .icones_baixo {
-    
-  
-
-    position: absolute;
-    bottom: 40px;
-    left: 0;
-    top: 650px;
-    width: 100%;
     display: flex;
-    justify-content: space-around;
-    gap: 120px;
+    justify-content: space-between;
+    background-color: #08253f;
+    border-bottom: 3px solid #1565af;
+}
+
+.logo {
+    display: flex;
     align-items: center;
-    text-align: center;
-
-    }
-
-    .icones_baixo img{
-
-    width: 128px;
-    height: 110px;
-    object-fit: contain;
-    filter: brightness(0) saturate(100%) invert(67%) sepia(50%) saturate(4646%) hue-rotate(143deg) brightness(101%) contrast(101%);
-    
-
-    }
-
-
-    
-
-
-
-    .icones_baixo h2{
-    
-    
-    position: static;      /* desfaz o position: absolute do h2 geral */
-    margin-top: 15px;      /* espaço entre o ícone e o texto */
-    max-width: 250px;      /* evita o texto ficar muito largo */
-    font-size: 40px;
-    color: rgba(254, 255, 255, 0.89);
-    
-    }
-
-       .icones_baixo p{
-        
-position: static;      /* desfaz o position: absolute do h2 geral */
-    margin-top: 15px;      /* espaço entre o ícone e o texto */
-    max-width: 250px;      /* evita o texto ficar muito largo */
-    font-size: 27px;
-    color: rgba(189, 202, 202, 0.89);
-    
-    }
-
-
-
-
-
-
-    /* .botoes{
-    display: flex;
-    gap: 34px;
-    margin-top: 90px;
-    }
-
-    .botoes button{
-     padding: 14px 30px;
-    background-color:rgba(43, 120, 165, 0.623);
-    color: white;
-    border: none;
-    border-radius: 15px;
-    font-size: larger;
-    cursor: pointer;
-   
-    
-    padding: 50px;
-    } */
-
-/* @media (max-width: 800px) {
-    .header {
-        background-color: red;
-    }
-} */
-
-/* LATERAL DO SITE */
-
-.logo img{
-    padding-left: 15px;
-    width: 90px;
-    height: 90px;
-   
+    gap: 10px;
 }
 
-.icone img{
-    display: flex;
-    padding-right: 15px;
-    padding-left: 22px;
-    width: 60px;
-    height: 60px;
-    margin-right: 20px;
-    
-    
+.logo img {
+    padding-left: 15px;
+    height: calc(var(--header-h) - 8px);
+    width: auto;
+}
+
+.titulo {
+    font-size: clamp(18px, 1.3vw, 34px);
+}
+
+.titulo-azul {
+    color: var(--ciano);
+}
+
+.titulo-branco {
+    color: white;
 }
 
 .icone {
     display: flex;
     align-items: center;
-    gap: 20px;
-    
-    
-}
-
-.logo{
-    display: flex;
-    align-items: center;
     gap: 15px;
-    
-}
-.titulo{
-    color: #00CED1;
 }
 
-.navibar{
+.icone img {
+    height: calc(var(--header-h) - 24px);
+    width: auto;
+    margin-right: 20px;
+}
+
+.navibar {
     font-family: "Asap Sharp", sans-serif;
     display: flex;
-    gap: 35px;
+    gap: clamp(16px, 1.5vw, 38px);
     padding: 20px;
-    margin: 0;
     list-style: none;
-    color: cyan;
-}
-
-li{
-    color: #00CED1;
 }
 
 .navibar a:hover,
-.agora{
-    color: #00CED1;
-    /* font-weight: bold; */
-    /* text-decoration: underline; */
-    font-size: 20px;
-    
-}
-a{
-    color: white;
-    text-decoration: none;
-    font-size: 20px;
-
+.agora {
+    color: var(--ciano);
 }
 
-.botoes{
+/* ---------- CONTAINER (ocupa exatamente a tela, sem rolar) ---------- */
+
+.container {
+    background-image: url('icons/fundo2.svg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    min-height: calc(100vh - var(--header-h));
     display: flex;
-    flex-direction: row;
-    gap: 20px;
-    position: absolute;
-    top: 41%;
-    left: 1420px;
-    font-size: 17px;
 }
 
-
-
-.btn{
-    padding: 30px 45px;
-    background-color:  #2355a0;
-    /* border-bottom: solid; color: #1565af;  */
-    color: rgb(255, 255, 255);
-    border-radius: 15px;
-    font-size: larger;
-    cursor: pointer;
-    border: none; 
-    font-weight: bold;
-     font-family: Arial, Helvetica, sans-serif;
-    
-     
+.principal {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 3vh;
+    padding: 4vh 6vw 3vh;
 }
 
+/* ---------- HERO (texto + botões) ---------- */
+
+.hero {
+    flex: 1;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    gap: 4vh 4vw;
+}
+
+.hero-texto {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 2.2vh;
+    flex: 1 1 30rem;
+    max-width: 60rem;
+}
+
+.textinho {
+    color: #ced7e6;
+    background-color: rgba(0, 20, 35, 0.65);
+    border: 1px solid #ced7e6;
+    border-radius: 20px;
+    padding: clamp(10px, 0.8vw, 22px) clamp(14px, 1.1vw, 28px);
+    font-size: clamp(14px, 0.95vw, 26px);
+}
+
+.texto-home {
+    color: white;
+}
+
+.texto-home h1 {
+    font-size: clamp(26px, 2.2vw, 66px);
+    font-weight: normal;
+}
+
+.texto-home h2 {
+    font-size: clamp(20px, 1.7vw, 50px);
+    font-weight: normal;
+    color: rgba(34, 140, 202, 0.89);
+}
+
+.embaixo {
+    font-size: clamp(15px, 0.95vw, 28px);
+    color: rgb(175, 174, 174);
+}
+
+.contexto {
+    font-size: clamp(15px, 0.95vw, 28px);
+    color: rgb(185, 184, 184);
+    max-width: 38em;
+}
+
+/* ---------- BOTÕES ---------- */
+
+.botoes {
+    display: flex;
+    gap: clamp(14px, 1.2vw, 32px);
+    padding-top: clamp(90px, 6vw, 170px); /* espaço para os ícones acima dos botões */
+}
 
 .botao-solucao,
 .botao-rato {
     position: relative;
 }
 
-
-/* ÍCONE SOLUÇÃO */
-.botao-solucao img {
-    position: absolute;
-    width: 130px;
-    height: 130px;
-    object-fit: contain;
-    left: 50%;
-    bottom: calc(100% + 10px);
-    transform: translateX(-50%);
-}
-
-
-/* ÍCONE RATO */
+.botao-solucao img,
 .botao-rato img {
     position: absolute;
-    width: 150px;
-    height: 150px;
     object-fit: contain;
     left: 50%;
     bottom: calc(100% + 10px);
     transform: translateX(-50%);
 }
 
-/* EFEITOS PARA OS BOTOES */
+.botao-solucao img {
+    width: clamp(70px, 4.5vw, 140px);
+    height: clamp(70px, 4.5vw, 140px);
+}
 
-.btn:active {
-    transform: scale(0.95);
+.botao-rato img {
+    width: clamp(80px, 5.2vw, 160px);
+    height: clamp(80px, 5.2vw, 160px);
+}
+
+.btn {
+    padding: clamp(14px, 1vw, 30px) clamp(20px, 1.6vw, 46px);
+    background-color: #2355a0;
+    color: white;
     border: none;
+    border-radius: 15px;
+    font-size: clamp(14px, 0.8vw, 24px);
+    font-weight: bold;
+    font-family: Arial, Helvetica, sans-serif;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.15s ease;
 }
 
 .btn:hover {
@@ -332,67 +219,49 @@ a{
 }
 
 .btn:active {
-    transform: translateY(4px);
+    transform: translateY(4px) scale(0.95);
 }
 
+/* ---------- BARRA CINZA ---------- */
 
+.principal > hr {
+    border: none;
+    border-top: 3px solid rgba(255, 255, 255, 0.15);
+    border-radius: 5px;
+    width: 100%;
+}
 
+/* ---------- ÍCONES DE BAIXO ---------- */
 
+.icones_baixo {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    align-items: flex-start;
+    gap: 3vh 4vw;
+    text-align: center;
+}
 
+.icones_baixo > div {
+    flex: 1 1 12rem;
+}
 
+.icones_baixo img {
+    width: clamp(60px, 4.5vw, 140px);
+    height: clamp(55px, 3.9vw, 120px);
+    object-fit: contain;
+    filter: brightness(0) saturate(100%) invert(67%) sepia(50%) saturate(4646%) hue-rotate(143deg) brightness(101%) contrast(101%);
+}
 
+.icones_baixo h2 {
+    margin-top: 1vh;
+    font-size: clamp(22px, 1.5vw, 46px);
+    color: rgba(254, 255, 255, 0.89);
+}
 
-
-
-/* ADAPTAÇÃO PARA OUTRO MONITOR */
-
-/* 
-@media (max-width: 1400px) {
-
-    .textinho {
-        top: 105px;
-        left: 45px;
-        padding: 15px;
-        font-size: 16px;
-    }
-
-    .texto-home {
-        top: 170px;
-        left: 45px;
-    }
-
-    .texto-home h1 {
-        font-size: 42px;
-    }
-
-    .texto-home h2 {
-        font-size: 39px;
-    }
-
-    .embaixo {
-        top: 305px;
-        left: 45px;
-        font-size: 19px;
-    }
-
-    .contexto {
-        top: 350px;
-        left: 45px;
-        font-size: 17px;
-        max-width: 650px;
-    }
-
-    .botoes {
-        top: 280px;
-        right: 25px;
-        left: auto;
-        gap: 20px;
-    }
-
-    .btn {
-        width: 220px;
-        height: 100px;
-        padding: 0;
-        font-size: 18px;
-    }
-} */
+.icones_baixo p {
+    margin: 0.8vh auto 0;
+    max-width: 14em;
+    font-size: clamp(14px, 1vw, 30px);
+    color: rgba(189, 202, 202, 0.89);
+}
