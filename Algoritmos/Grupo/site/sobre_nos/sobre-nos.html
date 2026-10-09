@@ -4,30 +4,38 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Monere Consulting | Sobre nós</title>
+
   <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500&display=swap" rel="stylesheet">
+
   <link rel="stylesheet" href="style_sobre_nos.css">
 </head>
 <body>
 
-  <header class="cabecalho">
-    <a href="index.html" class="logo">
-      <img src="../icons/Monere Consult aa.svg" alt="Logo Monere">
-      <div>
-        <span style="color: #00CED1; font-weight: bold;">Monere</span> 
-        <span style="color: white; font-weight: bold;">Consult</span>
-      </div>
-    </a>
-    <nav>
-      <ul class="menu">
+  <header class="header">
+
+    <div class="logo">
+      <img src="../icons/Monere Consult aa.svg" alt="Logo Monere Consult">
+      <h1 class="titulo">
+        <span class="titulo-azul">Monere</span> <span class="titulo-branco">Consult</span>
+      </h1>
+    </div>
+
+    <div class="icone">
+      <ul class="navibar">
         <li><a href="../home/home.html">Início</a></li>
-        <li><a href="#" class="ativo">Sobre nós</a></li>
+        <li><a class="agora" href="#">Sobre nós</a></li>
         <li><a href="../solucoes/solucoes.html">Soluções</a></li>
-        <li><a href="simulador.html">Simulador</a></li>
-        <li><a href="equipe.html">Nossa equipe</a></li>
-        <li class="perfil"><a href="login.html"><img src="../icons/Monere Consult (1).svg" alt="Perfil"></a></li>
+        <li><a href="#">Simulador</a></li>
+        <li><a href="#">Nossa equipe</a></li>
       </ul>
-    </nav>
+
+      <a href="../login/login.html" class="icone-login" data-tooltip="Login" aria-label="Login">
+        <img src="../icons/Monere Consult (1).svg" alt="">
+      </a>
+    </div>
+
   </header>
 
   <main class="conteudo">

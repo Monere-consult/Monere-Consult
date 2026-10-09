@@ -1,3 +1,12 @@
+/* =========================================================
+   Monere Consult - Soluções
+   ========================================================= */
+
+:root {
+    --header-h: clamp(56px, 3.4vw, 96px);
+    --header-ciano: #00CED1;
+}
+
 * {
     margin: 0;
     padding: 0;
@@ -9,53 +18,7 @@ body {
     color: #ffffff;
     font-family: Arial, Helvetica, sans-serif;
     min-height: 100vh;
-}
-
-header {
-   background-color: #08253f;
-
-}
-
-main {
-    padding: 0 40px;
-}
-
-nav {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 20px;
-    border-bottom: solid 3px; color: #1565af;
-    
-}
-
-nav .menu {
-    display: flex;
-    gap: 30px;
-    align-items: center;
-    font-size: larger;
-
-}
-
-nav img {
-    height: 50px;
-}
-
-.logo {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    font-size: 24px;
-}
-
-.logo-negrito {
-    font-weight: 700;
-    color: white;
-    
-}
-
-.logo-fino {
-    font-weight: 300;
+    padding-top: var(--header-h);
 }
 
 a {
@@ -63,13 +26,129 @@ a {
     color: #ffffff;
 }
 
-.menu a:hover,
-.agora{
-    color: cyan;
-    /* font-weight: bold; */
-    /* text-decoration: underline; */
-    
-    
+/* =========================================================
+   HEADER PADRÃO  (copiar este bloco idêntico em todas as páginas)
+   Tudo escopado em .header e usando --header-h / --header-ciano
+   ========================================================= */
+
+.header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: var(--header-h);
+    z-index: 1000;
+    display: flex;
+    justify-content: space-between;
+    background-color: #08253f;
+    border-bottom: 3px solid #1565af;
+}
+
+.header * {
+    margin: 0;
+    box-sizing: border-box;
+}
+
+.header a {
+    color: white;
+    text-decoration: none;
+    font-size: clamp(13px, 0.85vw, 22px);
+    transition: color 0.3s ease;
+}
+
+.header li {
+    color: var(--header-ciano);
+}
+
+.header .logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.header .logo img {
+    padding-left: 15px;
+    height: calc(var(--header-h) - 8px);
+    width: auto;
+}
+
+.header .titulo {
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-size: clamp(18px, 1.3vw, 34px);
+    font-weight: bold;
+    line-height: normal;
+}
+
+.header .titulo-azul   { color: var(--header-ciano); }
+.header .titulo-branco { color: white; }
+
+.header .icone {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.header .icone img {
+    height: calc(var(--header-h) - 24px);
+    width: auto;
+    margin-right: 20px;
+}
+
+.header .icone-login {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.header .icone-login::after {
+    content: attr(data-tooltip);
+    position: absolute;
+    top: calc(100% + 6px);
+    left: calc(50% - 10px);
+    transform: translateX(-50%);
+    padding: 6px 12px;
+    background-color: #0b1f33;
+    border: 1px solid #1565af;
+    border-radius: 8px;
+    color: white;
+    font-family: 'Poppins', sans-serif;
+    font-size: 13px;
+    font-weight: 500;
+    white-space: nowrap;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.2s ease;
+}
+
+.header .icone-login:hover::after,
+.header .icone-login:focus-visible::after {
+    opacity: 1;
+}
+
+.header .navibar {
+    font-family: 'Poppins', sans-serif;
+    display: flex;
+    gap: clamp(16px, 1.5vw, 38px);
+    padding: 20px;
+    list-style: none;
+}
+
+.header .navibar a {
+    font-weight: 500;
+}
+
+.header .navibar a:hover,
+.header .navibar a.agora {
+    color: var(--header-ciano);
+}
+
+/* ================= FIM DO HEADER PADRÃO ================= */
+
+
+/* ---------- CONTEÚDO DA PÁGINA ---------- */
+
+main {
+    padding: 0 40px;
 }
 
 .hero {
@@ -121,32 +200,31 @@ h1 {
     margin-bottom: 12px;
 }
 
-.calculadora-container{
+.calculadora-container {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    background:rgba(10, 36, 96, 0.8);
+    background: rgba(10, 36, 96, 0.8);
     border-radius: 10px;
     padding: 30px;
 }
-.span-h6{
-      color: #22CDED;
-  
+
+.span-h6 {
+    color: #22CDED;
 }
 
-.calculadora-p{
-    
+.calculadora-p {
     font-weight: bold;
 }
-    .calculadora-text{
-        align-items: center;
-        font-size: small;
-        font-weight: lighter;
-        
-    }
 
-        .botao {
-    background: radial-gradient( #22CDED,#2563EB);
+.calculadora-text {
+    align-items: center;
+    font-size: small;
+    font-weight: lighter;
+}
+
+.botao {
+    background: radial-gradient(#22CDED, #2563EB);
     color: #0D1026;
     border-radius: 10px;
     white-space: nowrap;
