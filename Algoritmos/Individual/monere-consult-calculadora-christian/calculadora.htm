@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculadora de Impacto</title>
+</head>
+
+<body>
+
+    <h1>Calculadora de Impacto Financeiro</h1>
+
+    <label>Média de pesquisas por ano:</label>
+    <input type="number" id="qtdPesquisas" placeholder="Ex: 10" min="0">
+
+    <br><br>
+
+    <label>Valor médio gasto por pesquisa:</label>
+    <input type="number" id="valorMedio" placeholder="Ex: 50000000" min="0">
+
+    <br><br>
+
+    <label>Taxa de mitigação garantida: 13%</label>
+
+    <br><br>
+
+    <button onclick="calcular()">Calcular impacto</button>
+
+    <h2>Resultado</h2>
+
+    <div id="resultado"></div>
+
+
+    <script>
+
+        // Percentual de perda sobre o valor investido: FIXO em 10%
+        let percentualPerda = 0.10;
+
+        // Percentual das perdas que o sistema evita: FIXO em 13%
+        let percentualEvita = 0.13;
+
+        function calcular() {
+
+            let quantidade = Number(qtdPesquisas.value);
+            let media = Number(valorMedio.value);
+
+            if (quantidade <= 0 || media <= 0) {
+
+                resultado.innerHTML = "Informe a quantidade de pesquisas por ano e o valor médio gasto por pesquisa.<br>";
+
+            } else {
+
+                // 1) Investimento total anual
+                let investimentoTotal = quantidade * media;
+
+                // 2) Perda sem a solução: 10% do investimento total
+                let perdaSemSolucao = investimentoTotal * percentualPerda;
+
+                // 3) Valor evitado: 13% DA PERDA
+                let valorEvitado = perdaSemSolucao * percentualEvita;
+
+                // 4) Perda com a solução
+                let perdaComSolucao = perdaSemSolucao - valorEvitado;
+
+                // Transformando os números em texto no formato de dinheiro (R$)
+                let mediaTexto = media.toLocaleString("pt-BR", { style: "currency", currency: "BRL" });
+                let investimentoTexto = investimentoTotal.toLocaleString("pt-BR", { style: "currency", currency: "BRL" });
+                let perdaSemTexto = perdaSemSolucao.toLocaleString("pt-BR", { style: "currency", currency: "BRL" });
+                let evitadoTexto = valorEvitado.toLocaleString("pt-BR", { style: "currency", currency: "BRL" });
+                let perdaComTexto = perdaComSolucao.toLocaleString("pt-BR", { style: "currency", currency: "BRL" });
+
+                resultado.innerHTML =
+                    "Investimento total por ano: " + investimentoTexto + "<br>" +
+                    quantidade + " pesquisas × " + mediaTexto + "<br><br>" +
+
+                    "Perda sem a solução: " + perdaSemTexto + "<br>" +
+                    investimentoTexto + " × 10%<br><br>" +
+
+                    "Valor que o sistema evita: " + evitadoTexto + "<br>" +
+                    "13% de " + perdaSemTexto + "<br><br>" +
+
+                    "Perda com a solução: " + perdaComTexto + "<br>" +
+                    perdaSemTexto + " − " + evitadoTexto + "<br>";
+
+            }
+
+        }
+
+    </script>
+
+</body>
+
+</html>
