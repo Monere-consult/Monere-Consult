@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Monere Consult</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="header.css">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="footer.css">
+</head>
+
+<body>
+
+    <header class="header">
+
+        <a href="#inicio" class="logo">
+            <!-- TROCAR IMAGEM 1: logo do header (canto esquerdo) -->
+            <img src="img/Monere Consult logo.svg" alt="Logo Monere Consult">
+            <h1 class="titulo">
+                <span class="titulo-azul">Monere</span> <span class="titulo-branco">Consult</span>
+            </h1>
+        </a>
+
+        <div class="icone">
+            <ul class="navibar">
+                <li><a class="" href="#inicio">Início</a></li>
+                <li><a class="" href="#sobre-nos">Sobre nós</a></li>
+                <li><a class="" href="#solucoes">Soluções</a></li>
+                <li><a class="" href="#simulador">Simulador</a></li>
+                <li><a class="" href="#equipe">Nossa equipe</a></li>
+            </ul>
+
+            <a href="login.html" class="icone-login" data-tooltip="Login" aria-label="Login">
+                <!-- TROCAR IMAGEM 2: ícone de usuário (canto direito) -->
+                <img src="img/icone.svg" alt="">
+            </a>
+        </div>
+
+    </header>
+
+    <main>
+
+        <!-- ===================== INÍCIO ===================== -->
+        <!-- TROCAR IMAGEM 3: o fundo da home NÃO fica aqui, fica no style.css (veja a explicação no final) -->
+        <section class="container" id="inicio">
+
+            <div class="principal">
+
+                <div class="hero">
+
+                    <div class="hero-texto">
+                        <div class="textinho">
+                            <p>TENHA SEGURANÇA COM SEU PROJETO</p>
+                        </div>
+
+                        <div class="texto-home">
+                            <h1>MONITORAMENTO INTELIGENTE</h1>
+                            <h2>PARA UM BIOTÉRIO MAIS SEGURO.</h2>
+                        </div>
+
+                        <div class="p">
+                            <p>PLATAFORMA IOT PARA MONITORAMENTO DE BIOTÉRIOS</p>
+                        </div>
+
+                        <div class="contexto">
+                            <p>Tecnologia IOT para monitorar a temperatura, identificar variações
+                                e gerar alertas quando os limites forem ultrapassados.</p>
+                        </div>
+                    </div>
+
+                    <aside class="botoes">
+                        <div class="botao-solucao">
+                            <!-- TROCAR IMAGEM 4: ícone acima do botão "Conheça a solução" -->
+                            <img src="img/Solução_ciano.svg" alt="">
+                            <button class="btn">Conheça a solução</button>
+                        </div>
+
+                        <div class="botao-rato">
+                            <!-- TROCAR IMAGEM 5: ícone acima do botão "Conheça o projeto" -->
+                            <img src="img/rato_ciano.svg" alt="">
+                            <button class="btn">Conheça o projeto</button>
+                        </div>
+                    </aside>
+
+                </div>
+
+                <hr>
+
+                <div class="icones_baixo">
+                    <div class="logo_temp">
+                        <!-- TROCAR IMAGEM 6: ícone do termômetro -->
+                        <img src="img/termometro.svg" alt="">
+                        <h2>24°C</h2>
+                        <p>Temperatura monitorada.</p>
+                    </div>
+
+                    <div class="logo_iot">
+                        <!-- TROCAR IMAGEM 7: ícone IoT -->
+                        <img src="img/iot.svg" alt="">
+                        <h2>IoT</h2>
+                        <p>Tecnologia conectada.</p>
+                    </div>
+
+                    <div class="logo_horas">
+                        <!-- TROCAR IMAGEM 8: ícone 24h -->
+                        <img src="img/24h.svg" alt="">
+                        <h2>24/7</h2>
+                        <p>Monitoramento contínuo.</p>
+                    </div>
+                </div>
+
+            </div>
+
+        </section>
+
+        <!-- ===================== SOBRE NÓS ===================== -->
+        <!-- Esta seção usa emojis, não tem arquivos de imagem para trocar -->
+         
+        <section class="secao-sobre" id="sobre-nos">
+            <div class="painel">
+                <span class="tag"> <b>Oque a Monere faz?</b></span>
+                <h2>Como ajudamos a manter<br>o <span class="destaque">controle do ambiente?</span></h2>
+                <p class="painel-texto">Monitoramos continuamente a temperatura de biotérios, registrando as variações e permitindo que os responsáveis acompanhem as condições do ambiente e identifiquem alterações rapidamente.</p>
+
+                <div class="cards">
+                    <article class="card">
+                        <div class="card-icone"></div>
+                        <h3>Sobre nós</h3>
+                        <p>Somos uma equipe dedicada ao desenvolvimento de uma solução tecnológica para o monitoramento de temperatura em biotérios.</p>
+                    </article>
+
+                    <article class="card">
+                        <div class="card-icone"></div>
+                        <h3>O que fazemos</h3>
+                        <p>Monitoramos a temperatura dos ambientes, registramos os dados e disponibilizamos as informações em uma plataforma web para acompanhamento.</p>
+                    </article>
+
+                    <article class="card">
+                        <div class="card-icone"></div>
+                        <h3>Como ajudamos</h3>
+                        <p>Facilitamos a identificação de variações de temperatura por meio de histórico de dados e alertas, permitindo uma resposta mais rápida a alterações no ambiente.</p>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <!-- ===================== SOLUÇÕES ===================== -->
+        <section class="solucoes" id="solucoes">
+
+            <div class="hero-solucoes">
+                <h4 class="badge"><b>Nosso Objetivo</b></h4>
+
+                <h2>mais que monitorar, <br> <span class="h1-azul">é proteger a sua pesquisa.</span></h2>
+<!-- 
+                <p>Nosso objetivo é garantir a integridade dos biotérios por meio do monitoramento contínuo da
+                    temperatura, utilizando tecnologia IoT para gerar alertas e manter um ambiente estável para os
+                    experimentos.</p> -->
+            </div>
+
+            <div class="cards-container">
+
+                <div class="card">
+                    <!-- TROCAR IMAGEM 9: ícone do card "Monitoramento Contínuo" -->
+                    <img src="img/24h.svg" alt=""> 
+                    <h4><b>Monitoramento Contínuo </b> </h4><br>
+                    <p>Acompanhamos a temperatura dos biotérios em tempo real, 24 horas por dia, 7 dias por semana.</p>
+                </div>
+
+                <div class="card">
+                    <!-- TROCAR IMAGEM 10: ícone do card "Alertas Inteligentes" -->
+                    <img src="img/icone_monitoramento.svg" alt="Alertas Inteligentes"> 
+                    <h4> <b>Alertas Inteligentes</b> </h4><br>
+                    <p>Identificamos variações de temperatura e notificamos a equipe antes que o problema afete os
+                        experimentos.</p>
+                </div>
+
+                <div class="card">
+                    <!-- TROCAR IMAGEM 11: ícone do card "Dados e Rastreabilidade" -->
+                    <img src="img/icone_dados.svg" alt="Dados e Rastreabilidade"> 
+                    <h4><b>Dados e Rastreabilidade</b></h4><br>
+                    <p>Registramos a temperatura dos biotérios, facilitando o acompanhamento dos dados e das variações ao longo do tempo.</p>
+                </div>
+
+                <div class="card">
+                    <!-- TROCAR IMAGEM 12: ícone do card "Segurança para a Pesquisa" -->
+                    <img src="img/icone_seguranca.svg" alt="Segurança para a Pesquisa"> 
+                    <h4><b>Segurança para a Pesquisa</b></h4><br>
+                    <p>Com tecnologia e automação, ajudamos a manter a estabilidade do ambiente e a qualidade dos seus
+                        resultados.</p>
+                </div>
+
+            </div>
+
+            <div class="calculadora-container">
+                <div class="calculadora-texto">
+                    <h6><span class="span-h6">Calculadora de economia e prevenção</span></h6><br>
+                    <p class="calculadora-p">Quanto sua operação pode deixar de perder?</p>
+                    <span class="calculadora-text">Simule o impacto financeiro de perdas causadas por variações de
+                        temperatura e descubra quanto o monitoramento pode ajudar a preservar.</span>
+                </div>
+                <a class="botao"><b>simular minha carga</b> </a> 
+            </div>
+
+        </section>
+
+        <!-- ===================== SIMULADOR (a fazer) ===================== -->
+        <section class="secao1" id="simulador">
+            <h2>Simulador</h2>
+            <p>Em breve.</p>
+        </section>
+
+        <!-- ===================== NOSSA EQUIPE (a fazer) ===================== -->
+        <section class="secao2" id="equipe">
+            <h2>Nossa equipe</h2>
+            <p>Em breve.</p>
+        </section>
+
+        <footer class="footer">
+
+        </footer>
+
+    </main>
+
+</body>
+
+</html>

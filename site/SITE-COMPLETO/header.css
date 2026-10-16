@@ -1,0 +1,126 @@
+/* =========================================================
+   HEADER PADRÃO - usado no index.html e no login.html
+   ========================================================= */
+
+:root {
+    --header-h: clamp(56px, 3.5vw, 96px);
+    --ciano: rgb(24, 194, 194);
+}
+
+.header,
+.header * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.header {
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: var(--header-h);
+    z-index: 1000;
+    display: flex;
+    justify-content: space-between;
+    background-color: #08253f;
+    border-bottom: 3px solid #1565af;
+}
+
+.header a {
+    color: white;
+    text-decoration: none;
+    font-size: clamp(13px, 0.85vw, 22px);
+    transition: color 0.3s ease;
+}
+
+.header .logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.header .logo img {
+    padding-left: 15px;
+    height: calc(var(--header-h) - 8px);
+    width: auto;
+}
+
+.header .titulo {
+    font-size: clamp(18px, 1.3vw, 34px);
+}
+
+.header .titulo-azul {
+    color: var(--ciano);
+}
+
+.header .titulo-branco {
+    color: white;
+}
+
+.header .icone {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.header .icone img {
+    height: calc(var(--header-h) - 24px);
+    width: auto;
+    margin-right: 20px;
+}
+
+/* ---------- ÍCONE DE LOGIN (tooltip) ---------- */
+
+.header .icone-login {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.header .icone-login::after {
+    content: attr(data-tooltip);
+    position: absolute;
+    top: calc(100% + 6px);
+    left: calc(50% - 10px);
+    transform: translateX(-50%);
+    padding: 6px 12px;
+    background-color: #0b1f33;
+    border: 1px solid #1565af;
+    border-radius: 8px;
+    color: white;
+    font-family: 'Poppins', sans-serif;
+    font-size: 13px;
+    font-weight: 500;
+    white-space: nowrap;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.2s ease;
+}
+
+.header .icone-login:hover::after,
+.header .icone-login:focus-visible::after {
+    opacity: 1;
+}
+
+/* ---------- NAVBAR ---------- */
+
+.header .navibar {
+    font-family: 'Poppins', sans-serif;
+    display: flex;
+    gap: clamp(16px, 1.5vw, 38px);
+    padding: 20px;
+    list-style: none;
+}
+
+.header .navibar a {
+    color: white;
+    font-weight: 500;
+}
+
+.header .navibar a:hover,
+.header .agora .navibar::after {
+    color: cyan;
+}
+
