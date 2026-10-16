@@ -1,9 +1,15 @@
+/* ===== GERAL ===== */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
 body {
-    font-family: Arial, sans-serif;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     background-color: #0b1f2a;
     color: white;
-    margin: 0;
-    padding: 20px;
 }
 
 input {
@@ -21,9 +27,123 @@ button {
     cursor: pointer;
 }
 
+button:hover {
+    background-color: #00d2ff;
+}
+
+
+/* ===== CABEÇALHO ===== */
+
+#cabecalho {
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    width: 100%;
+    background-color: #0a2540;
+    border-bottom: 3px solid #1e5bb8;
+}
+
+#cabecalho_container {
+    max-width: 1600px;
+    margin: 0 auto;
+    padding: 8px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+#cabecalho_logo {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    text-decoration: none;
+    color: white;
+    font-size: 18px;
+}
+
+#cabecalho_logo strong {
+    font-weight: 700;
+}
+
+.nome-azul {
+    color: #00CED1;
+}
+
+#cabecalho_logo img {
+    height: 45px;
+    width: auto;
+    display: block;
+}
+
+#cabecalho_lista {
+    display: flex;
+    list-style: none;
+    gap: 30px;
+}
+
+#cabecalho_lista a {
+    color: white;
+    text-decoration: none;
+    font-size: 15px;
+}
+
+#cabecalho_lista .item-ativo {
+    color: #00d2ff;
+    border-bottom: 2px solid #00d2ff;
+    padding-bottom: 4px;
+}
+
+
+/* ===== CONTEÚDO ===== */
+
+.principal {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    padding: 40px;
+}
+
+.resultado-area {
+    width: 50%;
+}
+
+.resultado-area h2 {
+    margin-bottom: 10px;
+}
+
 #resultado {
     margin-top: 10px;
     padding: 15px;
     border: 1px solid #00CED1;
     border-radius: 5px;
+}
+
+.caixa {
+    width: 500px;
+    padding: 30px;
+    border: 1px solid #00CED1;
+    border-radius: 10px;
+    background-color: #0a2540;
+}
+
+.caixa h1 {
+    margin-bottom: 20px;
+}
+
+
+/* ===== EXPLICAÇÃO DA REGRA DE NEGÓCIO ===== */
+
+.explicacao {
+    margin-bottom: 30px;
+    padding: 20px;
+    border-left: 4px solid #00CED1;
+    border-radius: 5px;
+    background-color: #0a2540;
+    line-height: 1.5;
+    color: rgba(255, 255, 255, 0.8);
+}
+
+.explicacao h2 {
+    color: white;
+    margin-bottom: 15px;
 }

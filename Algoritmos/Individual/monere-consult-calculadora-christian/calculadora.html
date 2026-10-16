@@ -8,38 +8,73 @@
     <link rel="stylesheet" href="style.css">
 </head>
 
-<body class="body">
- <header id="cabecalho"></header>
-     <div class="header">
+<body>
 
-        <div class="logo">
-            <img src="icons/Monere Consult aa.svg" alt="">
-            <h1 class="titulo"> <span style="color: #00CED1">Monere</span> <span style="color: white">Consult</span>
-            </h1>
+    <!-- CABEÇALHO -->
+    <header id="cabecalho">
+        <div id="cabecalho_container">
+
+            <a id="cabecalho_logo" href="#">
+                <img src="icons/Monere Consult aa.svg" alt="Logo Monere Consult">
+                <span><strong class="nome-azul">Monere</strong> <strong>Consult</strong></span>
+            </a>
+
+            <ul id="cabecalho_lista">
+                <li><a href="#">Início</a></li>
+                <li><a href="#">Sobre nós</a></li>
+                <li><a href="#">Soluções</a></li>
+                <li><a href="#" class="item-ativo">Simulador</a></li>
+                <li><a href="#">Nossa equipe</a></li>
+            </ul>
 
         </div>
+    </header>
 
-    <h1>Calculadora de Impacto Financeiro</h1>
+    <!-- CONTEÚDO: resultado na esquerda e caixa dos inputs na direita -->
+    <div class="principal">
 
-    <label>Média de pesquisas por ano:</label>
-    <input type="number" id="qtdPesquisas" placeholder="Ex: 10" min="0">
+        <div class="resultado-area">
+            <div class="explicacao">
+    <h2>Como calculamos</h2>
 
+    1. Investimento anual = média de pesquisas por ano × valor médio gasto por pesquisa.
     <br><br>
 
-    <label>Valor médio gasto por pesquisa:</label>
-    <input type="number" id="valorMedio" placeholder="Ex: 50000000" min="0">
-
+    2. Estimamos que 10% desse investimento é perdido por falhas no ambiente das pesquisas, como a variação de temperatura.
     <br><br>
 
-    <label>Taxa de mitigação garantida: 13%</label>
-
+    3. Nossa solução garante mitigar 13% dessas perdas.
     <br><br>
 
-    <button onclick="calcular()">Calcular impacto</button>
+    4. Perda com a solução = perda sem a solução − valor evitado.
+    <br><br>
 
-    <h2>Resultado</h2>
+</div> <br><br>
+            <h2>Resultado</h2>
+            <div id="resultado"></div>
+        </div>
 
-    <div id="resultado"></div>
+        <div class="caixa">
+            <h1>Calculadora de Impacto Financeiro</h1>
+
+            <label>Média de pesquisas por ano:</label>
+            <input type="number" id="qtdPesquisas" placeholder="Ex: 10" min="0">
+
+            <br><br>
+
+            <label>Valor médio gasto por pesquisa:</label>
+            <input type="number" id="valorMedio" placeholder="Ex: 50000000" min="0">
+
+            <br><br>
+
+            <label>Taxa de mitigação garantida: 13%</label>
+
+            <br><br>
+
+            <button onclick="calcular()">Calcular impacto</button>
+        </div>
+
+    </div>
 
 
     <script>
