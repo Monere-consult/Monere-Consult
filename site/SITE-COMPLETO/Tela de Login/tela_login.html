@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - Monere Consult</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="../header.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <header class="header">
+
+        <a href="../index.html#inicio" class="logo">
+            <img src="../img/Monere Consult logo.svg" alt="Logo Monere Consult">
+
+            <h1 class="titulo">
+                <span class="titulo-azul">Monere</span>
+                <span class="titulo-branco">Consult</span>
+            </h1>
+        </a>
+
+        <div class="icone">
+
+            <ul class="navibar">
+                <li><a href="../index.html#inicio">Início</a></li>
+                <li><a href="../index.html#sobre-nos">Sobre nós</a></li>
+                <li><a href="../index.html#solucoes">Soluções</a></li>
+                <li><a href="../index.html#simulador">Simulador</a></li>
+                <li><a href="../index.html#equipe">Nossa equipe</a></li>
+            </ul>
+
+            <a href="tela_login.html" class="icone-login"
+                data-tooltip="Login" aria-label="Login">
+                <img src="../img/icone.svg" alt="">
+            </a>
+
+        </div>
+
+    </header>
+
+    <main>
+
+        <div class="caixa-imagem">
+            <img src="assets/img/foto-direito.png"
+                alt="Monitoramento de temperatura para animais">
+        </div>
+
+        <div class="caixa-login">
+
+            <div class="logo"><b>Monere</b> Consult</div>
+
+            <h1>Faça seu login!</h1>
+
+            <form>
+                <label for="email">Email:</label>
+
+                <div class="campo">
+                    <span>✉</span>
+                    <input type="text" id="email" placeholder="Digite seu e-mail" >
+                </div>
+
+                <label for="ipt_senha">Senha:</label>
+
+                <div class="campo">
+                    <span>🔒</span>
+                   <input type="text" id="ipt_senha" placeholder="Digite sua senha" >
+                </div>
+
+                <button class="botao-cadastro" onclick="logar()">Login</button>
+            </form>
+
+            <p class="cadastro">
+                Não tem uma conta?
+                <a href="../Tela de Cadastro/tela_cadastro.html">Cadastre-se</a>
+            </p>
+
+        </div>
+
+    </main>
+
+</body>
+
+</html>
+
+
+<script>
+
+
+//  FAZER A LÓGICA DE LOGIN E ADICIONAR CAIXAS DE ERRO NO CSS
+
+
+
+
+
+
+</script>
