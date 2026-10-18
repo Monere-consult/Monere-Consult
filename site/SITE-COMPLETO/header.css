@@ -52,7 +52,7 @@
 }
 
 .header .titulo-azul {
-    color: var(--ciano);
+    color: cyan;
 }
 
 .header .titulo-branco {

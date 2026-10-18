@@ -257,7 +257,8 @@ background: linear-gradient(
     /* border: 1px solid #ffffff; */
     border-radius: 10px;
     color: white;
-    font-size: xx-large;
+    font-size: 3.6rem; 
+    width: 100%; 
     padding: 10px 22px;
     transform: translateY(-50px);
     border-radius: 20px;
@@ -273,6 +274,8 @@ background: linear-gradient(
     margin-top: -60px;
     margin-bottom: 16px;
     color: white;
+     font-size: 3.1rem; 
+    width: 100%; 
 
 }
 
@@ -286,6 +289,7 @@ background: linear-gradient(
     font-size: 1.3rem;
     line-height: 1.9;
     color: #c9dfe6b7;
+    font-size: 1.4rem; 
 }
 
 .secao-sobre .cards {
@@ -349,7 +353,18 @@ font-size: clamp(16px, 1vw, 20px);
     #08253F 0%,
     #0A1B32 55%,
     #0D1026 100%
-);
+); 
+
+/* background: linear-gradient(
+    180deg,
+    #08253F 0%,
+    #0A1B32 35%,
+    #0D1026 60%,
+    #343747 75%,
+    #777A88 88%,
+    rgba(255, 255, 255, 0.678) 100%
+); */
+
 }
 
 .solucoes a {
@@ -362,27 +377,46 @@ font-size: clamp(16px, 1vw, 20px);
     padding: 60px 0;
 }
 
-.solucoes .badge {
-    display: inline-block;
-    padding: 8px 20px;
-    /* border: 1px solid #ffffff; */
-    border-radius: 999px;
-    font-size: xx-large;
-    font-weight: 600;
-    margin-bottom: 20px;
-    transform: translateY(-30px);
+
+/* NOSSO OBJETIVO - TEXTO CIANO */
+ /* .solucoes .badge h2{ 
+     display: inline-block; 
+     padding: 8px 20px; 
+     border: 1px solid #ffffff; 
+    border-radius: 999px; 
+     font-size: xx-large; 
+     font-weight: 600; 
+     margin-bottom: 20px; 
+     transform: translateY(70px); 
     
+}  */
+
+/* NOSSO OBJETIVO - SUBTEXTO */
+
+.solucoes .hero-solucoes .badge h2{
+
+    transform: translateY(-36px);
+    color: cyan;
+    font-size: 3.5rem;
+
 }
+
+/* NOSSO OBJETIVO - SUBTEXTO */
 
 .solucoes .hero-solucoes h2 {
-    font-size: 48px;
-    line-height: 1.3;
+
+    /* line-height: 1.3; */
     transform: translateY(-40px);
+    font-size: 3.5rem;
+    color: white;
 
 }
 
+/* NOSSO OBJETIVO - SUBTEXTO */
+
 .solucoes .h1-azul {
-    color: #22CDED;
+    font-size: 3.5rem;
+    color: white;
 }
 
 .solucoes .cards-container {
@@ -390,7 +424,8 @@ font-size: clamp(16px, 1vw, 20px);
     justify-content: space-between;
     gap: 50px;
     padding: 40px 0;
-    transform: translateY(50px);
+    transform: translateY(65px);
+    height: auto;
 }
 
 .solucoes .card {
@@ -404,7 +439,8 @@ font-size: clamp(16px, 1vw, 20px);
     position: relative;
 }
 
-.solucoes .card img {
+/* ÍCONES DOS CARDS */
+.solucoes .card img:not(.imagem-card) {
     height: 50px;
     width: 100px;
     object-fit: contain;
@@ -414,16 +450,68 @@ font-size: clamp(16px, 1vw, 20px);
     top: -30px;
     left: 50%;
     transform: translateX(-50%);
-    filter: brightness(0) saturate(100%) invert(76%) 
+    filter: brightness(0) saturate(100%) invert(76%)
     sepia(72%) saturate(1800%) hue-rotate(145deg) brightness(102%);
-     transition: 0.5s;
+    transition: 0.5s;
 }
 
-.solucoes .card:hover img {
+/* EFEITO HOVER DOS ÍCONES */
+.solucoes .card:hover img:not(.imagem-card) {
     transform: translateX(-50%) scale(1.2);
 }
 
-.solucoes .calculadora-container {
+/* FOTOGRAFIAS DENTRO DOS CARDS */
+.solucoes .card .imagem-card {
+    position: static;
+    width: 100%;
+    height: 170px;
+    object-fit: cover;
+    border-radius: 10px;
+    margin: 15px 0;
+    filter: none;
+    transform: none;
+    display: block;
+}
+
+
+/* IMAGENS ABAIXO DOS CARDS */
+/* 
+.imagensCard {
+    margin-top: 40px;
+    padding: 0;
+    display: flex;
+    gap: 50px;
+    transform: translateY(50px);
+}
+
+.imagensCard div {
+    flex: 1;
+    min-width: 0;
+    display: flex;
+    justify-content: center;
+}
+
+.imagensCard img {
+    width: 90%;
+    height: 300px;
+    object-fit: cover;
+    border-radius: 10px;
+} */
+
+
+/* .solucoes .card .imagem-card {
+    position: static;
+    width: 100%;
+    height: 150px;
+    object-fit: cover;
+    border-radius: 10px;
+    margin: 15px 0;
+    filter: none;
+    transform: none;
+} */
+
+
+/* .solucoes .calculadora-container {
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -475,35 +563,330 @@ font-size: clamp(16px, 1vw, 20px);
 
 .solucoes .botao:active {
     transform: translateY(4px) scale(0.95);
-}
+} */
+
 
 
 /* =========================================================
-   SEÇÕES A FAZER: SIMULADOR e NOSSA EQUIPE
+   SEÇÃO: SIMULADOR
    ========================================================= */
 
-.secao1  {
+/* ÁREA PRINCIPAL */
+
+.calculadora-container{
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    transform: translateY(130px);
+    
+}
+
+.titulo-calculadora h2{
+    font-size: 3rem;
+    color: cyan;
+
+}
+
+.calculadora-texto p{
+    
+    font-size: 2.6rem;
+    color: white;
+}
+
+
+
+#simulador {
     min-height: calc(100vh - var(--header-h));
     padding: 60px 6vw;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    gap: 12px;
-    text-align: center;
-    color: white;
+    color: rgb(0, 0, 0);
     background: linear-gradient(180deg, #0D1026 0%, #08253f 100%);
+
 }
 
-.secao h2 {
-    font-size: 2.2rem;
+/* ORGANIZA RESULTADO E CALCULADORA */
+#simulador .simulador-conteudo {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 40px;
+    text-align: left;
+    transform: translateY(150px);
+
+}
+
+/* ÁREA DO TÍTULO E DOS RESULTADOS */
+#simulador .simulador-resultado-area {
+    flex: 1;
+    min-width: 0;
+}
+
+/* TÍTULO RESULTADO */
+#simulador .simulador-resultado-area h2 {
+    margin-bottom: 10px;
+    font-size: 2rem;
     font-weight: normal;
+    color: white;
 }
 
-.secao p {
-    color: rgba(255, 255, 255, 0.7);
+/* ÁREA DOS RESULTADOS */
+#simulador #resultado {
+    display: flex;
+    gap: 15px;
+    margin-top: 10px;
+    padding: 0;
+    border: none;
+    background: none;
+    line-height: 1.6;
 }
 
+/* CADA CARD DO RESULTADO */
+#simulador #resultado .resultado-card {
+    flex: 1;
+    min-width: 0;
+    border: 3px solid #08253f;
+    padding: 15px;
+    border-radius: 13px;
+    background-color: #e3e5e7e5;
+    overflow-wrap: anywhere;
+    box-sizing: border-box;
+}
+
+/* TÍTULO DE CADA CARD */
+#simulador #resultado .resultado-card h3 {
+    margin-top: 0;
+    margin-bottom: 15px;
+    color: #08253f;
+    font-size: 1rem;
+}
+
+/* VALOR DE CADA CARD */
+#simulador #resultado .resultado-card .resultado-valor {
+    margin-bottom: 12px;
+    color: #1565af;
+    font-size: 1.2rem;
+    font-weight: bold;
+}
+
+/* DESCRIÇÃO DE CADA CARD */
+#simulador #resultado .resultado-card p {
+    margin: 0;
+    color: #0D1026;
+    font-size: 0.9rem;
+}
+
+
+
+
+/* =========================================================
+   CALCULADORA
+   ========================================================= */
+
+/* CAIXA DA CALCULADORA */
+#simulador .simulador-caixa {
+    width: 500px;
+    max-width: 100%;
+    flex-shrink: 0;
+    padding: 30px;
+    border-radius: 10px;
+    background-color: #e3e5e7e5;
+    border: 5px solid #08253f;
+    text-align: left;
+}
+
+/* TÍTULO DA CALCULADORA */
+#simulador .simulador-caixa h1 {
+    margin-bottom: 20px;
+    font-size: 1.8rem;
+    color: rgb(2, 2, 2);
+}
+
+/* CAMPOS NUMÉRICOS */
+#simulador .simulador-caixa input {
+    width: 100%;
+    margin-top: 8px;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    font: inherit;
+}
+
+/* BOTÃO DE CALCULAR */
+#simulador .simulador-caixa button {
+    background: rgba(24, 194, 194, 0.678);
+    color: white;
+    border: none;
+    border-radius: 16px;
+    white-space: nowrap;
+    padding: 15px 11px;
+    max-width: 100%;
+    font-size: medium;
+    font-family: inherit;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.15s ease;
+    user-select: none;
+}
+
+/* EFEITO AO PASSAR O MOUSE */
+#simulador .simulador-caixa button:hover {
+    background-color: #1565af;
+}
+
+/* EFEITO AO CLICAR */
+#simulador .simulador-caixa button:active {
+    transform: translateY(4px) scale(0.95);
+}
+
+
+
+/* =========================================================
+   CAIXAS QUE EXPANDEM
+   ========================================================= */
+
+/* BLOCO */
+#simulador .simulador-expansivel {
+    margin-bottom: 20px;
+    border-radius: 20px;
+    background-color:#e3e5e7e5;
+    color: black;
+}
+
+/* TÍTULO CLICÁVEL */
+#simulador .simulador-expansivel summary {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px 25px;
+    cursor: pointer;
+    list-style: none;
+}
+
+/* REMOVE A SETA PADRÃO */
+#simulador .simulador-expansivel summary::-webkit-details-marker {
+    display: none;
+}
+
+/* TÍTULO */
+#simulador .simulador-expansivel h2 {
+    margin: 0;
+    font-size: 1.5rem;
+    color: black;
+}
+
+/* BOLINHA COM SETA */
+#simulador .simulador-seta {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 35px;
+    height: 35px;
+    flex-shrink: 0;
+    border-radius: 50%;
+    background-color: #00CED1;
+    border: 1px solid #08253f;
+    transition: transform 0.3s ease;
+}
+
+/* DESENHA A SETA */
+#simulador .simulador-seta::before {
+    content: "";
+    width: 10px;
+    height: 10px;
+    border-right: 2.3px solid #08253f;
+    border-bottom: 2.3px solid #08253f;
+    transform: rotate(45deg);
+    margin-top: -5px;
+}
+
+/* GIRA A SETA AO ABRIR */
+#simulador .simulador-expansivel[open] .simulador-seta {
+    transform: rotate(180deg);
+}
+
+/* CONTEÚDO EXPANDIDO */
+#simulador .simulador-expansivel-conteudo {
+    padding: 0 25px 20px;
+    line-height: 1.6;
+}
+
+/* ESPAÇAMENTO DOS PARÁGRAFOS */
+#simulador .simulador-expansivel-conteudo p {
+    margin-bottom: 15px;
+}
+
+/* =========================================================
+   EXEMPLO DE USO
+   ========================================================= */
+
+/* BLOCO */
+#simulador .simulador-exemplo {
+    margin-top: 20px;
+    border: 2px solid #08253f;
+    border-radius: 10px;
+    background-color: #D9DDE0;
+    color: #0D1026;
+}
+
+/* TÍTULO CLICÁVEL */
+#simulador .simulador-exemplo summary {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    padding: 15px;
+    cursor: pointer;
+    list-style: none;
+}
+
+/* REMOVE A SETA PADRÃO */
+#simulador .simulador-exemplo summary::-webkit-details-marker {
+    display: none;
+}
+
+/* TÍTULO */
+#simulador .simulador-exemplo summary h2 {
+    margin: 0;
+    font-size: 1.1rem;
+    color: #0D1026;
+}
+
+/* BOLINHA COM SETA */
+#simulador .simulador-exemplo .simulador-seta {
+    width: 30px;
+    height: 30px;
+    border: none;
+}
+
+/* SETA DO EXEMPLO */
+#simulador .simulador-exemplo .simulador-seta::before {
+    width: 8px;
+    height: 8px;
+    border-right: 2px solid #08253f;
+    border-bottom: 2px solid #08253f;
+    margin-top: -4px;
+}
+
+/* GIRA A SETA AO ABRIR */
+#simulador .simulador-exemplo[open] .simulador-seta {
+    transform: rotate(180deg);
+}
+
+/* CONTEÚDO EXPANDIDO */
+#simulador .simulador-exemplo-conteudo {
+    padding: 0 15px 15px;
+    line-height: 1.5;
+    overflow-wrap: anywhere;
+}
+
+
+
+
+/* NOSSA EQUIPE */
 
 .secao2 {
     min-height: calc(100vh - var(--header-h));
@@ -515,7 +898,8 @@ font-size: clamp(16px, 1vw, 20px);
     gap: 12px;
     text-align: center;
     color: white;
-    background: linear-gradient(180deg, #08253f 0%,  #0D1026 100%);
+    background: linear-gradient(180deg, #08253f 0%, #0D1026 100%);
+
 }
 
 .secao h2 {
@@ -526,3 +910,6 @@ font-size: clamp(16px, 1vw, 20px);
 .secao p {
     color: rgba(255, 255, 255, 0.7);
 }
+
+
+

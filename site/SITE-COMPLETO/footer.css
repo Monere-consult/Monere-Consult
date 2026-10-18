@@ -1,8 +1,112 @@
- .footer {
-    background: #101943;
-    color: white;
-    padding: clamp(100px, 8vw, 160px) clamp(20px, 3vw, 50px);
-    font-family: Arial, Helvetica, sans-serif;
-    height: 90px;
-} 
 
+/* FOOTER */
+
+.footer {
+    background-color: #101943;
+    color: #b0b9d0;
+    padding: 40px 5% 28px;
+    border-top: 4px solid #1565af;
+    font-family: Arial, sans-serif;
+}
+
+.footer-conteudo {
+    display: flex;
+    justify-content: space-between;
+    gap: 50px;
+    padding-bottom: 28px;
+}
+
+/* MARCA E LOGO */
+
+.footer-marca {
+    flex: 1;
+}
+
+
+.footer-logo {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 12px;
+}
+
+.footer-logo img {
+    width: 75px;
+    height: 75px;
+    object-fit: contain;
+    flex-shrink: 0;
+}
+
+.footer-logo h2 {
+    color: #ffffff;
+    font-size: 2.3rem;
+    margin: 0;
+}
+
+
+.footer-marca h2 {
+    color: #ffffff;
+    font-size: 2.3rem;
+    margin: 0;
+}
+
+.footer-marca p {
+    font-size: 1rem;
+    line-height: 1.4;
+    margin: 0 0 14px;
+}
+
+.footer-email {
+    display: inline-block;
+    color: #b0b9d0;
+    background-color: #0c1538;
+    text-decoration: none;
+    font-size: 1rem;
+    padding: 12px 14px;
+    border-radius: 7px;
+    box-shadow: 0 5px 0 #0a1230;
+}
+
+.footer-email:hover {
+    background-color: #1a2854;
+}
+
+/* LINKS */
+
+.footer-links {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    min-width: 150px;
+}
+
+.footer-links h3 {
+    color: #ffffff;
+    font-size: 1.3rem;
+    margin: 4px 0 0;
+}
+
+.footer-links a {
+    color: #b0b9d0;
+    text-decoration: none;
+    font-size: 0.90rem;
+}
+
+.footer-links a:hover {
+    color: #ffffff;
+}
+
+/* PARTE INFERIOR */
+
+.footer-inferior {
+    border-top: 1px solid #303b60;
+    padding-top: 20px;
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+}
+
+.footer-inferior p {
+    font-size: 0.70rem;
+    margin: 0;
+}
