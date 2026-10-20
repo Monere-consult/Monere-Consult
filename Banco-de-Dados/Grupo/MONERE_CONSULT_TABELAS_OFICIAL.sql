@@ -21,7 +21,6 @@ FOREIGN KEY (fk_empresa)
 REFERENCES empresa(id)
 );
 
-
 CREATE TABLE bioterio (
 id INT PRIMARY KEY AUTO_INCREMENT,
 cep CHAR(8) NOT NULL,
@@ -44,21 +43,16 @@ FOREIGN KEY (fk_bioterio)
 REFERENCES bioterio(id)
 );
 
-CREATE TABLE gaiola (
-id INT PRIMARY KEY AUTO_INCREMENT,
-fk_sala INT NOT NULL,
-CONSTRAINT fk_sala
-FOREIGN KEY (fk_sala)
-REFERENCES sala(id)
-);
-
 CREATE TABLE sensor(
 id INT PRIMARY KEY AUTO_INCREMENT,
 status_ VARCHAR(20) NOT NULL CONSTRAINT chEstadoSensor CHECK (status_ IN ('ativo', 'inativo', 'manutenção')),
 fk_gaiola INT,
 CONSTRAINT fk_gaiola
 FOREIGN KEY (fk_gaiola)
-REFERENCES gaiola(id)
+REFERENCES gaiola(id),
+fk_sala INT,
+FOREIGN KEY (fk_sala) 
+REFERENCES sala(id)
 );
 
 CREATE TABLE medidaSensor (
@@ -70,3 +64,33 @@ CONSTRAINT fk_sensor
 FOREIGN KEY (fk_sensor)
 REFERENCES sensor(id)
 );
+
+
+-- INSERTS
+
+-- empresa
+INSERT INTO empresa VALUES
+(DEFAULT, 'SpTech Research', 12345678901234);
+
+-- usuario
+INSERT INTO usuario VALUES
+(DEFAULT, 'Brandão','brandao@email.com','@Brandao123', 'gerente', 1),
+(DEFAULT, 'Júlia', 'julia@email.com', '@Julia123','funcionario', 1);
+
+-- bioterio 
+INSERT INTO bioterio VALUES
+(DEFAULT, '12345678', 'Rua Haddock Lobo', 595, 'Centro', 1);
+
+-- sala
+INSERT INTO sala VALUES
+(DEFAULT, 1, 'ativo', 1);
+
+-- sensor
+INSERT INTO sensor VALUES
+(DEFAULT, 'ativo', 1, 1);
+
+
+
+
+
+
