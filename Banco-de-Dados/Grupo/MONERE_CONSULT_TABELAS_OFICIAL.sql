@@ -87,7 +87,7 @@ INSERT INTO sala VALUES
 
 -- sensor
 INSERT INTO sensor VALUES
-(DEFAULT, 'ativo', 1, 1);
+(DEFAULT, 'ativo', 1);
 
 
 
