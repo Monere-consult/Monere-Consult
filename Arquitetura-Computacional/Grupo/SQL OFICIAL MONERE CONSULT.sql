@@ -88,8 +88,11 @@ INSERT INTO sala VALUES
 INSERT INTO sensor VALUES
 (DEFAULT, 'ativo', 1);
 
+INSERT INTO sensor VALUES
+(DEFAULT, 'ativo', 1);
 
 
+select * from sensor;
 SELECT * FROM medidaSensor;	
 
 

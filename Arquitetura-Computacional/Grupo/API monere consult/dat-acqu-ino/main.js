@@ -8,21 +8,21 @@ const SERIAL_BAUD_RATE = 9600;
 const SERVIDOR_PORTA = 3300;
 
 // habilita ou desabilita a inserção de dados no banco de dados
-const HABILITAR_OPERACAO_INSERIR = false;
+const HABILITAR_OPERACAO_INSERIR = true;
 
 // função para comunicação serial
 const serial = async (
     valoresSensorAnalogico,
-    valoresSensorDigital,
+    // valoresSensorDigital,
 ) => {
 
     // conexão com o banco de dados MySQL
     let poolBancoDados = mysql.createPool(
         {
-            host: 'HOST_DO_BANCO',
-            user: 'USUARIO_DO_BANCO',
-            password: 'SENHA_DO_BANCO',
-            database: 'DATABASE_DO_BANCO',
+            host: 'localhost',
+            user: 'user_insert2',
+            password: 'Zancr0wns_',
+            database: 'monere_consult',
             port: 3306
         }
     ).promise();
@@ -51,22 +51,34 @@ const serial = async (
     arduino.pipe(new serialport.ReadlineParser({ delimiter: '\r\n' })).on('data', async (data) => {
         console.log(data);
         const valores = data.split(';');
-        const sensorDigital = parseInt(valores[0]);
-        const sensorAnalogico = parseFloat(valores[1]);
+        const sensorAnalogico = parseFloat(valores[0]);
+        // const sensorAnalogico = parseInt(valores[1]);
 
         // armazena os valores dos sensores nos arrays correspondentes
         valoresSensorAnalogico.push(sensorAnalogico);
-        valoresSensorDigital.push(sensorDigital);
+        // valoresSensorDigital.push(sensorDigital);
+
+
+        const grafico2Aumento = 10;
+
 
         // insere os dados no banco de dados (se habilitado)
         if (HABILITAR_OPERACAO_INSERIR) {
 
+        const grafico2 = sensorAnalogico + grafico2Aumento
+        
+
             // este insert irá inserir os dados na tabela "medida"
             await poolBancoDados.execute(
-                'INSERT INTO medida (sensor_analogico, sensor_digital) VALUES (?, ?)',
-                [sensorAnalogico, sensorDigital]
+                'INSERT INTO medidaSensor (temperatura, fk_sensor) VALUES (?, ?)',
+                [sensorAnalogico, 1]    
             );
-            console.log("valores inseridos no banco: ", sensorAnalogico + ", " + sensorDigital);
+
+                 await poolBancoDados.execute(
+                'INSERT INTO medidaSensor (temperatura, fk_sensor) VALUES (?, ?)',
+                [grafico2, 1]    
+            );
+            // console.log("valores inseridos no banco: ", sensorAnalogico + ", " + sensorDigital);
 
         }
 
