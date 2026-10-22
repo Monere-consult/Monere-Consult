@@ -43,10 +43,10 @@ FOREIGN KEY (fk_bioterio)
 REFERENCES bioterio(id)
 );
 
-CREATE TABLE sensor(
+CREATE TABLE salaSensor(
 id INT PRIMARY KEY AUTO_INCREMENT,
 status_ VARCHAR(20) NOT NULL CONSTRAINT chEstadoSensor CHECK (status_ IN ('ativo', 'inativo', 'manutenção')),
-fk_salaSensor INT,
+fk_sala INT,
 FOREIGN KEY (fk_sala) 
 REFERENCES sala(id)
 );
@@ -80,20 +80,24 @@ INSERT INTO usuario VALUES
 (DEFAULT, 'Marcos Antônio', 'marcos.corporativo@gmail.com','@Escopo123', 'funcionario', 2),
 (DEFAULT, 'Levi Greb', 'levi.corporativo@gmail.com', '@Katana0', 'admin', NULL);
 
+DESCRIBE usuario;
+
 -- bioterio 
 INSERT INTO bioterio VALUES
-(DEFAULT, '12345678', 'Rua Haddock Lobo', 595, 'Centro', 1);
+(DEFAULT, '12345678', 'Rua Haddock Lobo', 595, 'Centro', 1),
+(DEFAULT, '78654321', 'Rua Agrimensor Sugaya', 930, 'Leste', 1),
+(DEFAULT, '23458690', 'Avenida Elisio Teixeira Leite', 5097, 'Norte', 2),
+(DEFAULT, '15273890', 'Rua Carlos Bigatti', 44, 'Leste', 2);
 
 -- sala
 INSERT INTO sala VALUES
-(DEFAULT, 1, 'ativo', 1);
+(DEFAULT, 1, 'ativo', 1),
+(DEFAULT, 2, 'Ativo', 2),
+(DEFAULT, 3, 'Manutenção', 3),
+(DEFAULT, 4, 'Inativo', 4);
 
--- sensor
-INSERT INTO sensor VALUES
-(DEFAULT, 'ativo', 1);
-
-
-
-
-
+-- salaSensor
+INSERT INTO salaSensor VALUES
+(DEFAULT, 'Ativo', 1),
+(DEFAULT, 'Ativo', 2);
 
