@@ -1,6 +1,15 @@
 CREATE DATABASE IF NOT EXISTS bioterio;
 USE bioterio;
 
+-- Drop na ordem inversa das dependências (quem aponta pra outra cai primeiro)
+DROP TABLE IF EXISTS leitura;
+DROP TABLE IF EXISTS sensor;
+DROP TABLE IF EXISTS gaiola;
+DROP TABLE IF EXISTS sala;
+DROP TABLE IF EXISTS usuario;
+DROP TABLE IF EXISTS empresa;
+
+-- Create na ordem das dependências (quem é referenciada nasce primeiro)
 CREATE TABLE empresa (
     idempresa INT PRIMARY KEY AUTO_INCREMENT,
     nome_fantasia VARCHAR(45),
