@@ -13,7 +13,7 @@ CREATE TABLE usuario (
 id INT PRIMARY KEY AUTO_INCREMENT,
 nome VARCHAR(100) NOT NULL,
 email VARCHAR(100) NOT NULL UNIQUE,
-senha VARCHAR(20) NOT NULL,
+senha VARCHAR(45) NOT NULL,
 tipo_usuario VARCHAR(45) NOT NULL CONSTRAINT chTipo_usuario CHECK (tipo_usuario IN ('admin', 'funcionario', 'gerente')),
 fk_empresa INT,
 CONSTRAINT fk_empresa
@@ -74,8 +74,8 @@ INSERT INTO empresa VALUES
 
 -- usuario
 INSERT INTO usuario VALUES
-(DEFAULT, 'Brandão','brandao@email.com','@Brandao123', 'gerente', 1),
-(DEFAULT, 'Júlia', 'julia@email.com', '@Julia123','funcionario', 1);
+(DEFAULT, 'Brandão','brandao.corporativo@email.com','@Rotina123', 'gerente', 1),
+(DEFAULT, 'Júlia', 'julia.corporativo@email.com', '@RotasControlesModulo123','funcionario', 1);
 
 -- bioterio 
 INSERT INTO bioterio VALUES

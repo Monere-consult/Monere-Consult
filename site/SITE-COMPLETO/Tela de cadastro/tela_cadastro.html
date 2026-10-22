@@ -37,10 +37,7 @@
                 <li><a href="../index.html#equipe">Nossa equipe</a></li>
             </ul>
 
-            <a href="../Tela de Login/tela_login.html"
-                class="icone-login"
-                data-tooltip="Login"
-                aria-label="Login">
+            <a href="../Tela de Login/tela_login.html" class="icone-login" data-tooltip="Login" aria-label="Login">
                 <img src="../img/icone.svg" alt="">
             </a>
 
@@ -51,8 +48,7 @@
     <main>
 
         <div class="caixa-imagem">
-            <img src="../Tela de Login/assets/img/foto-direito.png"
-                alt="Monitoramento de temperatura para animais">
+            <img src="../Tela de Login/assets/img/foto-direito.png" alt="Monitoramento de temperatura para animais">
         </div>
 
         <div class="caixa-login">
@@ -63,33 +59,111 @@
 
             <form>
 
-                <label for="email">Email:</label>
+                <label for="ipt_email">Email:</label>
 
                 <div class="campo">
                     <span>✉</span>
-                    <input type="text" id="email" placeholder="Digite seu e-mail" >
+                    <input type="text" id="ipt_email" placeholder="Digite seu e-mail">
                 </div>
+
+                <div id="div_emailInvalido"></div>
 
                 <label for="ipt_senha">Senha:</label>
 
                 <div class="campo">
-                    <input type="text" id="ipt_senha" placeholder="Crie uma senha" >
+                    <input type="password" id="ipt_senha" placeholder="Crie uma senha">
                 </div>
+
+                <div id="div_forcaSenha"></div>
 
                 <label for="ipt_confirmarSenha">Confirme sua senha:</label>
 
                 <div class="campo">
-                    <input type="text" id="ipt_confirmarSenha" placeholder="Digite a senha novamente" >
+                    <input type="password" id="ipt_confirmarSenha" placeholder="Digite a senha novamente">
                 </div>
 
-                <button class="botao-cadastro" onclick="cadastrar()">Cadastre-se</button>
-                
+                <div id="div_camposInvalidos"></div>
+
+                <button type="button" class="botao-cadastro" onclick="cadastrar()">Cadastre-se</button>
+
             </form>
 
         </div>
 
     </main>
 
+</body>
+
+</html>
+
+<script>
+    function cadastrar() {
+        let email = ipt_email.value;
+        let senha = ipt_senha.value;
+        let confirmarSenha = ipt_confirmarSenha.value;
+
+        let emailInvalido = true;
+        let senhaInvalida = true;
+        let cfmSenhaInvalido = true;
+
+        let temMaius = false;
+        let temMinus = false;
+        let temNum = false;
+        let temSimb = false;
+        let numerosPermitidos = "0123456789";
+        let simbolos = "!@#$%&*_-./";
+
+        let contarCaractere = 0;
+
+        while (contarCaractere < senha.length) {
+            let char = senha[contarCaractere];
+            if (char >= "A" && char <= "Z") temMaius = true;
+            if (char >= "a" && char <= "z") temMinus = true;
+            if (numerosPermitidos.includes(char)) temNum = true;
+            if (simbolos.includes(char)) temSimb = true;
+            contarCaractere++;
+        }
+
+        // senha
+        if (temMaius && temMinus && temNum && temSimb && senha.length >= 8 && senha.length <= 45) {
+            div_forcaSenha.innerHTML = "Forte";
+            senhaInvalida = false;
+        } else {
+            div_forcaSenha.innerHTML = "Fraca";
+            senhaInvalida = true;
+        }
+
+        // confirmar senha
+        if (confirmarSenha === senha && senha !== "") {
+            cfmSenhaInvalido = false;
+            div_camposInvalidos.innerHTML = ""
+        } else {
+            div_camposInvalidos.innerHTML = "As senhas são diferentes.";
+        }
+
+        // email
+        if (!email.includes(" ") && (
+            email.endsWith("@gmail.com") ||
+            email.endsWith("@hotmail.com") ||
+            email.endsWith("@outlook.com") ||
+            email.endsWith("@sptech.school")
+        )) {
+            emailInvalido = false;
+        }
+
+        // mensagens
+        if (emailInvalido) {
+            div_emailInvalido.innerHTML = "Digite um email válido.";
+
+
+            if (emailInvalido || senhaInvalida || cfmSenhaInvalido) {
+                div_camposInvalidos.innerHTML = "Preencha  os dados corretamente."
+            }
+
+        }
+    }
+    
+</script>
 </body>
 
 </html>

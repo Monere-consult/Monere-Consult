@@ -64,7 +64,7 @@
 
                 <div class="campo">
                     <span>✉</span>
-                    <input type="text" id="email" placeholder="Digite seu e-mail" >
+                    <input type="text" id="ipt_email" placeholder="Digite seu e-mail" >
                 </div>
 
                 <label for="ipt_senha">Senha:</label>
@@ -92,7 +92,20 @@
 
 
 <script>
+    function logar() {
+        let email = ipt_email.value;
+        let senha = ipt_senha.value
+        let emailBrandao = "brandao.corporativo@gmailcom";
+        let emailJulia = "julia.corporativo@gmail.com";
+        let senhaBrandao = "@Rotina123";
+        let senhaJulia = "@RotasControlesModulo123"
 
+        if (email != emailBrandao || senha != senhaBrandao || email != emailJulia || senha != senhaJulia) {
+            div_msg.innerHTML = ``
+        } else {
+            div_msg.innerHTML = ``
+        }
+    }
 
 //  FAZER A LÓGICA DE LOGIN E ADICIONAR CAIXAS DE ERRO NO CSS
 
