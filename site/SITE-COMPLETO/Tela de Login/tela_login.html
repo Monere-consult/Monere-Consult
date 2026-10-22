@@ -99,12 +99,23 @@
         let emailJulia = "julia.corporativo@gmail.com";
         let senhaBrandao = "@Rotina123";
         let senhaJulia = "@RotasControlesModulo123"
+        let tentativas = 3;
+
 
         if (email != emailBrandao || senha != senhaBrandao || email != emailJulia || senha != senhaJulia) {
             div_msg.innerHTML = ``
+        } else if (tentativas == 3) {
+            div_msg.innerHTML = `Login incorreto, tente novamente(Restam ${tentativas} tentativas)`
+            tentativas--
+        } else if (tentativas == 2) {
+            div_msg.innerHTML = `Login incorreto, tente novamente(Restam ${tentativas} tentativas)`
+        } else if (tentativas == 1) {
+            div_msg.innerHTML = `Login incorreto, tente novamente(Restam ${tentativas} tentativas)`
         } else {
-            div_msg.innerHTML = ``
+            div_msg.innerHTML = `Bloqueado temporariamente por excesso de tentativas`
         }
+
+        
     }
 
 //  FAZER A LÓGICA DE LOGIN E ADICIONAR CAIXAS DE ERRO NO CSS

@@ -103,6 +103,7 @@
         let confirmarSenha = ipt_confirmarSenha.value;
 
         let emailInvalido = true;
+        let tem1arroba = false;
         let senhaInvalida = true;
         let cfmSenhaInvalido = true;
 
@@ -115,12 +116,23 @@
 
         let contarCaractere = 0;
 
+
+         // email
+        if (!email.includes(" ") && email.split("@").length == 2 &&(
+            email.endsWith("@gmail.com") ||
+            email.endsWith("@hotmail.com") ||
+            email.endsWith("@outlook.com") ||
+            email.endsWith("@sptech.school")
+        )) {
+            emailInvalido = false;
+        }
+
         while (contarCaractere < senha.length) {
-            let char = senha[contarCaractere];
-            if (char >= "A" && char <= "Z") temMaius = true;
-            if (char >= "a" && char <= "z") temMinus = true;
-            if (numerosPermitidos.includes(char)) temNum = true;
-            if (simbolos.includes(char)) temSimb = true;
+            let caractere = senha[contarCaractere];
+            if (caractere >= "A" && caractere <= "Z") temMaius = true;
+            if (caractere >= "a" && caractere <= "z") temMinus = true;
+            if (numerosPermitidos.includes(caractere)) temNum = true;
+            if (simbolos.includes(caractere)) temSimb = true;
             contarCaractere++;
         }
 
@@ -141,22 +153,12 @@
             div_camposInvalidos.innerHTML = "As senhas são diferentes.";
         }
 
-        // email
-        if (!email.includes(" ") && (
-            email.endsWith("@gmail.com") ||
-            email.endsWith("@hotmail.com") ||
-            email.endsWith("@outlook.com") ||
-            email.endsWith("@sptech.school")
-        )) {
-            emailInvalido = false;
-        }
-
         // mensagens
         if (emailInvalido) {
             div_emailInvalido.innerHTML = "Digite um email válido.";
 
 
-            if (emailInvalido || senhaInvalida || cfmSenhaInvalido) {
+        if (emailInvalido || senhaInvalida || cfmSenhaInvalido) {
                 div_camposInvalidos.innerHTML = "Preencha  os dados corretamente."
             }
 
