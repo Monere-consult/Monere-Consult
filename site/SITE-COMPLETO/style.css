@@ -146,6 +146,9 @@ display: flex;
 }
 
 .btn {
+    display: inline-block;      /* novo */
+    text-align: center;         /* novo */
+    text-decoration: none;      /* novo */
     padding: clamp(14px, 1vw, 30px) clamp(20px, 1.6vw, 46px);
     background-color: rgba(24, 194, 194, 0.678);
     color: white;
