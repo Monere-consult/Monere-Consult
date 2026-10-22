@@ -46,11 +46,7 @@ REFERENCES bioterio(id)
 CREATE TABLE sensor(
 id INT PRIMARY KEY AUTO_INCREMENT,
 status_ VARCHAR(20) NOT NULL CONSTRAINT chEstadoSensor CHECK (status_ IN ('ativo', 'inativo', 'manutenção')),
-fk_gaiola INT,
-CONSTRAINT fk_gaiola
-FOREIGN KEY (fk_gaiola)
-REFERENCES gaiola(id),
-fk_sala INT,
+fk_salaSensor INT,
 FOREIGN KEY (fk_sala) 
 REFERENCES sala(id)
 );
@@ -72,10 +68,17 @@ REFERENCES sensor(id)
 INSERT INTO empresa VALUES
 (DEFAULT, 'SpTech Research', 12345678901234);
 
+INSERT INTO empresa VALUES 
+(DEFAULT, 'Instituto Butantan', 43210987654321);
+
+
+
 -- usuario
 INSERT INTO usuario VALUES
-(DEFAULT, 'Brandão','brandao.corporativo@email.com','@Rotina123', 'gerente', 1),
-(DEFAULT, 'Júlia', 'julia.corporativo@email.com', '@RotasControlesModulo123','funcionario', 1);
+(DEFAULT, 'Brandão','brandao.corporativo@gmail.com','@Rotina123', 'gerente', 1),
+(DEFAULT, 'Júlia', 'julia.corporativo@gmail.com', '@RotasControlesModulo123','gerente', 1),
+(DEFAULT, 'Marcos Antônio', 'marcos.corporativo@gmail.com','@Escopo123', 'funcionario', 2),
+(DEFAULT, 'Levi Greb', 'levi.corporativo@gmail.com', '@Katana0', 'admin', NULL);
 
 -- bioterio 
 INSERT INTO bioterio VALUES
