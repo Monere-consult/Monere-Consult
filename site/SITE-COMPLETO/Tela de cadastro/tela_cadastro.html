@@ -81,8 +81,8 @@
                 <div class="campo">
                     <input type="password" id="ipt_confirmarSenha" placeholder="Digite a senha novamente">
                 </div>
-
-                <div id="div_camposInvalidos"></div>
+                
+                <div id="div_msg"></div>
 
                 <button type="button" class="botao-cadastro" onclick="cadastrar()">Cadastre-se</button>
 
@@ -92,15 +92,13 @@
 
     </main>
 
-</body>
 
-</html>
 
 <script>
     function cadastrar() {
-        let email = ipt_email.value;
-        let senha = ipt_senha.value;
-        let confirmarSenha = ipt_confirmarSenha.value;
+        let email = ipt_email.value.trim();
+        let senha = ipt_senha.value.trim();
+        let confirmarSenha = ipt_confirmarSenha.value.trim();
 
         let emailInvalido = true;
         let tem1arroba = false;
@@ -148,21 +146,20 @@
         // confirmar senha
         if (confirmarSenha === senha && senha !== "") {
             cfmSenhaInvalido = false;
-            div_camposInvalidos.innerHTML = ""
+            div_msg.innerHTML = ""
         } else {
-            div_camposInvalidos.innerHTML = "As senhas são diferentes.";
+            div_msg.innerHTML = "As senhas são diferentes.";
         }
 
         // mensagens
         if (emailInvalido) {
             div_emailInvalido.innerHTML = "Digite um email válido.";
-
+        }
 
         if (emailInvalido || senhaInvalida || cfmSenhaInvalido) {
-                div_camposInvalidos.innerHTML = "Preencha  os dados corretamente."
+                div_msg.innerHTML = "Preencha  os dados corretamente."
             }
 
-        }
     }
     
 </script>
