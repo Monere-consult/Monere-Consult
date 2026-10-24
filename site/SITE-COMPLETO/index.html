@@ -393,6 +393,8 @@
 
                     <h1>Calculadora de Impacto Financeiro</h1>
 
+                    <div id="mensagem-validacao"></div>
+
                     <label for="qtdPesquisas">Média de pesquisas por ano:</label>
                     <input type="number" id="qtdPesquisas" placeholder="Ex: 10" min="0">
 
@@ -420,12 +422,13 @@
 
                         <div class="simulador-exemplo-conteudo">
 
-                            <p> <p>Estudo de caso ilustrativo<br>Instituto Butantan<br><br> <b>Média de pesquisas por ano:
+                            <p>
+                            <p>Estudo de caso ilustrativo<br>Instituto Butantan<br><br> <b>Média de pesquisas por ano:
                                     15 </b> <br>
                                 Valor médio gasto por pesquisa: R$ 2.000.000,00 <br><br>
                                 Investimento Anual: R$ 20.000.000,00<br> Perda sem solução: R$ 2.000.000,00 <br> Valor
                                 evitado: R$ 260.000,00 <br> Perda com o valor evitado: R$ 1.740.000,00 </p> <br>
-</p> 
+                            </p>
 
                         </div>
 
@@ -544,10 +547,19 @@
         let quantidade = Number(qtdPesquisas.value);
         let media = Number(valorMedio.value);
 
-        if (quantidade <= 0 || media <= 0) {
+        let mensagem = document.getElementById("mensagem-validacao");
 
-            resultado.innerHTML = "Informe a quantidade de pesquisas por ano e o valor médio gasto por pesquisa.<br>";
+        mensagem.innerHTML = "";
+        resultado.innerHTML = "";
 
+        if (quantidade <= 0) {
+            mensagem.innerHTML = "A quantidade de pesquisas precisa ser maior que zero!";
+
+        } else if (quantidade > 1000) {
+            mensagem.innerHTML = "Valor acima do limite recomendado. Verifique a quantidade informada!";
+
+        } else if (media <= 0) {
+            mensagem.innerHTML = "A média informada deve ser maior que zero. Verifique o valor inserido!";
         } else {
 
             // 1) Investimento total anual

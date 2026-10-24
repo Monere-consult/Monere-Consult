@@ -610,6 +610,21 @@ font-size: clamp(16px, 1vw, 20px);
 
 }
 
+#simulador #mensagem-validacao {
+    color: #b91c1c;
+    background-color: #fee2e2;
+    border: 1px solid #ef4444;
+    border-radius: 6px;
+    padding: 10px;
+    margin-bottom: 15px;
+    font-size: 0.9rem;
+    font-weight: bold;
+}
+
+#simulador #mensagem-validacao:empty {
+    display: none;
+}
+
 /* ORGANIZA RESULTADO E CALCULADORA */
 #simulador .simulador-conteudo {
     width: 100%;
