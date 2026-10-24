@@ -74,7 +74,9 @@
                     <input type="password" id="ipt_senha" placeholder="Crie uma senha">
                 </div>
 
-                <div id="div_forcaSenha"></div>
+                <div id="div_forte"></div>
+
+                <div id="div_fraca"></div>
 
                 <label for="ipt_confirmarSenha">Confirme sua senha:</label>
 
@@ -83,6 +85,8 @@
                 </div>
                 
                 <div id="div_msg"></div>
+
+                <div id="div_senhaDif"></div>
 
                 <button type="button" class="botao-cadastro" onclick="cadastrar()">Cadastre-se</button>
 
@@ -123,6 +127,9 @@
             email.endsWith("@sptech.school")
         )) {
             emailInvalido = false;
+            div_emailInvalido.innerHTML = "";
+        } else{
+            div_emailInvalido.innerHTML = "Digite um email válido.";
         }
 
         while (contarCaractere < senha.length) {
@@ -136,30 +143,28 @@
 
         // senha
         if (temMaius && temMinus && temNum && temSimb && senha.length >= 8 && senha.length <= 45) {
-            div_forcaSenha.innerHTML = "Forte";
+            div_forte.innerHTML = "Senha forte";
             senhaInvalida = false;
+            div_fraca.innerHTML = "";
         } else {
-            div_forcaSenha.innerHTML = "Fraca";
+            div_fraca.innerHTML = "Senha fraca";
             senhaInvalida = true;
+            div_forte.innerHTML = "";
         }
 
         // confirmar senha
         if (confirmarSenha === senha && senha !== "") {
             cfmSenhaInvalido = false;
+            div_senhaDif.innerHTML = ""
             div_msg.innerHTML = ""
         } else {
-            div_msg.innerHTML = "As senhas são diferentes.";
+            div_senhaDif.innerHTML = "As senhas são diferentes.";
+            div_msg.innerHTML = ""
         }
 
-        // mensagens
-        if (emailInvalido) {
-            div_emailInvalido.innerHTML = "Digite um email válido.";
-        }
-
-        if (emailInvalido || senhaInvalida || cfmSenhaInvalido) {
+        if (emailInvalido || senhaInvalida) {
                 div_msg.innerHTML = "Preencha  os dados corretamente."
             }
-
     }
     
 </script>

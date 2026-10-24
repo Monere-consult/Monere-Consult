@@ -120,3 +120,8 @@ main {
 .cadastro a {
     color: white;
 }
+
+#div_msg {
+    color: red;
+    font-weight: 700;
+}

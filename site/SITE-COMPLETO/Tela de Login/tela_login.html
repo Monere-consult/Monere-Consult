@@ -73,14 +73,18 @@
                     <span>🔒</span>
                    <input type="text" id="ipt_senha" placeholder="Digite sua senha" >
                 </div>
-
-                <button class="botao-cadastro" onclick="logar()">Login</button>
+                
+                <button type="button" class="botao-cadastro" onclick="logar()">Login</button>
             </form>
+            
+            <div id="div_msg"></div>
+            <div id="div_msgCerto"></div>
 
             <p class="cadastro">
                 Não tem uma conta?
                 <a href="../Tela de Cadastro/tela_cadastro.html">Cadastre-se</a>
             </p>
+
 
         </div>
 
@@ -92,31 +96,29 @@
 
 
 <script>
+
+    let tentativas = 3;
+
     function logar() {
         let email = ipt_email.value;
         let senha = ipt_senha.value
-        let emailBrandao = "brandao.corporativo@gmailcom";
+        let emailBrandao = "brandao.corporativo@gmail.com";
         let emailJulia = "julia.corporativo@gmail.com";
         let senhaBrandao = "@Rotina123";
         let senhaJulia = "@RotasControlesModulo123"
-        let tentativas = 3;
 
-
-        if (email != emailBrandao || senha != senhaBrandao || email != emailJulia || senha != senhaJulia) {
-            div_msg.innerHTML = ``
-        } else if (tentativas == 3) {
-            div_msg.innerHTML = `Login incorreto, tente novamente(Restam ${tentativas} tentativas)`
-            tentativas--
-        } else if (tentativas == 2) {
-            div_msg.innerHTML = `Login incorreto, tente novamente(Restam ${tentativas} tentativas)`
-        } else if (tentativas == 1) {
-            div_msg.innerHTML = `Login incorreto, tente novamente(Restam ${tentativas} tentativas)`
+        if(tentativas >= 1){
+            if(email != emailBrandao || senha != senhaBrandao || email != emailJulia || senha != senhaJulia){
+                div_msg.innerHTML = `Login incorreto, tente novamente(Restam ${tentativas} tentativas)` 
+                tentativas--
+            } else{
+                div_msg.innerHTML = ""
+                div_msgCerto.innerHTML = `Entrou`
+            }
         } else {
             div_msg.innerHTML = `Bloqueado temporariamente por excesso de tentativas`
         }
-
-        
-    }
+}
 
 //  FAZER A LÓGICA DE LOGIN E ADICIONAR CAIXAS DE ERRO NO CSS
 

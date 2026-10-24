@@ -119,7 +119,29 @@ main {
 
 }
 
-#div_forcaSenha {
+#div_forte {
     color: green;
     font-weight: 700;
 }
+
+#div_fraca {
+    color: red;
+    font-weight: 700;
+}
+
+#div_msg {
+    color: red;
+    font-weight: 700;
+}
+
+#div_emailInvalido {
+    color: red;
+    font-weight: 700;
+}
+
+#div_senhaDif {
+    color: red;
+    font-weight: 700;
+}
+
+
