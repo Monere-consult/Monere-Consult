@@ -14,7 +14,7 @@ id INT PRIMARY KEY AUTO_INCREMENT,
 nome VARCHAR(100) NOT NULL,
 email VARCHAR(100) NOT NULL UNIQUE,
 senha VARCHAR(45) NOT NULL,
-tipo_usuario VARCHAR(45) NOT NULL CONSTRAINT chTipo_usuario CHECK (tipo_usuario IN ('admin', 'funcionario', 'gerente')),
+tipo_usuario VARCHAR(20) CONSTRAINT chTipo_usuario CHECK (tipo_usuario IN ('admin', 'funcionario', 'gerente')),
 fk_empresa INT,
 CONSTRAINT fk_empresa
 FOREIGN KEY (fk_empresa)
