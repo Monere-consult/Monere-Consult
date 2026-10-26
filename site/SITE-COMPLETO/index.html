@@ -555,11 +555,11 @@
         if (quantidade <= 0) {
             mensagem.innerHTML = "A quantidade de pesquisas precisa ser maior que zero!";
 
-        } else if (quantidade > 1000) {
+        } else if (quantidade > 100000) {
             mensagem.innerHTML = "Valor acima do limite recomendado. Verifique a quantidade informada!";
 
-        } else if (media <= 0) {
-            mensagem.innerHTML = "A média informada deve ser maior que zero. Verifique o valor inserido!";
+        } else if (media < quantidade) {
+            mensagem.innerHTML = "A média informada deve ser maior que a quantidade de pesquisas. Verifique o valor inserido!";
         } else {
 
             // 1) Investimento total anual
