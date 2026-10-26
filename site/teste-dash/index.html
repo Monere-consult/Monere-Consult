@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard de Temperatura</title>
+
+    <!-- Fonte Montserrat (Google Fonts) -->
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet">
+
+    <!-- Nosso CSS -->
+    <link rel="stylesheet" href="style.css">
+
+    <!-- Biblioteca Chart.js (via CDN) -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+<div class="container">
+
+    <!-- ABAS -->
+    <div class="abas">
+        <button class="aba ativa" data-vista="vistaSala">Por sala</button>
+        <button class="aba" data-vista="vistaGeral">Visão geral</button>
+    </div>
+
+    <!-- ===================== VISTA 1: gráfico de linha ===================== -->
+    <div class="vista ativa" id="vistaSala">
+        <div class="filtros">
+            <div class="filtro">
+                <label>Empresa</label>
+                <div class="campo">Vacinar</div>
+            </div>
+            <div class="filtro">
+                <label>Filial</label>
+                <select>
+                    <option>Morumbi</option>
+                    <option>Paulista</option>
+                    <option>Santana</option>
+                </select>
+            </div>
+            <div class="filtro">
+                <label>Sala</label>
+                <select id="sala"></select>
+            </div>
+        </div>
+
+        <div class="cards">
+            <div class="card">
+                <div class="titulo">Temperatura atual</div>
+                <div class="valor" id="valorTempAtual">--</div>
+            </div>
+            <div class="card">
+                <div class="titulo">Status</div>
+                <div class="valor" id="statusSala">--</div>
+            </div>
+            <div class="card">
+                <div class="titulo">Sensores ativos</div>
+                <div class="valor">25</div>
+            </div>
+            <div class="card">
+                <div class="titulo">Sensores totais</div>
+                <div class="valor">25</div>
+            </div>
+        </div>
+
+        <div class="painel">
+            <h3>Temperatura (°C)</h3>
+            <div class="legenda">
+                <span><i class="bolinha vermelho"></i> Máxima (26°C)</span>
+                <span><i class="bolinha azul"></i> Mínima (20°C)</span>
+            </div>
+            <div class="grafico-wrapper">
+                <canvas id="graficoLinha"></canvas>
+            </div>
+        </div>
+    </div>
+
+    <!-- ===================== VISTA 2: gráfico de colunas ===================== -->
+    <div class="vista" id="vistaGeral">
+        <div class="filtros">
+            <div class="filtro">
+                <label>Empresa</label>
+                <div class="campo">Vacinar</div>
+            </div>
+            <div class="filtro">
+                <label>Filial</label>
+                <select>
+                    <option>Morumbi</option>
+                    <option>Paulista</option>
+                    <option>Santana</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="cards">
+            <div class="card">
+                <div class="titulo">Temperatura média</div>
+                <div class="valor" id="valorTempMedia">--</div>
+            </div>
+            <div class="card">
+                <div class="titulo">Status</div>
+                <div class="valor" id="statusGeral">--</div>
+            </div>
+            <div class="card">
+                <div class="titulo">Sensores ativos</div>
+                <div class="valor">25</div>
+            </div>
+            <div class="card">
+                <div class="titulo">Sensores totais</div>
+                <div class="valor">25</div>
+            </div>
+        </div>
+
+        <div class="painel">
+            <h3>Temperatura (°C)</h3>
+            <div class="legenda">
+                <span><i class="bolinha vermelho"></i> Máximo (26°C)</span>
+                <span><i class="bolinha azul"></i> Mínimo (20°C)</span>
+            </div>
+            <div class="grafico-wrapper">
+                <canvas id="graficoColunas"></canvas>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<!-- Nosso JavaScript (no final, depois que todo o HTML já existe) -->
+<script src="script.js"></script>
+</body>
+</html>
