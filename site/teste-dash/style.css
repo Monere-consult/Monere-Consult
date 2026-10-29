@@ -1,4 +1,6 @@
-* { box-sizing: border-box; }
+* {
+    box-sizing: border-box;
+}
 
 body {
     margin: 0;
@@ -25,7 +27,7 @@ body {
     background: none;
     border: none;
     border-bottom: 3px solid transparent;
-    color: #aab;
+    color: #aaaabb;
     font-family: inherit;
     font-size: 14px;
     font-weight: 600;
@@ -33,7 +35,9 @@ body {
     cursor: pointer;
 }
 
-.aba:hover { color: #fff; }
+.aba:hover {
+    color: #fff;
+}
 
 .aba.ativa {
     color: #fff;
@@ -41,24 +45,30 @@ body {
 }
 
 /* Só a vista com a classe "ativa" aparece */
-.vista { display: none; }
-.vista.ativa { display: block; }
+.vista {
+    display: none;
+}
+
+.vista.ativa {
+    display: block;
+}
 
 /* ---------- Filtros ---------- */
 .filtros {
     display: flex;
     gap: 12px;
     margin-bottom: 14px;
-    flex-wrap: wrap;
 }
 
-.filtro { width: 230px; }
+.filtro {
+    width: 230px;
+}
 
 .filtro label {
     display: block;
     font-size: 12px;
     font-weight: 300;
-    color: #aab;
+    color: #aaaabb;
     margin-bottom: 4px;
 }
 
@@ -75,17 +85,23 @@ body {
     font-weight: 600;
 }
 
-.filtro select { cursor: pointer; }
+.filtro select {
+    cursor: pointer;
+}
+
+.filtro select option {
+    background: #171f2b;
+}
 
 /* ---------- Cards ---------- */
 .cards {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
+    display: flex;
     gap: 12px;
     margin-bottom: 20px;
 }
 
 .card {
+    flex: 1;
     background: #171f2b;
     border: 1px solid #222b3a;
     border-radius: 6px;
@@ -95,7 +111,7 @@ body {
 .card .titulo {
     font-size: 13px;
     font-weight: 300;
-    color: #cdd;
+    color: #ccdddd;
     margin-bottom: 8px;
 }
 
@@ -104,8 +120,17 @@ body {
     font-weight: 600;
 }
 
-.status-normal { color: #0a8a0a; }
-.status-atencao { color: #f2d200; }
+.status-normal {
+    color: #0a8a0a;
+}
+
+.status-atencao {
+    color: #f2d200;
+}
+
+.status-critico {
+    color: #c40000;
+}
 
 /* ---------- Painel do gráfico ---------- */
 .painel {
@@ -143,17 +168,16 @@ body {
     display: inline-block;
 }
 
-.vermelho { background: #d71920; }
-.azul { background: #1f4fe0; }
+.vermelho {
+    background: #d71920;
+}
+
+.azul {
+    background: #1f4fe0;
+}
 
 .grafico-wrapper {
     position: relative;
     height: 320px;
     width: 100%;
-}
-
-/* ---------- Celular / telas pequenas ---------- */
-@media (max-width: 800px) {
-    .cards { grid-template-columns: repeat(2, 1fr); }
-    body { padding: 16px; }
 }
