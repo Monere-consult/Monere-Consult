@@ -1,14 +1,15 @@
-// ====================================================
-// CONSTANTES
-// ====================================================
-const LIMITE_MIN = 20;
-const LIMITE_MAX = 26;
+// Desenha as linhas tracejadas de máxima (26) e mínima (20) de uma borda à outra
+// (usado só no gráfico de colunas)
+const linhasLimite = {
+    id: 'linhasLimite',
+    afterDatasetsDraw: function (chart) {
+        const ctx = chart.ctx;
+        const area = chart.chartArea;
 
-const COR_LINHA = '#e8620c';   // laranja da linha de temperatura
-const COR_OK = '#0b5a0b';      // verde escuro: dentro da faixa
-const COR_NO_LIMITE = '#6df50a'; // verde-limão: exatamente no limite
-const COR_FORA = '#b30000';    // vermelho: fora da faixa
+        const yMaxima = chart.scales.y.getPixelForValue(26);
+        const yMinima = chart.scales.y.getPixelForValue(20);
 
+<<<<<<< HEAD
 // ====================================================
 // DADOS MOCADOS (depois trocar por fetch na API)
 // ====================================================
@@ -132,206 +133,175 @@ const pluginLimites = {
     id: 'limites',
     afterDatasetsDraw(chart) {
         const { ctx, chartArea, scales } = chart;
+=======
+>>>>>>> edcef00d9c29d68075af23bf7592c9691cf6b736
         ctx.save();
         ctx.setLineDash([6, 6]);
-        ctx.lineWidth = 1.2;
-        [[LIMITE_MAX, 'rgba(215,25,32,0.6)'], [LIMITE_MIN, 'rgba(31,79,224,0.75)']].forEach(([valor, cor]) => {
-            const y = scales.y.getPixelForValue(valor);
-            ctx.strokeStyle = cor;
-            ctx.beginPath();
-            ctx.moveTo(chartArea.left, y);
-            ctx.lineTo(chartArea.right, y);
-            ctx.stroke();
-        });
+        ctx.lineWidth = 2;
+
+        // linha vermelha (máxima)
+        ctx.strokeStyle = 'red';
+        ctx.beginPath();
+        ctx.moveTo(area.left, yMaxima);
+        ctx.lineTo(area.right, yMaxima);
+        ctx.stroke();
+
+        // linha azul (mínima)
+        ctx.strokeStyle = 'blue';
+        ctx.beginPath();
+        ctx.moveTo(area.left, yMinima);
+        ctx.lineTo(area.right, yMinima);
+        ctx.stroke();
+
         ctx.restore();
     }
 };
 
-// Valor escrito em cima de cada barra
-const pluginValoresBarras = {
-    id: 'valoresBarras',
-    afterDatasetsDraw(chart) {
-        const { ctx } = chart;
-        ctx.save();
-        ctx.fillStyle = '#fff';
-        ctx.font = '600 10px Montserrat, Arial';
-        ctx.textAlign = 'center';
-        chart.getDatasetMeta(0).data.forEach((barra, i) => {
-            ctx.fillText(chart.data.datasets[0].data[i], barra.x, barra.y - 6);
-        });
-        ctx.restore();
+// Opções dos gráficos de linha (Tempo real e Histórico)
+const opcoes = {
+    responsive: true,
+    maintainAspectRatio: false,
+    plugins: {
+        legend: { display: false }
+    },
+    scales: {
+        y: { min: 16, max: 30 }
     }
 };
 
-// ====================================================
-// CONFIGURAÇÕES GERAIS DO CHART.JS
-// ====================================================
-Chart.defaults.color = '#dde';
-Chart.defaults.font.family = 'Montserrat, Arial, sans-serif';
-Chart.defaults.font.weight = 300;
+// Opções do gráfico de colunas (Visão geral): offset true evita cortar as barras das pontas
+const opcoesColunas = {
+    responsive: true,
+    maintainAspectRatio: false,
+    plugins: {
+        legend: { display: false }
+    },
+    scales: {
+        x: { offset: true },
+        y: { min: 16, max: 30 }
+    }
+};
 
-const grade = { color: 'rgba(255,255,255,0.06)' };
+// ===== GRÁFICO 1: TEMPO REAL (linha) =====
+const labels = ['17:46', '17:48', '17:50', '17:52', '17:54', '17:56', '17:58', '18:00',
+                '18:02', '18:04', '18:06', '18:08', '18:10', '18:12', '18:14', '18:16'];
 
-// Barras: eixo fixo de 16 a 30
-const escalaYBarras = { min: 16, max: 30, ticks: { stepSize: 2 }, grid: grade };
+const data = {
+    labels: labels,
+    datasets: [{
+        label: 'Temperatura',
+        data: [22.1, 22.6, 22.0, 21.1, 21.6, 22.6, 23.3, 23.9, 23.4, 23.3, 24.0, 24.9, 25.5, 24.8, 24.0, 22.8],
+        borderColor: 'orange',
+        backgroundColor: 'orange',
+        tension: 0.1
+    },
+    {
+        label: 'Máxima',
+        data: [26, 26, 26, 26, 26, 26, 26, 26, 26, 26, 26, 26, 26, 26, 26, 26],
+        borderColor: 'red',
+        borderDash: [6, 6],
+        pointRadius: 0
+    },
+    {
+        label: 'Mínima',
+        data: [20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20],
+        borderColor: 'blue',
+        borderDash: [6, 6],
+        pointRadius: 0
+    }]
+};
 
-// Linhas: começa em 16 a 30, mas cresce sozinho se algum valor passar disso
-const escalaYLinha = { suggestedMin: 16, suggestedMax: 30, ticks: { stepSize: 2 }, grid: grade };
+const config = {
+    type: 'line',
+    data: data,
+    options: opcoes
+};
 
-const escalaX = { grid: grade };
+const myChart = new Chart(document.getElementById('graficoTempoReal'), config);
 
-// ====================================================
-// FUNÇÃO QUE CRIA UM GRÁFICO DE LINHA (usada em 2 telas)
-// ====================================================
-function criarGraficoLinha(idCanvas, labels, serie) {
-    return new Chart(document.getElementById(idCanvas), {
-        type: 'line',
-        data: {
-            labels: labels,
-            datasets: [{
-                data: serie,
-                borderColor: COR_LINHA,
-                backgroundColor: COR_LINHA,
-                borderWidth: 1.5,
-                pointRadius: 2,
-                tension: 0.2
-            }]
-        },
-        options: {
-            responsive: true,
-            maintainAspectRatio: false,
-            plugins: { legend: { display: false } },
-            scales: { y: escalaYLinha, x: escalaX }
-        },
-        plugins: [pluginLimites]
-    });
-}
 
-// ====================================================
-// SELECTS (preenchidos pelo JS)
-// ====================================================
-const selectSalaTempoReal = document.getElementById('salaTempoReal');
-const selectSalaHistorico = document.getElementById('salaHistorico');
-const selectDia = document.getElementById('diaHistorico');
+// ===== GRÁFICO 2: VISÃO GERAL (colunas) =====
+const labels2 = ['Sala 1', 'Sala 2', 'Sala 3', 'Sala 4', 'Sala 5'];
 
-const opcoesSalas = salas.map((s, i) => `<option value="${i}">${i + 1}</option>`).join('');
-selectSalaTempoReal.innerHTML = opcoesSalas;
-selectSalaHistorico.innerHTML = opcoesSalas;
-selectSalaTempoReal.value = SALA_REFERENCIA;  // Sala 9, como no protótipo
-selectSalaHistorico.value = SALA_REFERENCIA;
-
-selectDia.innerHTML = Object.keys(historico)
-    .map(dia => `<option value="${dia}">${dia}</option>`)
-    .join('');
-selectDia.value = 'há 1 dia';
-
-// ====================================================
-// TELA 1: TEMPO REAL
-// ====================================================
-let graficoTempoReal = null;
-
-function mostrarTempoReal() {
-    const sala = salas[selectSalaTempoReal.value];
-    const serie = serieTempoRealDaSala(sala);
-    const atual = serie[serie.length - 1];
-
-    document.getElementById('valorTempAtual').textContent = atual.toFixed(1) + ' °C';
-    definirStatus('statusTempoReal', [atual]);
-    document.getElementById('ultimaLeituraTempoReal').textContent = ULTIMA_LEITURA;
-
-    const bateria = document.getElementById('valorBateria');
-    bateria.textContent = sala.bateria + '%';
-    bateria.className = 'valor ' + classeBateria(sala.bateria);
-
-    if (graficoTempoReal) graficoTempoReal.destroy();
-    graficoTempoReal = criarGraficoLinha('graficoTempoReal', horasTempoReal, serie);
-}
-
-selectSalaTempoReal.addEventListener('change', mostrarTempoReal);
-
-// ====================================================
-// TELA 2: VISÃO GERAL (colunas)
-// ====================================================
-let graficoColunas = null;
-
-function mostrarVisaoGeral() {
-    const temperaturas = salas.map(s => s.temperatura);
-    const fora = temperaturas.filter(foraDaFaixa).length;
-
-    definirStatus('statusGeral', temperaturas);
-    document.getElementById('valorSensores').textContent = `${SENSORES.online}/${SENSORES.total}`;
-    document.getElementById('valorForaFaixa').textContent = `${fora}/${salas.length}`;
-    document.getElementById('ultimaLeituraGeral').textContent = ULTIMA_LEITURA;
-
-    if (graficoColunas) graficoColunas.destroy();
-
-    graficoColunas = new Chart(document.getElementById('graficoColunas'), {
+const data2 = {
+    labels: labels2,
+    datasets: [{
         type: 'bar',
-        data: {
-            labels: salas.map(s => s.nome),
-            datasets: [{
-                data: temperaturas,
-                backgroundColor: temperaturas.map(corDaBarra),
-                barPercentage: 0.5,
-                categoryPercentage: 1
-            }]
-        },
-        options: {
-            responsive: true,
-            maintainAspectRatio: false,
-            plugins: { legend: { display: false }, tooltip: { enabled: false } },
-            scales: { y: escalaYBarras, x: escalaX }
-        },
-        plugins: [pluginLimites, pluginValoresBarras]
-    });
-}
-
-// ====================================================
-// TELA 3: HISTÓRICO
-// ====================================================
-let graficoHistorico = null;
-
-function mostrarHistorico() {
-    const sala = salas[selectSalaHistorico.value];
-    const dados = historico[selectDia.value];
-    const serie = ajustarParaSala(dados.serie, sala);
-
-    document.getElementById('valorMaxima').textContent = Math.max(...serie).toFixed(1) + ' °C';
-    document.getElementById('valorMinima').textContent = Math.min(...serie).toFixed(1) + ' °C';
-    document.getElementById('valorTempoFora').textContent = formatarMinutos(dados.tempoForaMin);
-    document.getElementById('valorExcursoes').textContent = contarExcursoes(serie);
-
-    if (graficoHistorico) graficoHistorico.destroy();
-    graficoHistorico = criarGraficoLinha('graficoHistorico', horasHistorico, serie);
-}
-
-selectSalaHistorico.addEventListener('change', mostrarHistorico);
-selectDia.addEventListener('change', mostrarHistorico);
-
-// ====================================================
-// ABAS
-// ====================================================
-const desenharVista = {
-    vistaTempoReal: mostrarTempoReal,
-    vistaGeral: mostrarVisaoGeral,
-    vistaHistorico: mostrarHistorico
+        label: 'Temperatura',
+        data: [22.4, 28.4, 24.1, 21.7, 23.5],
+        // verde = dentro da faixa | amarelo = fora da faixa
+        backgroundColor: ['green', 'yellow', 'green', 'green', 'green'],
+        barPercentage: 0.5,
+        categoryPercentage: 0.8
+    }]
 };
 
-const abas = document.querySelectorAll('.aba');
-const vistas = document.querySelectorAll('.vista');
+const config2 = {
+    type: 'bar',
+    data: data2,
+    options: opcoesColunas,
+    plugins: [linhasLimite]
+};
 
-abas.forEach(aba => {
-    aba.addEventListener('click', () => {
-        abas.forEach(a => a.classList.remove('ativa'));
-        vistas.forEach(v => v.classList.remove('ativa'));
+const myChart2 = new Chart(document.getElementById('graficoGeral'), config2);
 
-        aba.classList.add('ativa');
-        document.getElementById(aba.dataset.vista).classList.add('ativa');
 
-        // Desenha o gráfico só depois que a aba ficou visível
-        desenharVista[aba.dataset.vista]();
-    });
-});
+// ===== GRÁFICO 3: HISTÓRICO (linha) =====
+const labels3 = ['00:00', '02:00', '04:00', '06:00', '08:00', '10:00',
+                 '12:00', '14:00', '16:00', '18:00', '20:00', '22:00'];
 
-// Tela inicial
-mostrarTempoReal();
+const data3 = {
+    labels: labels3,
+    datasets: [{
+        label: 'Temperatura',
+        data: [22.1, 23.1, 25.4, 27.0, 25.3, 24.0, 21.6, 22.8, 24.0, 22.2, 18.8, 20.3],
+        borderColor: 'orange',
+        backgroundColor: 'orange',
+        tension: 0.1
+    },
+    {
+        label: 'Máxima',
+        data: [26, 26, 26, 26, 26, 26, 26, 26, 26, 26, 26, 26],
+        borderColor: 'red',
+        borderDash: [6, 6],
+        pointRadius: 0
+    },
+    {
+        label: 'Mínima',
+        data: [20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20],
+        borderColor: 'blue',
+        borderDash: [6, 6],
+        pointRadius: 0
+    }]
+};
+
+const config3 = {
+    type: 'line',
+    data: data3,
+    options: opcoes
+};
+
+const myChart3 = new Chart(document.getElementById('graficoHistorico'), config3);
+
+
+// ===== ABAS =====
+function mostrarAba(idVista, idBotao) {
+    // esconde as 3 telas
+    document.getElementById('vistaTempoReal').className = 'vista';
+    document.getElementById('vistaGeral').className = 'vista';
+    document.getElementById('vistaHistorico').className = 'vista';
+
+    // apaga o destaque dos 3 botões
+    document.getElementById('botaoTempoReal').className = 'aba';
+    document.getElementById('botaoGeral').className = 'aba';
+    document.getElementById('botaoHistorico').className = 'aba';
+
+    // mostra só a tela e o botão que foram clicados
+    document.getElementById(idVista).className = 'vista ativa';
+    document.getElementById(idBotao).className = 'aba ativa';
+
+    // ajusta o tamanho dos gráficos, porque estavam escondidos
+    myChart.resize();
+    myChart2.resize();
+    myChart3.resize();
+}

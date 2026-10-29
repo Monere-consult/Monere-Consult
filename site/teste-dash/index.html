@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard de Temperatura</title>
-
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
@@ -14,12 +13,12 @@
 
     <!-- ABAS -->
     <div class="abas">
-        <button class="aba ativa" data-vista="vistaTempoReal">Tempo real</button>
-        <button class="aba" data-vista="vistaGeral">Visão geral</button>
-        <button class="aba" data-vista="vistaHistorico">Histórico</button>
+        <button class="aba ativa" id="botaoTempoReal" onclick="mostrarAba('vistaTempoReal', 'botaoTempoReal')">Tempo real</button>
+        <button class="aba" id="botaoGeral" onclick="mostrarAba('vistaGeral', 'botaoGeral')">Visão geral</button>
+        <button class="aba" id="botaoHistorico" onclick="mostrarAba('vistaHistorico', 'botaoHistorico')">Histórico</button>
     </div>
 
-    <!-- ===================== VISTA 1: TEMPO REAL ===================== -->
+    <!-- ========== TELA 1: TEMPO REAL ========== -->
     <div class="vista ativa" id="vistaTempoReal">
         <div class="filtros">
             <div class="filtro">
@@ -36,26 +35,32 @@
             </div>
             <div class="filtro">
                 <label>Sala</label>
-                <select id="salaTempoReal"></select>
+                <select>
+                    <option>1</option>
+                    <option>2</option>
+                    <option>3</option>
+                    <option>4</option>
+                    <option>5</option>
+                </select>
             </div>
         </div>
 
         <div class="cards">
             <div class="card">
                 <div class="titulo">Temperatura atual</div>
-                <div class="valor" id="valorTempAtual">--</div>
+                <div class="valor">22.8 °C</div>
             </div>
             <div class="card">
                 <div class="titulo">Status</div>
-                <div class="valor" id="statusTempoReal">--</div>
+                <div class="valor status-normal">Normal</div>
             </div>
             <div class="card">
                 <div class="titulo">Última leitura</div>
-                <div class="valor" id="ultimaLeituraTempoReal">--</div>
+                <div class="valor">()</div>
             </div>
             <div class="card">
                 <div class="titulo">Bateria do sensor</div>
-                <div class="valor" id="valorBateria">--</div>
+                <div class="valor status-normal">()</div>
             </div>
         </div>
 
@@ -71,7 +76,7 @@
         </div>
     </div>
 
-    <!-- ===================== VISTA 2: VISÃO GERAL ===================== -->
+    <!-- ========== TELA 2: VISÃO GERAL ========== -->
     <div class="vista" id="vistaGeral">
         <div class="filtros">
             <div class="filtro">
@@ -91,19 +96,19 @@
         <div class="cards">
             <div class="card">
                 <div class="titulo">Status</div>
-                <div class="valor" id="statusGeral">--</div>
-            </div>
-            <div class="card">
-                <div class="titulo">Sensores online</div>
-                <div class="valor" id="valorSensores">--</div>
+                <div class="valor status-atencao">Atenção</div>
             </div>
             <div class="card">
                 <div class="titulo">Fora da faixa</div>
-                <div class="valor" id="valorForaFaixa">--</div>
+                <div class="valor">1/5</div>
+            </div>
+            <div class="card">
+                <div class="titulo">Sensores online</div>
+                <div class="valor">()</div>
             </div>
             <div class="card">
                 <div class="titulo">Última leitura</div>
-                <div class="valor" id="ultimaLeituraGeral">--</div>
+                <div class="valor">()</div>
             </div>
         </div>
 
@@ -114,12 +119,12 @@
                 <span><i class="bolinha azul"></i> Mínima (20°C)</span>
             </div>
             <div class="grafico-wrapper">
-                <canvas id="graficoColunas"></canvas>
+                <canvas id="graficoGeral"></canvas>
             </div>
         </div>
     </div>
 
-    <!-- ===================== VISTA 3: HISTÓRICO ===================== -->
+    <!-- ========== TELA 3: HISTÓRICO ========== -->
     <div class="vista" id="vistaHistorico">
         <div class="filtros">
             <div class="filtro">
@@ -136,30 +141,40 @@
             </div>
             <div class="filtro">
                 <label>Sala</label>
-                <select id="salaHistorico"></select>
+                <select>
+                    <option>1</option>
+                    <option>2</option>
+                    <option>3</option>
+                    <option>4</option>
+                    <option>5</option>
+                </select>
             </div>
             <div class="filtro">
                 <label>Dia</label>
-                <select id="diaHistorico"></select>
+                <select>
+                    <option>Hoje</option>
+                    <option selected>há 1 dia</option>
+                    <option>há 2 dias</option>
+                </select>
             </div>
         </div>
 
         <div class="cards">
             <div class="card">
                 <div class="titulo">Máxima do período</div>
-                <div class="valor" id="valorMaxima">--</div>
+                <div class="valor">27.0 °C</div>
             </div>
             <div class="card">
                 <div class="titulo">Mínima do período</div>
-                <div class="valor" id="valorMinima">--</div>
+                <div class="valor">18.8 °C</div>
             </div>
             <div class="card">
                 <div class="titulo">Tempo fora da faixa</div>
-                <div class="valor" id="valorTempoFora">--</div>
+                <div class="valor">2h 20min</div>
             </div>
             <div class="card">
                 <div class="titulo">Excursões</div>
-                <div class="valor" id="valorExcursoes">--</div>
+                <div class="valor">2</div>
             </div>
         </div>
 
