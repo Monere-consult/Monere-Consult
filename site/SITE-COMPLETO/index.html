@@ -401,11 +401,11 @@
                     <br><br>
 
                     <label for="valorMedio">Valor médio gasto por pesquisa:</label>
-                    <input type="number" id="valorMedio" placeholder="Ex: 50000000" min="0">
+                    <input type="text" id="valorMedio" placeholder="Ex: R$ 5000,00" min="0">
 
                     <br><br>
 
-                    <label>Taxa de mitigação garantida: 13%</label>
+                    <label>Taxa de mitigação garantida: 13% </label>
 
                     <br><br>
 
@@ -489,6 +489,9 @@
                         e prevenção de perdas, garantindo confiabilidade para seus experimentos.
                     </p>
 
+                    <p class="faleC">FALE CONOSCO</p>
+
+
                     <a href="mailto:contato@monere.com.br" class="footer-email">
                         ✉ monereconsult@email.com
                     </a>
@@ -542,10 +545,27 @@
     // Percentual das perdas que o sistema evita: FIXO em 13%
     let percentualEvita = 0.13;
 
+    valorMedio.addEventListener('input', function() {
+
+    let valor = valorMedio.value.replace(/\D/g, '');
+
+    if (valor == "") {
+        valorMedio.value = "";
+    } else {
+        valor = (Number(valor) / 100).toLocaleString("pt-BR", {
+            minimumFractionDigits: 2,
+            maximumFractionDigits: 2
+        });
+
+        valorMedio.value = "R$ " + valor;
+    }
+    });
+
+
     function calcular() {
 
         let quantidade = Number(qtdPesquisas.value);
-        let media = Number(valorMedio.value);
+        let media = Number(valorMedio.value.replace(/\D/g, '')) / 100;
 
         let mensagem = document.getElementById("mensagem-validacao");
 

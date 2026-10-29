@@ -18,7 +18,7 @@ const SENSORES = { online: 25, total: 25 };
 const salas = [
     { nome: 'Sala 1',  temperatura: 22.4, bateria: 91 },
     { nome: 'Sala 2',  temperatura: 17.4, bateria: 76 },
-    { nome: 'Sala 3',  temperatura: 21.8, bateria: 64 },
+    { nome: 'Sala 3',  temperatura: 21.8, bateria: 64 },    
     { nome: 'Sala 4',  temperatura: 26.0, bateria: 88 },
     { nome: 'Sala 5',  temperatura: 19.5, bateria: 45 },
     { nome: 'Sala 6',  temperatura: 25.2, bateria: 70 },
