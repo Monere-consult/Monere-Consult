@@ -42,5 +42,7 @@ O sistema atua como ferramenta de apoio à decisão: **não realiza o controle a
 - [Levi Greb](https://github.com/Legreb)
 - [João Pedro Sakamoto](https://github.com/joaohashimoto)
 - [Fernando de Oliveira](https://github.com/FernandoOliveiraa7)
+- [Bianca Ramos](https://github.com/BiancaRamos4)
+- [Gustavo Cerqueira](https://github.com/Gustavo-C-Fernandes)
 
 
