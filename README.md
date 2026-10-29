@@ -1,5 +1,5 @@
 # Monere-Consult
-<img width="124" height="105" alt="image" src="https://github.com/user-attachments/assets/e181397f-f1fb-4a2f-9059-267dfcfec26e" />
+<img width="124" height="105" alt="image" src="file:///C:/Users/joaov/Downloads/Faculdade/SPRINT%202/Monere-Consult/site/SITE-COMPLETO/img/Monere%20Consult%20logo.svg" />
 
 
 ## Sobre o projeto
