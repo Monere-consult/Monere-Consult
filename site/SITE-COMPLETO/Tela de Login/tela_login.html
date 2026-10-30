@@ -111,7 +111,7 @@
         let senhaMarcos = "@Escopo123";
 
         if(tentativas >= 1){
-            if(email != emailBrandao || senha != senhaBrandao || email != emailJulia || senha != senhaJulia){
+            if((email != emailBrandao || senha != senhaBrandao) || (email != emailJulia || senha != senhaJulia)||(email != emailMarcos || senha != senhaMarcos)){
                 div_msg.innerHTML = `Login incorreto, tente novamente(Restam ${tentativas} tentativas)` 
                 tentativas--
             } else{
@@ -122,12 +122,4 @@
             div_msg.innerHTML = `Bloqueado temporariamente por excesso de tentativas`
         }
 }
-
-//  FAZER A LÓGICA DE LOGIN E ADICIONAR CAIXAS DE ERRO NO CSS
-
-
-
-
-
-
 </script>
