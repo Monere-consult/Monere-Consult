@@ -1,197 +1,230 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard de Temperatura</title>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../header.css">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
 </head>
+
 <body>
-<div class="container">
 
-    <!-- ABAS -->
-    <div class="abas">
-        <button class="aba ativa" id="botaoTempoReal" onclick="mostrarAba('vistaTempoReal', 'botaoTempoReal')">Tempo real</button>
-        <button class="aba" id="botaoGeral" onclick="mostrarAba('vistaGeral', 'botaoGeral')">Visão geral</button>
-        <button class="aba" id="botaoHistorico" onclick="mostrarAba('vistaHistorico', 'botaoHistorico')">Histórico</button>
+    <header class="header">
+
+        <a href="../index.html#inicio" class="logo">
+            <img src="img/Monere Consult logo.svg" alt="Logo Monere Consult">
+            <h1 class="titulo">
+                <span class="titulo-azul">Monere</span> <span class="titulo-branco">Consult</span>
+            </h1>
+        </a>
+
+        <div class="icone">
+            <ul class="navibar">
+                <li><a href="../index.html#inicio">Início</a></li>
+                <li><a href="../index.html#sobre-nos">Sobre nós</a></li>
+                <li><a href="../index.html#solucoes">Soluções</a></li>
+                <li><a href="../index.html#simulador">Simulador</a></li>
+                <li><a href="../index.html#equipe">Nossa equipe</a></li>
+            </ul>
+
+            <a href="../Tela de Login/tela_login.html" class="icone-login" data-tooltip="Login" aria-label="Login">
+                <img src="img/icone.svg" alt="">
+            </a>
+        </div>
+
+    </header>
+    <div class="container">
+
+        <!-- ABAS -->
+        <div class="abas">
+            <button class="aba ativa" id="botaoTempoReal" onclick="mostrarAba('vistaTempoReal', 'botaoTempoReal')">Tempo
+                real</button>
+            <button class="aba" id="botaoGeral" onclick="mostrarAba('vistaGeral', 'botaoGeral')">Visão geral</button>
+            <button class="aba" id="botaoHistorico"
+                onclick="mostrarAba('vistaHistorico', 'botaoHistorico')">Histórico</button>
+        </div>
+
+        <!-- ========== TELA 1: TEMPO REAL ========== -->
+        <div class="vista ativa" id="vistaTempoReal">
+            <div class="filtros">
+                <div class="filtro">
+                    <label>Empresa</label>
+                    <div class="campo">Vacinar</div>
+                </div>
+                <div class="filtro">
+                    <label>Filial</label>
+                    <select>
+                        <option>Morumbi</option>
+                        <option>Paulista</option>
+                        <option>Santana</option>
+                    </select>
+                </div>
+                <div class="filtro">
+                    <label>Sala</label>
+                    <select>
+                        <option>1</option>
+                        <option>2</option>
+                        <option>3</option>
+                        <option>4</option>
+                        <option>5</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="cards">
+                <div class="card">
+                    <div class="titulo">Temperatura atual</div>
+                    <div class="valor">22.8 °C</div>
+                </div>
+                <div class="card">
+                    <div class="titulo">Status</div>
+                    <div class="valor status-normal">Normal</div>
+                </div>
+                <div class="card">
+                    <div class="titulo">Última leitura</div>
+                    <div class="valor">()</div>
+                </div>
+                <div class="card">
+                    <div class="titulo">Bateria do sensor</div>
+                    <div class="valor status-normal">()</div>
+                </div>
+            </div>
+
+            <div class="painel">
+                <h3>Temperatura (°C)</h3>
+                <div class="legenda">
+                    <span><i class="bolinha vermelho"></i> Máxima (26°C)</span>
+                    <span><i class="bolinha azul"></i> Mínima (20°C)</span>
+                </div>
+                <div class="grafico-wrapper">
+                    <canvas id="graficoTempoReal"></canvas>
+                </div>
+            </div>
+        </div>
+
+        <!-- ========== TELA 2: VISÃO GERAL ========== -->
+        <div class="vista" id="vistaGeral">
+            <div class="filtros">
+                <div class="filtro">
+                    <label>Empresa</label>
+                    <div class="campo">Vacinar</div>
+                </div>
+                <div class="filtro">
+                    <label>Filial</label>
+                    <select>
+                        <option>Morumbi</option>
+                        <option>Paulista</option>
+                        <option>Santana</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="cards">
+                <div class="card">
+                    <div class="titulo">Status</div>
+                    <div class="valor status-atencao">Atenção</div>
+                </div>
+                <div class="card">
+                    <div class="titulo">Fora da faixa</div>
+                    <div class="valor">1/5</div>
+                </div>
+                <div class="card">
+                    <div class="titulo">Sensores online</div>
+                    <div class="valor">()</div>
+                </div>
+                <div class="card">
+                    <div class="titulo">Última leitura</div>
+                    <div class="valor">()</div>
+                </div>
+            </div>
+
+            <div class="painel">
+                <h3>Temperatura (°C)</h3>
+                <div class="legenda">
+                    <span><i class="bolinha vermelho"></i> Máxima (26°C)</span>
+                    <span><i class="bolinha azul"></i> Mínima (20°C)</span>
+                </div>
+                <div class="grafico-wrapper">
+                    <canvas id="graficoGeral"></canvas>
+                </div>
+            </div>
+        </div>
+
+        <!-- ========== TELA 3: HISTÓRICO ========== -->
+        <div class="vista" id="vistaHistorico">
+            <div class="filtros">
+                <div class="filtro">
+                    <label>Empresa</label>
+                    <div class="campo">Vacinar</div>
+                </div>
+                <div class="filtro">
+                    <label>Filial</label>
+                    <select>
+                        <option>Morumbi</option>
+                        <option>Paulista</option>
+                        <option>Santana</option>
+                    </select>
+                </div>
+                <div class="filtro">
+                    <label>Sala</label>
+                    <select>
+                        <option>1</option>
+                        <option>2</option>
+                        <option>3</option>
+                        <option>4</option>
+                        <option>5</option>
+                    </select>
+                </div>
+                <div class="filtro">
+                    <label>Dia</label>
+                    <select>
+                        <option>Hoje</option>
+                        <option selected>há 1 dia</option>
+                        <option>há 2 dias</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="cards">
+                <div class="card">
+                    <div class="titulo">Máxima do período</div>
+                    <div class="valor">27.0 °C</div>
+                </div>
+                <div class="card">
+                    <div class="titulo">Mínima do período</div>
+                    <div class="valor">18.8 °C</div>
+                </div>
+                <div class="card">
+                    <div class="titulo">Tempo fora da faixa</div>
+                    <div class="valor">2h 20min</div>
+                </div>
+                <div class="card">
+                    <div class="titulo">Excursões</div>
+                    <div class="valor">2</div>
+                </div>
+            </div>
+
+            <div class="painel">
+                <h3>Temperatura (°C)</h3>
+                <div class="legenda">
+                    <span><i class="bolinha vermelho"></i> Máxima (26°C)</span>
+                    <span><i class="bolinha azul"></i> Mínima (20°C)</span>
+                </div>
+                <div class="grafico-wrapper">
+                    <canvas id="graficoHistorico"></canvas>
+                </div>
+            </div>
+        </div>
+
     </div>
 
-    <!-- ========== TELA 1: TEMPO REAL ========== -->
-    <div class="vista ativa" id="vistaTempoReal">
-        <div class="filtros">
-            <div class="filtro">
-                <label>Empresa</label>
-                <div class="campo">Vacinar</div>
-            </div>
-            <div class="filtro">
-                <label>Filial</label>
-                <select>
-                    <option>Morumbi</option>
-                    <option>Paulista</option>
-                    <option>Santana</option>
-                </select>
-            </div>
-            <div class="filtro">
-                <label>Sala</label>
-                <select>
-                    <option>1</option>
-                    <option>2</option>
-                    <option>3</option>
-                    <option>4</option>
-                    <option>5</option>
-                </select>
-            </div>
-        </div>
-
-        <div class="cards">
-            <div class="card">
-                <div class="titulo">Temperatura atual</div>
-                <div class="valor">22.8 °C</div>
-            </div>
-            <div class="card">
-                <div class="titulo">Status</div>
-                <div class="valor status-normal">Normal</div>
-            </div>
-            <div class="card">
-                <div class="titulo">Última leitura</div>
-                <div class="valor">()</div>
-            </div>
-            <div class="card">
-                <div class="titulo">Bateria do sensor</div>
-                <div class="valor status-normal">()</div>
-            </div>
-        </div>
-
-        <div class="painel">
-            <h3>Temperatura (°C)</h3>
-            <div class="legenda">
-                <span><i class="bolinha vermelho"></i> Máxima (26°C)</span>
-                <span><i class="bolinha azul"></i> Mínima (20°C)</span>
-            </div>
-            <div class="grafico-wrapper">
-                <canvas id="graficoTempoReal"></canvas>
-            </div>
-        </div>
-    </div>
-
-    <!-- ========== TELA 2: VISÃO GERAL ========== -->
-    <div class="vista" id="vistaGeral">
-        <div class="filtros">
-            <div class="filtro">
-                <label>Empresa</label>
-                <div class="campo">Vacinar</div>
-            </div>
-            <div class="filtro">
-                <label>Filial</label>
-                <select>
-                    <option>Morumbi</option>
-                    <option>Paulista</option>
-                    <option>Santana</option>
-                </select>
-            </div>
-        </div>
-
-        <div class="cards">
-            <div class="card">
-                <div class="titulo">Status</div>
-                <div class="valor status-atencao">Atenção</div>
-            </div>
-            <div class="card">
-                <div class="titulo">Fora da faixa</div>
-                <div class="valor">1/5</div>
-            </div>
-            <div class="card">
-                <div class="titulo">Sensores online</div>
-                <div class="valor">()</div>
-            </div>
-            <div class="card">
-                <div class="titulo">Última leitura</div>
-                <div class="valor">()</div>
-            </div>
-        </div>
-
-        <div class="painel">
-            <h3>Temperatura (°C)</h3>
-            <div class="legenda">
-                <span><i class="bolinha vermelho"></i> Máxima (26°C)</span>
-                <span><i class="bolinha azul"></i> Mínima (20°C)</span>
-            </div>
-            <div class="grafico-wrapper">
-                <canvas id="graficoGeral"></canvas>
-            </div>
-        </div>
-    </div>
-
-    <!-- ========== TELA 3: HISTÓRICO ========== -->
-    <div class="vista" id="vistaHistorico">
-        <div class="filtros">
-            <div class="filtro">
-                <label>Empresa</label>
-                <div class="campo">Vacinar</div>
-            </div>
-            <div class="filtro">
-                <label>Filial</label>
-                <select>
-                    <option>Morumbi</option>
-                    <option>Paulista</option>
-                    <option>Santana</option>
-                </select>
-            </div>
-            <div class="filtro">
-                <label>Sala</label>
-                <select>
-                    <option>1</option>
-                    <option>2</option>
-                    <option>3</option>
-                    <option>4</option>
-                    <option>5</option>
-                </select>
-            </div>
-            <div class="filtro">
-                <label>Dia</label>
-                <select>
-                    <option>Hoje</option>
-                    <option selected>há 1 dia</option>
-                    <option>há 2 dias</option>
-                </select>
-            </div>
-        </div>
-
-        <div class="cards">
-            <div class="card">
-                <div class="titulo">Máxima do período</div>
-                <div class="valor">27.0 °C</div>
-            </div>
-            <div class="card">
-                <div class="titulo">Mínima do período</div>
-                <div class="valor">18.8 °C</div>
-            </div>
-            <div class="card">
-                <div class="titulo">Tempo fora da faixa</div>
-                <div class="valor">2h 20min</div>
-            </div>
-            <div class="card">
-                <div class="titulo">Excursões</div>
-                <div class="valor">2</div>
-            </div>
-        </div>
-
-        <div class="painel">
-            <h3>Temperatura (°C)</h3>
-            <div class="legenda">
-                <span><i class="bolinha vermelho"></i> Máxima (26°C)</span>
-                <span><i class="bolinha azul"></i> Mínima (20°C)</span>
-            </div>
-            <div class="grafico-wrapper">
-                <canvas id="graficoHistorico"></canvas>
-            </div>
-        </div>
-    </div>
-
-</div>
-
-<script src="script.js"></script>
+    <script src="script.js"></script>
 </body>
+
 </html>

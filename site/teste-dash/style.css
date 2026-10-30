@@ -1,13 +1,117 @@
 * {
+    margin: 0;
+    padding: 0;
     box-sizing: border-box;
 }
 
 body {
     margin: 0;
-    padding: 30px 40px;
+    padding: 100px 40px 30px;
     background: #1e1e1e;
     color: #fff;
     font-family: 'Montserrat', Arial, sans-serif;
+}
+
+
+/* ---------- Header (igual ao do site) ---------- */
+.header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 65px;
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 22px;
+    background-color: #08253f;
+    border-bottom: 2px solid #1565af;
+    font-family: 'Poppins', Arial, sans-serif;
+}
+
+.header .logo {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+    text-decoration: none;
+}
+
+.header .logo img {
+    height: 50px;
+    width: auto;
+    display: block;
+}
+
+.header .titulo {
+    font-size: 24px;
+    font-weight: 700;
+    line-height: 1;
+}
+
+.header .titulo-azul {
+    color: #00ffff;
+}
+
+.header .titulo-branco {
+    color: #fff;
+}
+
+.header .icone {
+    display: flex;
+    align-items: center;
+    gap: 36px;
+}
+
+.header .navibar {
+    display: flex;
+    align-items: center;
+    gap: 28px;
+    list-style: none;
+}
+
+.header .navibar a {
+    color: #fff;
+    text-decoration: none;
+    font-size: 16px;
+    font-weight: 500;
+    transition: color 0.3s ease;
+}
+
+.header .navibar a:hover {
+    color: #00ffff;
+}
+
+.header .icone-login {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.header .icone-login img {
+    width: 40px;
+    height: 40px;
+    display: block;
+}
+
+.header .icone-login::after {
+    content: attr(data-tooltip);
+    position: absolute;
+    top: 100%;
+    right: 0;
+    margin-top: 10px;
+    padding: 4px 10px;
+    border-radius: 6px;
+    background: #1565af;
+    color: #fff;
+    font-size: 12px;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.2s ease;
+}
+
+.header .icone-login:hover::after {
+    opacity: 1;
 }
 
 .container {
