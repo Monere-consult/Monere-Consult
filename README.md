@@ -1,5 +1,5 @@
 # Monere-Consult
-<img width="895" height="823" alt="image" src="https://github.com/user-attachments/assets/dc36ae37-fb95-4bfb-84f1-984ed8cc18a7" />
+<img width="100" height="100" alt="image" src="https://github.com/user-attachments/assets/dc36ae37-fb95-4bfb-84f1-984ed8cc18a7" />
 
 
 
