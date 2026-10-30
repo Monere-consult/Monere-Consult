@@ -104,7 +104,7 @@ const data2 = {
         label: 'Temperatura',
         data: [22.4, 28.4, 24.1, 21.7, 23.5],
         // verde = dentro da faixa | amarelo = fora da faixa
-        backgroundColor: ['green', 'yellow', 'green', 'green', 'green'],
+        backgroundColor: ['green', 'red', 'green', 'green', 'green'],
         barPercentage: 0.5,
         categoryPercentage: 0.8
     }]
