@@ -1,5 +1,6 @@
 # Monere-Consult
-<img width="124" height="105" alt="image" src="file:///C:/Users/joaov/Downloads/Design%20sem%20nome.png" />
+<img width="105" height="96" alt="image" src="https://github.com/user-attachments/assets/830f9146-c825-454f-acb0-c1b50ae3362d" />
+
 
 
 ## Sobre o projeto
