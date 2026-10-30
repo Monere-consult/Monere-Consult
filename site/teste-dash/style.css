@@ -115,10 +115,15 @@ body {
 }
 
 .container {
-    max-width: 1000px;
+    
     margin: 0 auto;
+    background: #171f2b;
+    border: 1px solid #222b3a;
+    border-radius: 8px;
+    padding: 20px;
+    height: 830px;
+    width: 1300px;
 }
-
 /* ---------- Abas ---------- */
 .abas {
     display: flex;
@@ -157,11 +162,17 @@ body {
     display: block;
 }
 
+
+
 /* ---------- Filtros ---------- */
 .filtros {
     display: flex;
     gap: 12px;
     margin-bottom: 14px;
+    padding: 16px;
+    border: 1px solid #222b3a;
+    border-radius: 6px;
+    background: #171f2b;
 }
 
 .filtro {
@@ -212,6 +223,16 @@ body {
     padding: 16px;
 }
 
+.cards{
+    flex: 1;
+    background-color: #08253f;
+    border: 1px solid #1565af;
+    border-radius: 6px;
+    padding: 16px;   
+}
+
+
+
 .card .titulo {
     font-size: 13px;
     font-weight: 300;
@@ -236,10 +257,21 @@ body {
     color: #c40000;
 }
 
+.detalhe-excursao {
+    font-size: 11px;
+    color: #aaaabb;
+    margin-top: 6px;
+}
+
+.detalhe-excursao span {
+    color: #ff4545;
+    font-weight: 600;
+}
+
 /* ---------- Painel do gráfico ---------- */
 .painel {
     background: #171f2b;
-    border: 1px solid #222b3a;
+    border: 1px solid #1565af;
     border-radius: 6px;
     padding: 16px;
 }

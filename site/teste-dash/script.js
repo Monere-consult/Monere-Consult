@@ -1,8 +1,37 @@
+// BOTÕES PARA TROCAR DE ABA
+
+function mostrarAba(abaSelecionada, botaoSelecionado) {
+
+    // Esconde as três telas
+    document.getElementById('vistaTempoReal').classList.remove('ativa');
+    document.getElementById('vistaGeral').classList.remove('ativa');
+    document.getElementById('vistaHistorico').classList.remove('ativa');
+
+    // Retira o destaque dos três botões
+    document.getElementById('botaoTempoReal').classList.remove('ativa');
+    document.getElementById('botaoGeral').classList.remove('ativa');
+    document.getElementById('botaoHistorico').classList.remove('ativa');
+
+    // Mostra a tela selecionada
+    document.getElementById(abaSelecionada).classList.add('ativa');
+
+    // Destaca o botão selecionado
+    document.getElementById(botaoSelecionado).classList.add('ativa');
+
+    // Ajusta os gráficos
+    myChart.resize();
+    myChart2.resize();
+    myChart3.resize();
+
+}
+
+
+
 // Desenha as linhas tracejadas de máxima (26) e mínima (20) de uma borda à outra
 // (usado só no gráfico de colunas)
 const linhasLimite = {
     id: 'linhasLimite',
-    afterDatasetsDraw: function (chart) {
+    afterDraw: function (chart) {
         const ctx = chart.ctx;
         const area = chart.chartArea;
 
@@ -102,11 +131,13 @@ const data2 = {
     datasets: [{
         type: 'bar',
         label: 'Temperatura',
-        data: [22.4, 28.4, 24.1, 21.7, 23.5],
+        data: [22.4, 28.4, 24.1, 26, 23.5],
         // verde = dentro da faixa | amarelo = fora da faixa
-        backgroundColor: ['green', 'red', 'green', 'green', 'green'],
-        barPercentage: 0.5,
-        categoryPercentage: 0.8
+        backgroundColor: ['green', 'darkred', 'green', 'orange', 'green'],
+        barPercentage: 0.2,
+        categoryPercentage: 0.8,
+        borderColor: 'cyan',
+        borderWidth: 3,
     }]
 };
 
@@ -157,25 +188,3 @@ const config3 = {
 
 const myChart3 = new Chart(document.getElementById('graficoHistorico'), config3);
 
-
-// ===== ABAS =====
-function mostrarAba(idVista, idBotao) {
-    // esconde as 3 telas
-    document.getElementById('vistaTempoReal').className = 'vista';
-    document.getElementById('vistaGeral').className = 'vista';
-    document.getElementById('vistaHistorico').className = 'vista';
-
-    // apaga o destaque dos 3 botões
-    document.getElementById('botaoTempoReal').className = 'aba';
-    document.getElementById('botaoGeral').className = 'aba';
-    document.getElementById('botaoHistorico').className = 'aba';
-
-    // mostra só a tela e o botão que foram clicados
-    document.getElementById(idVista).className = 'vista ativa';
-    document.getElementById(idBotao).className = 'aba ativa';
-
-    // ajusta o tamanho dos gráficos, porque estavam escondidos
-    myChart.resize();
-    myChart2.resize();
-    myChart3.resize();
-}

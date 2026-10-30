@@ -41,28 +41,36 @@
     </header>
     <div class="container">
 
-        <!-- ABAS -->
         <div class="abas">
-            <button class="aba ativa" id="botaoTempoReal" onclick="mostrarAba('vistaTempoReal', 'botaoTempoReal')">Tempo
-                real</button>
-            <button class="aba" id="botaoGeral" onclick="mostrarAba('vistaGeral', 'botaoGeral')">Visão geral</button>
-            <button class="aba" id="botaoHistorico"
-                onclick="mostrarAba('vistaHistorico', 'botaoHistorico')">Histórico</button>
+
+            <button class="aba ativa" id="botaoTempoReal" onclick="mostrarAba('vistaTempoReal', 'botaoTempoReal')">
+                Tempo real
+            </button>
+
+            <button class="aba" id="botaoGeral" onclick="mostrarAba('vistaGeral', 'botaoGeral')">
+                Visão geral
+            </button>
+
+            <button class="aba" id="botaoHistorico" onclick="mostrarAba('vistaHistorico', 'botaoHistorico')">
+                Histórico
+            </button>
+
         </div>
+
+
 
         <!-- ========== TELA 1: TEMPO REAL ========== -->
         <div class="vista ativa" id="vistaTempoReal">
             <div class="filtros">
                 <div class="filtro">
                     <label>Empresa</label>
-                    <div class="campo">Vacinar</div>
+                    <div class="campo">SpTech Research</div>
                 </div>
                 <div class="filtro">
                     <label>Filial</label>
                     <select>
+                        <option selected>Paulista</option>
                         <option>Morumbi</option>
-                        <option>Paulista</option>
-                        <option>Santana</option>
                     </select>
                 </div>
                 <div class="filtro">
@@ -87,13 +95,10 @@
                     <div class="valor status-normal">Normal</div>
                 </div>
                 <div class="card">
-                    <div class="titulo">Última leitura</div>
-                    <div class="valor">()</div>
+                    <div class="titulo">Última atualização</div>
+                    <div class="valor">Há 2 minutos</div>
                 </div>
-                <div class="card">
-                    <div class="titulo">Bateria do sensor</div>
-                    <div class="valor status-normal">()</div>
-                </div>
+
             </div>
 
             <div class="painel">
@@ -113,14 +118,13 @@
             <div class="filtros">
                 <div class="filtro">
                     <label>Empresa</label>
-                    <div class="campo">Vacinar</div>
+                    <div class="campo">SpTech Research</div>
                 </div>
                 <div class="filtro">
                     <label>Filial</label>
                     <select>
+                        <option selected>Paulista</option>
                         <option>Morumbi</option>
-                        <option>Paulista</option>
-                        <option>Santana</option>
                     </select>
                 </div>
             </div>
@@ -136,12 +140,16 @@
                 </div>
                 <div class="card">
                     <div class="titulo">Sensores online</div>
-                    <div class="valor">()</div>
+                    <div class="valor">5/5</div>
                 </div>
                 <div class="card">
-                    <div class="titulo">Última leitura</div>
-                    <div class="valor">()</div>
+                    <div class="titulo">Pico de excursão</div>
+                    <div class="valor status-critico">28,3 °C</div>
+                    <div class="detalhe-excursao">
+                        <span>+2,3 °C</span> acima do limite
+                    </div>
                 </div>
+
             </div>
 
             <div class="painel">
@@ -161,14 +169,13 @@
             <div class="filtros">
                 <div class="filtro">
                     <label>Empresa</label>
-                    <div class="campo">Vacinar</div>
+                    <div class="campo">SpTech Research</div>
                 </div>
                 <div class="filtro">
                     <label>Filial</label>
                     <select>
+                        <option selected>Paulista</option>
                         <option>Morumbi</option>
-                        <option>Paulista</option>
-                        <option>Santana</option>
                     </select>
                 </div>
                 <div class="filtro">
