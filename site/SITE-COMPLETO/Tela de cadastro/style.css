@@ -23,14 +23,13 @@ main {
     flex-direction: row-reverse;
     align-items: stretch;
     width: min(1000px, 90%);
-    height: 536px;
+    min-height: 536px;
     margin: 60px auto;
 }
 
 /* IMAGEM */
 .caixa-imagem {
     width: 50%;
-    height: 536px;
     border-radius: 28px;
     overflow: hidden;
     margin-left: 3px;
@@ -46,8 +45,8 @@ main {
 /* CAIXA DE CADASTRO */
 .caixa-login {
     width: 50%;
-    height: 536px;
-    padding: 25px 60px;
+    min-height: 536px;
+    padding: 25px 60px 35px;
     border-radius: 28px;
     background-color: #1c2a70;
     text-align: center;
@@ -98,7 +97,7 @@ main {
 .botao-cadastro {
     width: 220px;
     height: 46px;
-    margin-top: 34px;
+    margin-top: 24px;
     border: none;
     border-radius: 15px;
     background-color: rgba(24, 194, 194, 0.678);
@@ -143,5 +142,3 @@ main {
     color: red;
     font-weight: 700;
 }
-
-
