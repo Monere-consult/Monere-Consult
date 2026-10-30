@@ -23,6 +23,7 @@ O sistema conta com um **banco de dados MySQL**, integrado à aplicação por me
 - **Alertas de temperatura:** identificação de valores abaixo de 20 °C ou acima de 26 °C, considerando a faixa de referência inicial adotada pelo projeto.
 - **Cadastro e login:** acesso às funcionalidades do sistema por meio de uma área de autenticação.
 - **Simulador financeiro:** estimativa de possíveis perdas financeiras e de recuperação econômica potencial com base nos parâmetros definidos pela equipe.
+- **Site institucional: site próprio do projeto, com apresentação da Monere Consult, sobre nós, soluções, simulador e nossa equipe.
 
 ## Tecnologias utilizadas
 
