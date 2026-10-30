@@ -83,7 +83,7 @@
             <p class="cadastro">
                 Não tem uma conta?
                 <a href="../Tela de Cadastro/tela_cadastro.html">Cadastre-se</a>
-            </p>
+            </p><img src="" alt="">
 
 
         </div>
@@ -93,7 +93,6 @@
 </body>
 
 </html>
-
 
 <script>
     let tentativas = 3;
@@ -113,25 +112,25 @@
         if (tentativas < 1) {
             div_msg.innerHTML = "Bloqueado temporariamente por excesso de tentativas";
             div_msgCerto.innerHTML = "";
-            return;
-        }
-
-        let loginValido =
-            (email == emailBrandao && senha == senhaBrandao) ||
-            (email == emailJulia && senha == senhaJulia) ||
-            (email == emailMarcos && senha == senhaMarcos);
-
-        if (loginValido) {
-            div_msg.innerHTML = "";
-            div_msgCerto.innerHTML = "Entrou";
         } else {
-            tentativas--;
-            div_msgCerto.innerHTML = "";
+            let loginValido =
+                (email == emailBrandao && senha == senhaBrandao) ||
+                (email == emailJulia && senha == senhaJulia) ||
+                (email == emailMarcos && senha == senhaMarcos);
 
-            if (tentativas > 0) {
-                div_msg.innerHTML = `Login incorreto, tente novamente (Restam ${tentativas} tentativas)`;
+            if (loginValido) {
+                div_msg.innerHTML = "";
+                div_msgCerto.innerHTML = "Entrou";
+                window.location.href = '../../teste-dash/index.html';
             } else {
-                div_msg.innerHTML = "Bloqueado temporariamente por excesso de tentativas";
+                tentativas--;
+                div_msgCerto.innerHTML = "";
+
+                if (tentativas > 0) {
+                    div_msg.innerHTML = `Login incorreto, tente novamente (Restam ${tentativas} tentativas)`;
+                } else {
+                    div_msg.innerHTML = "Bloqueado temporariamente por excesso de tentativas";
+                }
             }
         }
     }
