@@ -96,12 +96,12 @@
 
 
 <script>
-
     let tentativas = 3;
 
     function logar() {
         let email = ipt_email.value;
-        let senha = ipt_senha.value
+        let senha = ipt_senha.value;
+
         let emailBrandao = "brandao.corporativo@gmail.com";
         let emailJulia = "julia.corporativo@gmail.com";
         let emailMarcos = "marcos.corporativo@gmail.com";
@@ -110,16 +110,29 @@
         let senhaJulia = "@RotasControlesModulo123";
         let senhaMarcos = "@Escopo123";
 
-        if(tentativas >= 1){
-            if((email != emailBrandao || senha != senhaBrandao) || (email != emailJulia || senha != senhaJulia)||(email != emailMarcos || senha != senhaMarcos)){
-                div_msg.innerHTML = `Login incorreto, tente novamente(Restam ${tentativas} tentativas)` 
-                tentativas--
-            } else{
-                div_msg.innerHTML = ""
-                div_msgCerto.innerHTML = `Entrou`
-            }
-        } else {
-            div_msg.innerHTML = `Bloqueado temporariamente por excesso de tentativas`
+        if (tentativas < 1) {
+            div_msg.innerHTML = "Bloqueado temporariamente por excesso de tentativas";
+            div_msgCerto.innerHTML = "";
+            return;
         }
-}
+
+        let loginValido =
+            (email == emailBrandao && senha == senhaBrandao) ||
+            (email == emailJulia && senha == senhaJulia) ||
+            (email == emailMarcos && senha == senhaMarcos);
+
+        if (loginValido) {
+            div_msg.innerHTML = "";
+            div_msgCerto.innerHTML = "Entrou";
+        } else {
+            tentativas--;
+            div_msgCerto.innerHTML = "";
+
+            if (tentativas > 0) {
+                div_msg.innerHTML = `Login incorreto, tente novamente (Restam ${tentativas} tentativas)`;
+            } else {
+                div_msg.innerHTML = "Bloqueado temporariamente por excesso de tentativas";
+            }
+        }
+    }
 </script>
