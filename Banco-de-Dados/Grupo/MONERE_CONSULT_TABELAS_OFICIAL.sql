@@ -16,10 +16,15 @@ email VARCHAR(100) NOT NULL UNIQUE,
 senha VARCHAR(45) NOT NULL,
 tipo_usuario VARCHAR(20) CONSTRAINT chTipo_usuario CHECK (tipo_usuario IN ('admin', 'funcionario', 'gerente')),
 fk_empresa INT,
+fk_gerente INT,
 CONSTRAINT fk_empresa
 FOREIGN KEY (fk_empresa)
-REFERENCES empresa(id)
+REFERENCES empresa(id),
+CONSTRAINT (fk_gerente)
+FOREIGN KEY (fk_gerente)
+REFERENCES usuario(id)
 );
+
 
 CREATE TABLE bioterio (
 id INT PRIMARY KEY AUTO_INCREMENT,
