@@ -179,8 +179,6 @@
                     <!-- TROCAR IMAGEM 9: ícone do card "Monitoramento Contínuo" -->
                     <img src="img/24h.svg" alt="">
 
-
-
                     <img class="imagem-card" src="img/01_monitoramento_continuo.svg" alt="">
 
                     <h4><b>Monitoramento Contínuo </b> </h4><br>
@@ -261,7 +259,6 @@
                     <img src="img/04_seguranca_pesquisa.svg" alt="">
                 </div> -->
 
-            </div>
             <!-- <div class="calculadora-container">
                 <div class="calculadora-texto">
                     <h6><span class="span-h6">Calculadora de economia e prevenção</span></h6><br>
@@ -293,14 +290,11 @@
 
         <section class="secao1" id="simulador">
 
-
-
             <!-- CONTEÚDO: explicação e resultado à esquerda, calculadora à direita -->
             <div class="simulador-conteudo">
 
                 <!-- COLUNA ESQUERDA: explicação dos cálculos e resultado -->
                 <div class="simulador-resultado-area">
-
 
                     <!-- Explicação da regra de negócio -->
 
@@ -336,7 +330,6 @@
                     </details>
 
                     <!-- BLOCO: COMO USAR A CALCULADORA -->
-
 
                     <details class="simulador-expansivel">
 
@@ -378,10 +371,7 @@
 
                     </details>
 
-
-
                     <!-- Resultado apresentado após o cálculo -->
-
 
                     <h2><span>Resultado</span></h2>
                     <div id="resultado"></div>
@@ -434,22 +424,6 @@
 
                     </details>
 
-                    <!-- <details class="simulador-exemplo">
-
-                        <summary>
-                            <h2>Dados</h2>
-                            <span class="simulador-seta"></span>
-                        </summary>
-
-                        <div class="simulador-exemplo-conteudo">
-                            <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Facere quasi sit sequi
-                                reiciendis, culpa laboriosam nisi libero at, corrupti velit inventore odit cum delectus
-                                exercitationem eaque earum, voluptatem dolor voluptate?</p>
-                        </div>
-
-                    </details> -->
-
-
                 </div>
 
             </div>
@@ -457,19 +431,83 @@
         </section>
 
 
-
-        <!-- ===================== NOSSA EQUIPE (a fazer) ===================== -->
+        <!-- ===================== NOSSA EQUIPE ===================== -->
         <section class="secao2" id="equipe">
-            <h2>Nossa equipe</h2>
-            <p>Em breve.</p>
+
+            <div class="equipe-cabecalho">
+                <span class="equipe-tag">Quem faz a Monere</span>
+                <h2>Nossa <span class="equipe-destaque">equipe</span></h2>
+                <p>Conheça as pessoas por trás do desenvolvimento da plataforma.</p>
+            </div>
+
+            <div class="equipe-grid">
+
+                <!-- TROCAR FOTO 1 -->
+                <article class="membro">
+                    <div class="membro-foto">
+                        <img src="img/bianca.jpeg" alt="Foto de Nome do Integrante 1">
+                    </div>
+                    <h3>Bianca Ramos Da Silva</h3>
+                    <p class="membro-cargo">Desenvolvedora</p>
+                </article>
+
+                <!-- TROCAR FOTO 2 -->
+                <article class="membro">
+                    <div class="membro-foto">
+                        <img src="img/foto-christian.jpeg" alt="Foto de Nome do Integrante 2">
+                    </div>
+                    <h3>Christian Raphael Santos Misael </h3>
+                    <p class="membro-cargo">Desenvolvedor</p>
+                </article>
+
+                <!-- TROCAR FOTO 3 -->
+                <article class="membro">
+                    <div class="membro-foto">
+                        <img src="img/foto-Fernando.png" alt="Foto de Nome do Integrante 3">
+                    </div>
+                    <h3>Fernando De Oliveira Pinheiro</h3>
+                    <p class="membro-cargo">Desenvolvedor</p>
+                </article>
+
+                <!-- TROCAR FOTO 4 -->
+                <article class="membro">
+                    <div class="membro-foto">
+                        <img src="img/foto-Gustavo-Cerqueira.jpeg" alt="Foto de Nome do Integrante 4">
+                    </div>
+                    <h3>Gustavo Cerqueira</h3>
+                    <p class="membro-cargo">Desenvolvedor</p>
+                </article>
+
+                <!-- TROCAR FOTO 5 -->
+                <article class="membro">
+                    <div class="membro-foto">
+                        <img src="img/foto-sakamoto.jpeg" alt="Foto de Nome do Integrante 5">
+                    </div>
+                    <h3>João Pedro Sakamoto</h3>
+                    <p class="membro-cargo">Desenvolvedor</p>
+                </article>
+
+                <!-- TROCAR FOTO 6 -->
+                <article class="membro">
+                    <div class="membro-foto">
+                        <img src="img/foto-joao-vitor.jpeg" alt="Foto de Nome do Integrante 6">
+                    </div>
+                    <h3>João Vitor Serra Croce</h3>
+                    <p class="membro-cargo">Desenvolvedor</p>
+                </article>
+
+                <!-- TROCAR FOTO 7 -->
+                <article class="membro">
+                    <div class="membro-foto">
+                        <img src="img/foto-levi.jpeg" alt="Foto de Nome do Integrante 7">
+                    </div>
+                    <h3>Levi Greb Oliveira Da Silva</h3>
+                    <p class="membro-cargo">Desenvolvedor</p>
+                </article>
+
+            </div>
         </section>
 
-
-
-
-
-
-        <!-- =================== FOOTER ============================== -->
 
         <!-- =================== FOOTER ============================== -->
 
@@ -526,112 +564,107 @@
 
     </main>
 
-</body>
 
-</html>
+    <!-- SCRIPT DA CALCULADORA -->
+    <script>
 
+        // Percentual de perda sobre o valor investido: FIXO em 10%
+        let percentualPerda = 0.10;
 
+        // Percentual das perdas que o sistema evita: FIXO em 13%
+        let percentualEvita = 0.13;
 
+        valorMedio.addEventListener('input', function () {
 
+            let valor = valorMedio.value.replace(/\D/g, '');
 
-<!-- SCRIPT DA CALCULADORA -->
+            if (valor == "") {
+                valorMedio.value = "";
+            } else {
+                valor = (Number(valor) / 100).toLocaleString("pt-BR", {
+                    minimumFractionDigits: 2,
+                    maximumFractionDigits: 2
+                });
 
-
-<script>
-
-    // Percentual de perda sobre o valor investido: FIXO em 10%
-    let percentualPerda = 0.10;
-
-    // Percentual das perdas que o sistema evita: FIXO em 13%
-    let percentualEvita = 0.13;
-
-    valorMedio.addEventListener('input', function() {
-
-    let valor = valorMedio.value.replace(/\D/g, '');
-
-    if (valor == "") {
-        valorMedio.value = "";
-    } else {
-        valor = (Number(valor) / 100).toLocaleString("pt-BR", {
-            minimumFractionDigits: 2,
-            maximumFractionDigits: 2
+                valorMedio.value = "R$ " + valor;
+            }
         });
 
-        valorMedio.value = "R$ " + valor;
-    }
-    });
+
+        function calcular() {
+
+            let quantidade = Number(qtdPesquisas.value);
+            let media = Number(valorMedio.value.replace(/\D/g, '')) / 100;
+
+            let mensagem = document.getElementById("mensagem-validacao");
+
+            mensagem.innerHTML = "";
+            resultado.innerHTML = "";
+
+            if (quantidade <= 0) {
+                mensagem.innerHTML = "A quantidade de pesquisas precisa ser maior que zero!";
+
+            } else if (quantidade > 100000) {
+                mensagem.innerHTML = "Valor acima do limite recomendado. Verifique a quantidade informada!";
+
+            } else if (media < quantidade) {
+                mensagem.innerHTML = "A média informada deve ser maior que a quantidade de pesquisas. Verifique o valor inserido!";
+            } else {
+
+                // 1) Investimento total anual
+                let investimentoTotal = quantidade * media;
+
+                // 2) Perda sem a solução: 10% do investimento total
+                let perdaSemSolucao = investimentoTotal * percentualPerda;
+
+                // 3) Valor evitado: 13% DA PERDA
+                let valorEvitado = perdaSemSolucao * percentualEvita;
+
+                // 4) Perda com a solução
+                let perdaComSolucao = perdaSemSolucao - valorEvitado;
+
+                // Transformando os números em texto no formato de dinheiro (R$)
+                let mediaTexto = media.toLocaleString("pt-BR", { style: "currency", currency: "BRL" });
+                let investimentoTexto = investimentoTotal.toLocaleString("pt-BR", { style: "currency", currency: "BRL" });
+                let perdaSemTexto = perdaSemSolucao.toLocaleString("pt-BR", { style: "currency", currency: "BRL" });
+                let evitadoTexto = valorEvitado.toLocaleString("pt-BR", { style: "currency", currency: "BRL" });
+                let perdaComTexto = perdaComSolucao.toLocaleString("pt-BR", { style: "currency", currency: "BRL" });
 
 
-    function calcular() {
+                // Criação das tags dentro do innerHTML para criar os cards quando clicar no resultado
 
-        let quantidade = Number(qtdPesquisas.value);
-        let media = Number(valorMedio.value.replace(/\D/g, '')) / 100;
+                resultado.innerHTML = `
 
-        let mensagem = document.getElementById("mensagem-validacao");
+                <div class="resultado-card">
+                    <h3>Investimento anual</h3>
+                    <div class="resultado-valor">${investimentoTexto}</div>
+                    <p>${quantidade} pesquisas × ${mediaTexto}</p>
+                </div>
 
-        mensagem.innerHTML = "";
-        resultado.innerHTML = "";
+                <div class="resultado-card">
+                    <h3>Perda sem a solução</h3>
+                    <div class="resultado-valor" style="color: red;">${perdaSemTexto}</div>
+                    <p>10% do investimento anual</p>
+                </div>
 
-        if (quantidade <= 0) {
-            mensagem.innerHTML = "A quantidade de pesquisas precisa ser maior que zero!";
+                <div class="resultado-card">
+                    <h3>Valor evitado</h3>
+                    <div class="resultado-valor" style="color: green;">${evitadoTexto}</div>
+                    <p>13% do valor das perdas</p>
+                </div>
 
-        } else if (quantidade > 100000) {
-            mensagem.innerHTML = "Valor acima do limite recomendado. Verifique a quantidade informada!";
+                <div class="resultado-card">
+                    <h3>Perda com a solução</h3>
+                    <div class="resultado-valor" style="color: green;">${perdaComTexto}</div>
+                    <p>Perdas menos o valor evitado</p>
+                </div>  `
 
-        } else if (media < quantidade) {
-            mensagem.innerHTML = "A média informada deve ser maior que a quantidade de pesquisas. Verifique o valor inserido!";
-        } else {
-
-            // 1) Investimento total anual
-            let investimentoTotal = quantidade * media;
-
-            // 2) Perda sem a solução: 10% do investimento total
-            let perdaSemSolucao = investimentoTotal * percentualPerda;
-
-            // 3) Valor evitado: 13% DA PERDA
-            let valorEvitado = perdaSemSolucao * percentualEvita;
-
-            // 4) Perda com a solução
-            let perdaComSolucao = perdaSemSolucao - valorEvitado;
-
-            // Transformando os números em texto no formato de dinheiro (R$)
-            let mediaTexto = media.toLocaleString("pt-BR", { style: "currency", currency: "BRL" });
-            let investimentoTexto = investimentoTotal.toLocaleString("pt-BR", { style: "currency", currency: "BRL" });
-            let perdaSemTexto = perdaSemSolucao.toLocaleString("pt-BR", { style: "currency", currency: "BRL" });
-            let evitadoTexto = valorEvitado.toLocaleString("pt-BR", { style: "currency", currency: "BRL" });
-            let perdaComTexto = perdaComSolucao.toLocaleString("pt-BR", { style: "currency", currency: "BRL" });
-
-
-            // Criação das tags dentro do innerHTML para criar os cards quando clicar no resultado
-
-            resultado.innerHTML = `
-
-            <div class="resultado-card">
-                <h3>Investimento anual</h3>
-                <div class="resultado-valor">${investimentoTexto}</div>
-                <p>${quantidade} pesquisas × ${mediaTexto}</p>
-            </div>
-
-            <div class="resultado-card">
-                <h3>Perda sem a solução</h3>
-                <div class="resultado-valor" style="color: red;">${perdaSemTexto}</div>
-                <p>10% do investimento anual</p>
-            </div>
-
-            <div class="resultado-card">
-                <h3>Valor evitado</h3>
-                <div class="resultado-valor" style="color: green;">${evitadoTexto}</div>
-                <p>13% do valor das perdas</p>
-            </div>
-
-            <div class="resultado-card">
-                <h3>Perda com a solução</h3>
-                <div class="resultado-valor" style="color: green;">${perdaComTexto}</div>
-                <p>Perdas menos o valor evitado</p>
-            </div>  `
+            }
 
         }
 
-    }
+    </script>
 
-</script>
+</body>
+
+</html>

@@ -904,30 +904,122 @@ font-size: clamp(16px, 1vw, 20px);
 
 
 
-/* NOSSA EQUIPE */
+/* =========================================================
+   SEÇÃO: NOSSA EQUIPE
+   ========================================================= */
 
 .secao2 {
     min-height: calc(100vh - var(--header-h));
-    padding: 60px 6vw;
+    padding: 80px 6vw;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    gap: 12px;
     text-align: center;
     color: white;
     background: linear-gradient(180deg, #08253f 0%, #0D1026 100%);
-
 }
 
-.secao h2 {
-    font-size: 2.2rem;
-    font-weight: normal;
+/* ---------- CABEÇALHO ---------- */
+
+.equipe-cabecalho {
+    max-width: 700px;
+    margin: 0 auto 56px;
 }
 
-.secao p {
-    color: rgba(255, 255, 255, 0.7);
+.equipe-tag {
+    display: inline-block;
+    padding: 6px 16px;
+    border: 1px solid cyan;
+    border-radius: 999px;
+    color: cyan;
+    font-size: 0.85rem;
+    font-weight: 500;
+    margin-bottom: 16px;
 }
 
+.equipe-cabecalho h2 {
+    font-size: clamp(2rem, 4vw, 3.1rem);
+    font-weight: bold;
+    margin-bottom: 12px;
+    color: white;
+}
 
+.equipe-destaque {
+    color: cyan;
+}
 
+.equipe-cabecalho p {
+    color: rgba(255, 255, 255, 0.75);
+    font-size: 1.1rem;
+}
+
+/* ---------- GRADE: 4 em cima e 3 embaixo (centralizados) ---------- */
+
+.equipe-grid {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 40px 32px;
+    max-width: 1100px;
+    margin: 0 auto;
+}
+
+.membro {
+    flex: 0 0 220px;
+    text-align: center;
+}
+
+.membro-foto {
+    width: 180px;
+    height: 180px;
+    margin: 0 auto 16px;
+    border-radius: 50%;
+    overflow: hidden;
+    border: 3px solid cyan;
+    box-shadow: 0 0 0 6px rgba(0, 255, 255, 0.12);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.membro-foto img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;   /* evita foto esticada */
+    display: block;
+}
+
+.membro:hover .membro-foto {
+    transform: translateY(-6px) scale(1.04);
+    box-shadow: 0 0 0 8px rgba(0, 255, 255, 0.25),
+                0 10px 24px rgba(0, 255, 255, 0.25);
+}
+
+.membro h3 {
+    font-size: 1.05rem;
+    font-weight: 600;
+    margin-bottom: 4px;
+    color: white;
+}
+
+.membro-cargo {
+    font-size: 0.9rem;
+    color: cyan;
+    opacity: 0.9;
+}
+
+/* ---------- CELULAR ---------- */
+
+@media (max-width: 600px) {
+    .membro {
+        flex: 0 0 140px;
+    }
+
+    .membro-foto {
+        width: 130px;
+        height: 130px;
+    }
+
+    .equipe-grid {
+        gap: 32px 16px;
+    }
+}
