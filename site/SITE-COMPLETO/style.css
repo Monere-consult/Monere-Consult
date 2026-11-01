@@ -1,7 +1,6 @@
-/* =========================================================
-   Monere Consult - página única (index.html)
-   O header fica em header.css.
-   ========================================================= */
+/* Monere Consult - página única (index.html)
+   O cabeçalho fica separado no arquivo header.css.
+*/
 
 * {
     margin: 0;
@@ -24,13 +23,10 @@ section[id] {
 }
 
 
-/* =========================================================
-   SEÇÃO: INÍCIO
-   ========================================================= */
+/* Início da página */
 
 .container {
-    /* TROCAR IMAGEM 3: fundo da home */
-
+    /* Imagem de fundo da página inicial */
 
 background-image:
 linear-gradient(
@@ -113,7 +109,8 @@ display: flex;
     max-width: 38em;
 }
 
-/* ---------- BOTÕES ---------- */
+
+/* Botões da página inicial */
 
 .botoes {
     display: flex;
@@ -146,9 +143,9 @@ display: flex;
 }
 
 .btn {
-    display: inline-block;      /* novo */
-    text-align: center;         /* novo */
-    text-decoration: none;      /* novo */
+    display: inline-block;      /* Deixa o botão alinhado corretamente */
+    text-align: center;         /* Centraliza o texto dentro do botão */
+    text-decoration: none;      /* Remove o sublinhado do link */
     padding: clamp(14px, 1vw, 30px) clamp(20px, 1.6vw, 46px);
     background-color: rgba(24, 194, 194, 0.678);
     color: white;
@@ -169,7 +166,8 @@ display: flex;
     transform: translateY(4px) scale(0.95);
 }
 
-/* ---------- BARRA CINZA ---------- */
+
+/* Linha que separa os conteúdos */
 
 .principal > hr {
     border: none;
@@ -179,7 +177,8 @@ display: flex;
     margin-bottom: 9vh;
 }
 
-/* ---------- ÍCONES DE BAIXO ---------- */
+
+/* Ícones e informações na parte inferior */
 
 .icones_baixo {
     display: flex;
@@ -216,9 +215,8 @@ display: flex;
 }
 
 
-/* =========================================================
-   SEÇÃO: SOBRE NÓS
-   ========================================================= */
+/* Parte sobre nós */
+
 .secao-sobre {
 --azul-fundo: #08253F;
 --azul-card: #0d2a63;
@@ -249,7 +247,7 @@ background: linear-gradient(
     border-radius: 20px;
     padding: 36px 40px 50px;
     text-align: center;
-    
+
 } 
 
 
@@ -303,7 +301,7 @@ background: linear-gradient(
     flex-direction: row;
     justify-content: center;
     margin-top: 90px;
-   
+
 }
 
 .secao-sobre .card {
@@ -342,9 +340,7 @@ font-size: clamp(16px, 1vw, 20px);
 }
 
 
-/* =========================================================
-   SEÇÃO: SOLUÇÕES
-   ========================================================= */
+/* Parte das soluções */
 
 .solucoes {
     min-height: calc(100vh - var(--header-h));
@@ -358,6 +354,7 @@ font-size: clamp(16px, 1vw, 20px);
     #0D1026 100%
 ); 
 
+/* Gradiente alternativo de fundo */
 /* background: linear-gradient(
     180deg,
     #08253F 0%,
@@ -381,8 +378,8 @@ font-size: clamp(16px, 1vw, 20px);
 }
 
 
-/* NOSSO OBJETIVO - TEXTO CIANO */
- /* .solucoes .badge h2{ 
+/* Estilo alternativo para o título */
+/* .solucoes .badge h2{ 
      display: inline-block; 
      padding: 8px 20px; 
      border: 1px solid #ffffff; 
@@ -391,10 +388,10 @@ font-size: clamp(16px, 1vw, 20px);
      font-weight: 600; 
      margin-bottom: 20px; 
      transform: translateY(70px); 
-    
+
 }  */
 
-/* NOSSO OBJETIVO - SUBTEXTO */
+/* Título em ciano */
 
 .solucoes .hero-solucoes .badge h2{
 
@@ -404,7 +401,7 @@ font-size: clamp(16px, 1vw, 20px);
 
 }
 
-/* NOSSO OBJETIVO - SUBTEXTO */
+/* Texto abaixo do título */
 
 .solucoes .hero-solucoes h2 {
 
@@ -415,7 +412,7 @@ font-size: clamp(16px, 1vw, 20px);
 
 }
 
-/* NOSSO OBJETIVO - SUBTEXTO */
+/* Título principal */
 
 .solucoes .h1-azul {
     font-size: 3.5rem;
@@ -442,7 +439,9 @@ font-size: clamp(16px, 1vw, 20px);
     position: relative;
 }
 
-/* ÍCONES DOS CARDS */
+
+/* Ícones que aparecem nos cards */
+
 .solucoes .card img:not(.imagem-card) {
     height: 50px;
     width: 100px;
@@ -458,12 +457,16 @@ font-size: clamp(16px, 1vw, 20px);
     transition: 0.5s;
 }
 
-/* EFEITO HOVER DOS ÍCONES */
+
+/* Aumenta os ícones quando passa o mouse */
+
 .solucoes .card:hover img:not(.imagem-card) {
     transform: translateX(-50%) scale(1.2);
 }
 
-/* FOTOGRAFIAS DENTRO DOS CARDS */
+
+/* Imagens utilizadas dentro dos cards */
+
 .solucoes .card .imagem-card {
     position: static;
     width: 100%;
@@ -477,7 +480,7 @@ font-size: clamp(16px, 1vw, 20px);
 }
 
 
-/* IMAGENS ABAIXO DOS CARDS */
+/* Estilos antigos para imagens abaixo dos cards */
 /* 
 .imagensCard {
     margin-top: 40px;
@@ -502,6 +505,7 @@ font-size: clamp(16px, 1vw, 20px);
 } */
 
 
+/* Estilo antigo para as imagens dos cards */
 /* .solucoes .card .imagem-card {
     position: static;
     width: 100%;
@@ -514,6 +518,7 @@ font-size: clamp(16px, 1vw, 20px);
 } */
 
 
+/* Código antigo da calculadora */
 /* .solucoes .calculadora-container {
     display: flex;
     align-items: center;
@@ -521,7 +526,7 @@ font-size: clamp(16px, 1vw, 20px);
     background: #0D1127;
     border-radius: 10px;
     padding: 30px;
-    
+
     transform: translateY(75px);
 
 }
@@ -557,7 +562,7 @@ font-size: clamp(16px, 1vw, 20px);
     cursor: pointer;
      transition: background-color 0.3s ease, transform 0.15s ease;
      user-select: none;
-    
+
 }
 
 .solucoes .botao:hover {
@@ -569,19 +574,16 @@ font-size: clamp(16px, 1vw, 20px);
 } */
 
 
+/* Parte do simulador */
 
-/* =========================================================
-   SEÇÃO: SIMULADOR
-   ========================================================= */
-
-/* ÁREA PRINCIPAL */
+/* Organização da área principal */
 
 .calculadora-container{
     display: flex;
     align-items: center;
     flex-direction: column;
     transform: translateY(130px);
-    
+
 }
 
 .titulo-calculadora h2{
@@ -591,7 +593,7 @@ font-size: clamp(16px, 1vw, 20px);
 }
 
 .calculadora-texto p{
-    
+
     font-size: 2.6rem;
     color: white;
 }
@@ -625,7 +627,9 @@ font-size: clamp(16px, 1vw, 20px);
     display: none;
 }
 
-/* ORGANIZA RESULTADO E CALCULADORA */
+
+/* Organização dos resultados e da calculadora */
+
 #simulador .simulador-conteudo {
     width: 100%;
     display: flex;
@@ -638,13 +642,15 @@ font-size: clamp(16px, 1vw, 20px);
 
 }
 
-/* ÁREA DO TÍTULO E DOS RESULTADOS */
+/* Área onde ficam o título e os resultados */
+
 #simulador .simulador-resultado-area {
     flex: 1;
     min-width: 0;
 }
 
-/* TÍTULO RESULTADO */
+/* Título da área de resultados */
+
 #simulador .simulador-resultado-area h2 {
     margin-bottom: 10px;
     font-size: 2rem;
@@ -652,7 +658,8 @@ font-size: clamp(16px, 1vw, 20px);
     color: white;
 }
 
-/* ÁREA DOS RESULTADOS */
+/* Organização dos cards de resultado */
+
 #simulador #resultado {
     display: flex;
     gap: 15px;
@@ -663,7 +670,8 @@ font-size: clamp(16px, 1vw, 20px);
     line-height: 1.6;
 }
 
-/* CADA CARD DO RESULTADO */
+/* Aparência de cada card */
+
 #simulador #resultado .resultado-card {
     flex: 1;
     min-width: 0;
@@ -675,7 +683,8 @@ font-size: clamp(16px, 1vw, 20px);
     box-sizing: border-box;
 }
 
-/* TÍTULO DE CADA CARD */
+/* Título de cada resultado */
+
 #simulador #resultado .resultado-card h3 {
     margin-top: 0;
     margin-bottom: 15px;
@@ -683,7 +692,8 @@ font-size: clamp(16px, 1vw, 20px);
     font-size: 1rem;
 }
 
-/* VALOR DE CADA CARD */
+/* Valor apresentado no resultado */
+
 #simulador #resultado .resultado-card .resultado-valor {
     margin-bottom: 12px;
     color: #1565af;
@@ -691,7 +701,8 @@ font-size: clamp(16px, 1vw, 20px);
     font-weight: bold;
 }
 
-/* DESCRIÇÃO DE CADA CARD */
+/* Descrição de cada resultado */
+
 #simulador #resultado .resultado-card p {
     margin: 0;
     color: #0D1026;
@@ -701,11 +712,10 @@ font-size: clamp(16px, 1vw, 20px);
 
 
 
-/* =========================================================
-   CALCULADORA
-   ========================================================= */
+/* Estilos da calculadora */
 
-/* CAIXA DA CALCULADORA */
+/* Caixa principal da calculadora */
+
 #simulador .simulador-caixa {
     width: 500px;
     max-width: 100%;
@@ -717,14 +727,16 @@ font-size: clamp(16px, 1vw, 20px);
     text-align: left;
 }
 
-/* TÍTULO DA CALCULADORA */
+/* Título da calculadora */
+
 #simulador .simulador-caixa h1 {
     margin-bottom: 20px;
     font-size: 1.8rem;
     color: rgb(2, 2, 2);
 }
 
-/* CAMPOS NUMÉRICOS */
+/* Campos para preencher os valores */
+
 #simulador .simulador-caixa input {
     width: 100%;
     margin-top: 8px;
@@ -734,7 +746,8 @@ font-size: clamp(16px, 1vw, 20px);
     font: inherit;
 }
 
-/* BOTÃO DE CALCULAR */
+/* Botão que realiza o cálculo */
+
 #simulador .simulador-caixa button {
     background: rgba(24, 194, 194, 0.678);
     color: white;
@@ -750,23 +763,24 @@ font-size: clamp(16px, 1vw, 20px);
     user-select: none;
 }
 
-/* EFEITO AO PASSAR O MOUSE */
+/* Muda a cor do botão ao passar o mouse */
+
 #simulador .simulador-caixa button:hover {
     background-color: #1565af;
 }
 
-/* EFEITO AO CLICAR */
+/* Efeito ao clicar no botão */
+
 #simulador .simulador-caixa button:active {
     transform: translateY(4px) scale(0.95);
 }
 
 
 
-/* =========================================================
-   CAIXAS QUE EXPANDEM
-   ========================================================= */
+/* Caixas que podem ser abertas e fechadas */
 
-/* BLOCO */
+/* Aparência da caixa */
+
 #simulador .simulador-expansivel {
     margin-bottom: 20px;
     border-radius: 20px;
@@ -774,7 +788,8 @@ font-size: clamp(16px, 1vw, 20px);
     color: black;
 }
 
-/* TÍTULO CLICÁVEL */
+/* Parte clicável para abrir o conteúdo */
+
 #simulador .simulador-expansivel summary {
     display: flex;
     align-items: center;
@@ -784,19 +799,22 @@ font-size: clamp(16px, 1vw, 20px);
     list-style: none;
 }
 
-/* REMOVE A SETA PADRÃO */
+/* Remove a seta padrão do navegador */
+
 #simulador .simulador-expansivel summary::-webkit-details-marker {
     display: none;
 }
 
-/* TÍTULO */
+/* Título da caixa */
+
 #simulador .simulador-expansivel h2 {
     margin: 0;
     font-size: 1.5rem;
     color: black;
 }
 
-/* BOLINHA COM SETA */
+/* Círculo que contém a seta */
+
 #simulador .simulador-seta {
     display: flex;
     align-items: center;
@@ -810,7 +828,8 @@ font-size: clamp(16px, 1vw, 20px);
     transition: transform 0.3s ease;
 }
 
-/* DESENHA A SETA */
+/* Desenha a seta dentro do círculo */
+
 #simulador .simulador-seta::before {
     content: "";
     width: 10px;
@@ -821,27 +840,30 @@ font-size: clamp(16px, 1vw, 20px);
     margin-top: -5px;
 }
 
-/* GIRA A SETA AO ABRIR */
+/* Gira a seta quando a caixa é aberta */
+
 #simulador .simulador-expansivel[open] .simulador-seta {
     transform: rotate(180deg);
 }
 
-/* CONTEÚDO EXPANDIDO */
+/* Espaço onde aparece o conteúdo da caixa */
+
 #simulador .simulador-expansivel-conteudo {
     padding: 0 25px 20px;
     line-height: 1.6;
 }
 
-/* ESPAÇAMENTO DOS PARÁGRAFOS */
+/* Espaçamento entre os parágrafos */
+
 #simulador .simulador-expansivel-conteudo p {
     margin-bottom: 15px;
 }
 
-/* =========================================================
-   EXEMPLO DE USO
-   ========================================================= */
 
-/* BLOCO */
+/* Exemplo de uso do simulador */
+
+/* Aparência da caixa de exemplo */
+
 #simulador .simulador-exemplo {
     margin-top: 20px;
     border: 2px solid #08253f;
@@ -850,7 +872,8 @@ font-size: clamp(16px, 1vw, 20px);
     color: #0D1026;
 }
 
-/* TÍTULO CLICÁVEL */
+/* Parte clicável para abrir o exemplo */
+
 #simulador .simulador-exemplo summary {
     display: flex;
     align-items: center;
@@ -861,26 +884,30 @@ font-size: clamp(16px, 1vw, 20px);
     list-style: none;
 }
 
-/* REMOVE A SETA PADRÃO */
+/* Remove a seta padrão do navegador */
+
 #simulador .simulador-exemplo summary::-webkit-details-marker {
     display: none;
 }
 
-/* TÍTULO */
+/* Título do exemplo */
+
 #simulador .simulador-exemplo summary h2 {
     margin: 0;
     font-size: 1.1rem;
     color: #0D1026;
 }
 
-/* BOLINHA COM SETA */
+/* Círculo que contém a seta */
+
 #simulador .simulador-exemplo .simulador-seta {
     width: 30px;
     height: 30px;
     border: none;
 }
 
-/* SETA DO EXEMPLO */
+/* Desenha a seta do exemplo */
+
 #simulador .simulador-exemplo .simulador-seta::before {
     width: 8px;
     height: 8px;
@@ -889,12 +916,14 @@ font-size: clamp(16px, 1vw, 20px);
     margin-top: -4px;
 }
 
-/* GIRA A SETA AO ABRIR */
+/* Gira a seta quando o exemplo é aberto */
+
 #simulador .simulador-exemplo[open] .simulador-seta {
     transform: rotate(180deg);
 }
 
-/* CONTEÚDO EXPANDIDO */
+/* Conteúdo que aparece ao abrir o exemplo */
+
 #simulador .simulador-exemplo-conteudo {
     padding: 0 15px 15px;
     line-height: 1.5;
@@ -904,9 +933,7 @@ font-size: clamp(16px, 1vw, 20px);
 
 
 
-/* =========================================================
-   SEÇÃO: NOSSA EQUIPE
-   ========================================================= */
+/* Parte da nossa equipe */
 
 .secao2 {
     min-height: calc(100vh - var(--header-h));
@@ -920,7 +947,8 @@ font-size: clamp(16px, 1vw, 20px);
     background: linear-gradient(180deg, #08253f 0%, #0D1026 100%);
 }
 
-/* ---------- CABEÇALHO ---------- */
+
+/* Título e apresentação da equipe */
 
 .equipe-cabecalho {
     max-width: 700px;
@@ -954,7 +982,8 @@ font-size: clamp(16px, 1vw, 20px);
     font-size: 1.1rem;
 }
 
-/* ---------- GRADE: 4 em cima e 3 embaixo (centralizados) ---------- */
+
+/* Organização dos integrantes da equipe */
 
 .equipe-grid {
     display: flex;
@@ -970,6 +999,8 @@ font-size: clamp(16px, 1vw, 20px);
     text-align: center;
 }
 
+/* Foto de cada integrante */
+
 .membro-foto {
     width: 180px;
     height: 180px;
@@ -984,15 +1015,19 @@ font-size: clamp(16px, 1vw, 20px);
 .membro-foto img {
     width: 100%;
     height: 100%;
-    object-fit: cover;   /* evita foto esticada */
+    object-fit: cover;   /* Mantém a proporção da foto */
     display: block;
 }
+
+/* Efeito na foto quando passa o mouse */
 
 .membro:hover .membro-foto {
     transform: translateY(-6px) scale(1.04);
     box-shadow: 0 0 0 8px rgba(0, 255, 255, 0.25),
                 0 10px 24px rgba(0, 255, 255, 0.25);
 }
+
+/* Nome de cada integrante */
 
 .membro h3 {
     font-size: 1.05rem;
@@ -1001,25 +1036,10 @@ font-size: clamp(16px, 1vw, 20px);
     color: white;
 }
 
+/* Função de cada integrante */
+
 .membro-cargo {
     font-size: 0.9rem;
     color: cyan;
     opacity: 0.9;
-}
-
-/* ---------- CELULAR ---------- */
-
-@media (max-width: 600px) {
-    .membro {
-        flex: 0 0 140px;
-    }
-
-    .membro-foto {
-        width: 130px;
-        height: 130px;
-    }
-
-    .equipe-grid {
-        gap: 32px 16px;
-    }
 }
