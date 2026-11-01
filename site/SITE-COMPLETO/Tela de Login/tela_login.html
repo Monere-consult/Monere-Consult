@@ -95,40 +95,56 @@
 </html>
 
 <script>
+    // Define a quantidade inicial de tentativas de login
     let tentativas = 3;
 
     function logar() {
+
+        // Captura o e-mail e a senha digitados pelo usuário
         let email = ipt_email.value;
         let senha = ipt_senha.value;
 
+        // E-mails dos usuários autorizados
         let emailBrandao = "brandao.corporativo@gmail.com";
         let emailJulia = "julia.corporativo@gmail.com";
         let emailMarcos = "marcos.corporativo@gmail.com";
 
+        // Senhas correspondentes a cada usuário
         let senhaBrandao = "@Rotina123";
         let senhaJulia = "@RotasControlesModulo123";
         let senhaMarcos = "@Escopo123";
 
+        // Verifica se o usuário já esgotou todas as tentativas
         if (tentativas < 1) {
             div_msg.innerHTML = "Bloqueado temporariamente por excesso de tentativas";
             div_msgCerto.innerHTML = "";
         } else {
+
+            // Compara as credenciais digitadas com os três usuários
             let loginValido =
                 (email == emailBrandao && senha == senhaBrandao) ||
                 (email == emailJulia && senha == senhaJulia) ||
                 (email == emailMarcos && senha == senhaMarcos);
 
+            // Verifica se as credenciais estão corretas
             if (loginValido) {
                 div_msg.innerHTML = "";
                 div_msgCerto.innerHTML = "Entrou";
+
+                // Manda o usuário para o dashboard
                 window.location.href = '../../teste-dash/index.html';
+
             } else {
+
+                // Diminui uma tentativa quando o login está errado
                 tentativas--;
                 div_msgCerto.innerHTML = "";
 
+                // Verifica se ainda existem tentativas disponíveis
                 if (tentativas > 0) {
                     div_msg.innerHTML = `Login incorreto, tente novamente (Restam ${tentativas} tentativas)`;
                 } else {
+                    // Exibe a mensagem de bloqueio após esgotar as tentativas
                     div_msg.innerHTML = "Bloqueado temporariamente por excesso de tentativas";
                 }
             }

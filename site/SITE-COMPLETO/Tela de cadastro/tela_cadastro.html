@@ -100,16 +100,18 @@
 
 <script>
     function cadastrar() {
-        // declarando varáveis (.trim serve para tirar os espaços do começo e final)
+        // declara varáveis (.trim serve para tirar os espaços do começo e final)
         let email = ipt_email.value.trim();
         let senha = ipt_senha.value.trim();
         let confirmarSenha = ipt_confirmarSenha.value.trim();
 
+        // Variáveis de controle das validações
         let emailInvalido = true;
         let tem1arroba = false;
         let senhaInvalida = true;
         let cfmSenhaInvalido = true;
 
+        // Variáveis que identificam os requisitos da senha
         let temMaius = false;
         let temMinus = false;
         let temNum = false;
@@ -152,13 +154,7 @@
             contarCaractere++;
         }
 
-        // senha
-        /* Ter pelo menos uma letra maiúscula.
-        Ter pelo menos uma letra minúscula.
-        Ter pelo menos um número.
-        Ter pelo menos um símbolo permitido.
-        Ter no mínimo 8 caracteres.
-        Ter no máximo 45 caracteres.*/
+        // Verifica se a senha atende a todos os requisitos
         if (temMaius && temMinus && temNum && temSimb && senha.length >= 8 && senha.length <= 45) {
             div_forte.innerHTML = "Senha forte";
             senhaInvalida = false;
@@ -169,7 +165,7 @@
             div_forte.innerHTML = "";
         }
 
-        // confirmar senha
+        // Verifica se a confirmação corresponde à senha original
         if (confirmarSenha === senha && senha !== "") {
             cfmSenhaInvalido = false;
             div_senhaDif.innerHTML = ""
