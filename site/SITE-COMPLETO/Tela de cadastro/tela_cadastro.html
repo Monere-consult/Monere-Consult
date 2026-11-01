@@ -100,6 +100,7 @@
 
 <script>
     function cadastrar() {
+        // declarando varáveis (.trim serve para tirar os espaços do começo e final)
         let email = ipt_email.value.trim();
         let senha = ipt_senha.value.trim();
         let confirmarSenha = ipt_confirmarSenha.value.trim();
@@ -120,18 +121,28 @@
 
 
          // email
+
+         // !email.includes(" ") verifica se o email não possui espaços
+
+         // split("@") divide o texto toda vez que encontra um @
+
+         // length conta quantas partes foram geradas (== 2 significa que devem existir exatamente duas partes)
+
+         // Verifica se o e-mail termina com um dos domínios permitidos.
         if (!email.includes(" ") && email.split("@").length == 2 &&(
             email.endsWith("@gmail.com") ||
             email.endsWith("@hotmail.com") ||
             email.endsWith("@outlook.com") ||
             email.endsWith("@sptech.school")
         )) {
+            // se tudo for true, email vira válido e limpa a msg
             emailInvalido = false;
             div_emailInvalido.innerHTML = "";
         } else{
             div_emailInvalido.innerHTML = "Digite um email válido.";
         }
 
+        // while percorre toda a senha e identifica se ela possui pelo menos uma letra maiúscula, uma minúscula, um número e um símbolo.
         while (contarCaractere < senha.length) {
             let caractere = senha[contarCaractere];
             if (caractere >= "A" && caractere <= "Z") temMaius = true;
@@ -142,6 +153,12 @@
         }
 
         // senha
+        /* Ter pelo menos uma letra maiúscula.
+        Ter pelo menos uma letra minúscula.
+        Ter pelo menos um número.
+        Ter pelo menos um símbolo permitido.
+        Ter no mínimo 8 caracteres.
+        Ter no máximo 45 caracteres.*/
         if (temMaius && temMinus && temNum && temSimb && senha.length >= 8 && senha.length <= 45) {
             div_forte.innerHTML = "Senha forte";
             senhaInvalida = false;
@@ -162,6 +179,7 @@
             div_msg.innerHTML = ""
         }
 
+        // verifica se email e senha são válidos
         if (emailInvalido || senhaInvalida) {
                 div_msg.innerHTML = "Preencha  os dados corretamente."
             }
