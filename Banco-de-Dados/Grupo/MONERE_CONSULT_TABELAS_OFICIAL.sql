@@ -87,7 +87,7 @@ INSERT INTO usuario VALUES
 -- bioterio 
 INSERT INTO bioterio (nome, cep, logradouro, numero, complemento, fk_empresa) VALUES
 ('Paulista',  '12345678', 'Rua Haddock Lobo', 595, 'Centro', 1),
-('Leste I',  '78654321', 'Rua Agrimensor Sugaya', 930, 'Leste', 1),
+('Morumbi',  '78654321', 'Rua Agrimensor Sugaya', 930, 'Leste', 1),
 ('Norte',    '23458690', 'Avenida Elisio Teixeira Leite', 5097, 'Norte', 2),
 ('Leste II', '15273890', 'Rua Carlos Bigatti', 44, 'Leste', 2);
 
@@ -175,5 +175,7 @@ JOIN salaSensor ss ON m.fk_sensor = ss.id
 WHERE ss.fk_sala = 1
 AND m.momento >= NOW() - INTERVAL 30 MINUTE -- Essa linha filtra as medidas pelo horário, e mantém só as dos últimos 30 minutos
 ORDER BY m.momento;
+
+
   
   
