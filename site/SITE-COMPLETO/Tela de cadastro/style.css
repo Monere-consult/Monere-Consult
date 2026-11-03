@@ -133,6 +133,7 @@ main {
     font-weight: 700;
 }
 
+#div_nomeInvalido,
 #div_emailInvalido {
     color: red;
     font-weight: 700;

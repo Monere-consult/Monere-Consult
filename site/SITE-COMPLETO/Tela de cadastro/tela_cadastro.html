@@ -59,6 +59,15 @@
 
             <form>
 
+                <label for="ipt_nome">Nome:</label>
+
+                <div class="campo">
+                    <span>👤</span>
+                    <input type="text" id="ipt_nome" placeholder="Digite seu nome">
+                </div>
+
+                <div id="div_nomeInvalido"></div>
+
                 <label for="ipt_email">Email:</label>
 
                 <div class="campo">
@@ -83,7 +92,7 @@
                 <div class="campo">
                     <input type="password" id="ipt_confirmarSenha" placeholder="Digite a senha novamente">
                 </div>
-                
+
                 <div id="div_msg"></div>
 
                 <div id="div_senhaDif"></div>
@@ -98,90 +107,122 @@
 
 
 
-<script>
-    function cadastrar() {
-        // declara varáveis (.trim serve para tirar os espaços do começo e final)
-        let email = ipt_email.value.trim();
-        let senha = ipt_senha.value.trim();
-        let confirmarSenha = ipt_confirmarSenha.value.trim();
+    <script>
+        function cadastrar() {
+            // declara varáveis (.trim serve para tirar os espaços do começo e final)
+            let nome = ipt_nome.value.trim();
+            let email = ipt_email.value.trim();
+            let senha = ipt_senha.value.trim();
+            let confirmarSenha = ipt_confirmarSenha.value.trim();
 
-        // Variáveis de controle das validações
-        let emailInvalido = true;
-        let tem1arroba = false;
-        let senhaInvalida = true;
-        let cfmSenhaInvalido = true;
+            // Variáveis de controle das validações
+            let nomeInvalido = true;
+            let emailInvalido = true;
+            let tem1arroba = false;
+            let senhaInvalida = true;
+            let cfmSenhaInvalido = true;
 
-        // Variáveis que identificam os requisitos da senha
-        let temMaius = false;
-        let temMinus = false;
-        let temNum = false;
-        let temSimb = false;
-        let numerosPermitidos = "0123456789";
-        let simbolos = "!@#$%&*_-./";
+            // Variáveis que identificam os requisitos da senha
+            let temMaius = false;
+            let temMinus = false;
+            let temNum = false;
+            let temSimb = false;
+            let numerosPermitidos = "0123456789";
+            let simbolos = "!@#$%&*_-./";
 
-        let contarCaractere = 0;
+            let contarCaractere = 0;
 
 
-         // email
+            // nome
 
-         // !email.includes(" ") verifica se o email não possui espaços
-
-         // split("@") divide o texto toda vez que encontra um @
-
-         // length conta quantas partes foram geradas (== 2 significa que devem existir exatamente duas partes)
-
-         // Verifica se o e-mail termina com um dos domínios permitidos.
-        if (!email.includes(" ") && email.split("@").length == 2 &&(
-            email.endsWith("@gmail.com") ||
-            email.endsWith("@hotmail.com") ||
-            email.endsWith("@outlook.com") ||
-            email.endsWith("@sptech.school")
-        )) {
-            // se tudo for true, email vira válido e limpa a msg
-            emailInvalido = false;
-            div_emailInvalido.innerHTML = "";
-        } else{
-            div_emailInvalido.innerHTML = "Digite um email válido.";
-        }
-
-        // while percorre toda a senha e identifica se ela possui pelo menos uma letra maiúscula, uma minúscula, um número e um símbolo.
-        while (contarCaractere < senha.length) {
-            let caractere = senha[contarCaractere];
-            if (caractere >= "A" && caractere <= "Z") temMaius = true;
-            if (caractere >= "a" && caractere <= "z") temMinus = true;
-            if (numerosPermitidos.includes(caractere)) temNum = true;
-            if (simbolos.includes(caractere)) temSimb = true;
-            contarCaractere++;
-        }
-
-        // Verifica se a senha atende a todos os requisitos
-        if (temMaius && temMinus && temNum && temSimb && senha.length >= 8 && senha.length <= 45) {
-            div_forte.innerHTML = "Senha forte";
-            senhaInvalida = false;
-            div_fraca.innerHTML = "";
-        } else {
-            div_fraca.innerHTML = "Senha fraca";
-            senhaInvalida = true;
-            div_forte.innerHTML = "";
-        }
-
-        // Verifica se a confirmação corresponde à senha original
-        if (confirmarSenha === senha && senha !== "") {
-            cfmSenhaInvalido = false;
-            div_senhaDif.innerHTML = ""
-            div_msg.innerHTML = ""
-        } else {
-            div_senhaDif.innerHTML = "As senhas são diferentes.";
-            div_msg.innerHTML = ""
-        }
-
-        // verifica se email e senha são válidos
-        if (emailInvalido || senhaInvalida) {
-                div_msg.innerHTML = "Preencha  os dados corretamente."
+            // precisa ter pelo menos 3 caracteres e no máximo 45
+            // só aceita letras (com acento) e espaços
+            // (letra = caractere que muda quando passa para maiúsculo/minúsculo)
+            let nomeSoLetras = true;
+            let contarNome = 0;
+            while (contarNome < nome.length) {
+                let c = nome[contarNome];
+                if (c !== " " && c.toLowerCase() === c.toUpperCase()) nomeSoLetras = false;
+                contarNome++;
             }
-    }
-    
-</script>
+
+            if (nome.length >= 3 && nome.length <= 45 && nomeSoLetras) {
+                nomeInvalido = false;
+                div_nomeInvalido.innerHTML = "";
+            } else {
+                div_nomeInvalido.innerHTML = "Digite um nome válido.";
+            }
+
+            // email
+
+            // !email.includes(" ") verifica se o email não possui espaços
+
+            // split("@") divide o texto toda vez que encontra um @
+
+            // length conta quantas partes foram geradas (== 2 significa que devem existir exatamente duas partes)
+
+            // Verifica se o e-mail termina com um dos domínios permitidos.
+            if (!email.includes(" ") && email.split("@").length == 2 && (
+                email.endsWith("@gmail.com") ||
+                email.endsWith("@hotmail.com") ||
+                email.endsWith("@outlook.com") ||
+                email.endsWith("@sptech.school")
+            )) {
+                // se tudo for true, email vira válido e limpa a msg
+                emailInvalido = false;
+                div_emailInvalido.innerHTML = "";
+            } else {
+                div_emailInvalido.innerHTML = "Digite um email válido.";
+            }
+
+            // while percorre toda a senha e identifica se ela possui pelo menos uma letra maiúscula, uma minúscula, um número e um símbolo.
+            while (contarCaractere < senha.length) {
+                let caractere = senha[contarCaractere];
+                if (caractere >= "A" && caractere <= "Z") temMaius = true;
+                if (caractere >= "a" && caractere <= "z") temMinus = true;
+                if (numerosPermitidos.includes(caractere)) temNum = true;
+                if (simbolos.includes(caractere)) temSimb = true;
+                contarCaractere++;
+            }
+
+            // Verifica se a senha atende a todos os requisitos
+            if (temMaius && temMinus && temNum && temSimb && senha.length >= 8 && senha.length <= 45) {
+                div_forte.innerHTML = "Senha forte";
+                senhaInvalida = false;
+                div_fraca.innerHTML = "";
+            } else {
+                div_fraca.innerHTML = "Senha fraca";
+                senhaInvalida = true;
+                div_forte.innerHTML = "";
+            }
+
+            // Verifica se a confirmação corresponde à senha original
+            if (confirmarSenha === senha && senha !== "") {
+                cfmSenhaInvalido = false;
+                div_senhaDif.innerHTML = ""
+                div_msg.innerHTML = ""
+            } else {
+                div_senhaDif.innerHTML = "As senhas são diferentes.";
+                div_msg.innerHTML = ""
+            }
+
+            // verifica se nome, email e senha são válidos
+            if (nomeInvalido || emailInvalido || senhaInvalida) {
+                div_msg.innerHTML = "Preencha  os dados corretamente."
+            } else {
+                // tudo certo: mostra mensagem de sucesso
+                div_forte.innerHTML = " ";
+                div_msg.style.color = "green";
+                div_msg.innerHTML = "Cadastro realizado com sucesso! Redirecionando...";
+                
+                // vai para a tela de login
+                    window.location.href = "../Tela de Login/tela_login.html";
+            }
+        }
+
+
+
+    </script>
 </body>
 
 </html>
