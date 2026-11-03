@@ -10,7 +10,6 @@
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="../header.css">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-
 </head>
 
 <body>
@@ -39,16 +38,17 @@
         </div>
 
     </header>
+
     <div class="container">
 
         <div class="abas">
 
-            <button class="aba ativa" id="botaoTempoReal" onclick="mostrarAba('vistaTempoReal', 'botaoTempoReal')">
-                Tempo real
+            <button class="aba ativa" id="botaoGeral" onclick="mostrarAba('vistaGeral', 'botaoGeral')">
+                Visão geral
             </button>
 
-            <button class="aba" id="botaoGeral" onclick="mostrarAba('vistaGeral', 'botaoGeral')">
-                Visão geral
+            <button class="aba" id="botaoTempoReal" onclick="mostrarAba('vistaTempoReal', 'botaoTempoReal')">
+                Tempo real
             </button>
 
             <button class="aba" id="botaoHistorico" onclick="mostrarAba('vistaHistorico', 'botaoHistorico')">
@@ -58,14 +58,16 @@
         </div>
 
 
+        <!-- ========== TELA 1: VISÃO GERAL ========== -->
 
-        <!-- ========== TELA 1: TEMPO REAL ========== -->
-        <div class="vista ativa" id="vistaTempoReal">
+        <div class="vista ativa" id="vistaGeral">
+
             <div class="filtros">
                 <div class="filtro">
                     <label>Empresa</label>
                     <div class="campo">SpTech Research</div>
                 </div>
+
                 <div class="filtro">
                     <label>Filial</label>
                     <select>
@@ -73,104 +75,250 @@
                         <option>Morumbi</option>
                     </select>
                 </div>
+            </div>
+
+            <!-- CONTEÚDO PRINCIPAL + MÉTRICAS -->
+
+            <div class="area-dashboard">
+
+                <div class="conteudo-principal">
+
+                    <div class="cards">
+
+                        <div class="card">
+                            <div class="titulo">Status</div>
+                            <div class="valor status-atencao">Atenção</div>
+                        </div>
+
+                        <div class="card">
+                            <div class="titulo">Fora da faixa</div>
+                            <div class="valor">1/5</div>
+                        </div>
+
+                        <div class="card">
+                            <div class="titulo">Sensores online</div>
+                            <div class="valor">5/5</div>
+                        </div>
+
+                        <div class="card">
+                            <div class="titulo">Pico de excursão</div>
+                            <div class="valor status-critico">28,3 °C</div>
+                            <div class="detalhe-excursao">
+                                <span>+2,3 °C</span> acima do limite
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="painel">
+                        <h3>Temperatura (°C)</h3>
+
+                        <div class="legenda">
+                            <span><i class="bolinha vermelho"></i> Máxima (26°C)</span>
+                            <span><i class="bolinha azul"></i> Mínima (20°C)</span>
+                        </div>
+
+                        <div class="grafico-wrapper">
+                            <canvas id="graficoGeral"></canvas>
+                        </div>
+                    </div>
+
+                </div>
+
+
+                <!-- MÉTRICAS LATERAIS: VISÃO GERAL -->
+
+                <aside class="metricas-laterais">
+
+                    <div class="metrica">
+
+                        <div class="metrica-titulo">
+                            Status das salas
+                        </div>
+
+                        <div class="metrica-faixas duas-faixas">
+                            <div class="faixa faixa-normal">
+                                NORMAL
+                            </div>
+
+                            <div class="faixa faixa-alerta selecionada">
+                                ALERTA
+                            </div>
+                        </div>
+
+                        <div class="metrica-resultado alerta">
+                            <span class="indicador"></span>
+                            ALERTA
+                        </div>
+
+                        <div class="metrica-descricao">
+                            1 ou mais salas fora da faixa ideal
+                        </div>
+
+                    </div>
+
+
+                    <div class="metrica">
+
+                        <div class="metrica-titulo">
+                            Condição do gráfico
+                        </div>
+
+                        <div class="metrica-faixas tres-faixas">
+                            <div class="faixa faixa-normal">
+                                NORMAL
+                            </div>
+
+                            <div class="faixa faixa-limite">
+                                LIMITE
+                            </div>
+
+                            <div class="faixa faixa-alerta selecionada">
+                                FORA
+                            </div>
+                        </div>
+
+                        <div class="metrica-resultado alerta">
+                            <span class="indicador"></span>
+                            FORA DA FAIXA
+                        </div>
+
+                        <div class="metrica-descricao">
+                            Existem temperaturas acima ou abaixo dos limites permitidos
+                        </div>
+
+                    </div>
+
+                </aside>
+
+            </div>
+
+        </div>
+
+
+        <!-- ========== TELA 2: TEMPO REAL ========== -->
+
+        <div class="vista" id="vistaTempoReal">
+
+            <div class="filtros">
+
+                <div class="filtro">
+                    <label>Empresa</label>
+                    <div class="campo">SpTech Research</div>
+                </div>
+
+                <div class="filtro">
+                    <label>Filial</label>
+                    <select>
+                        <option selected>Paulista</option>
+                        <option>Morumbi</option>
+                    </select>
+                </div>
+
                 <div class="filtro">
                     <label>Sala</label>
-                    <select>
-                        <option>1</option>
-                        <option>2</option>
-                        <option>3</option>
-                        <option>4</option>
-                        <option>5</option>
+                    <select id="selectSalaTempoReal">
+                        <option value="1" selected>Sala 1</option>
+                        <option value="2">Sala 2</option>
+                        <option value="3">Sala 3</option>
+                        <option value="4">Sala 4</option>
+                        <option value="5">Sala 5</option>
                     </select>
                 </div>
-            </div>
-
-            <div class="cards">
-                <div class="card">
-                    <div class="titulo">Temperatura atual</div>
-                    <div class="valor">22.8 °C</div>
-                </div>
-                <div class="card">
-                    <div class="titulo">Status</div>
-                    <div class="valor status-normal">Normal</div>
-                </div>
-                <div class="card">
-                    <div class="titulo">Última atualização</div>
-                    <div class="valor">Há 2 minutos</div>
-                </div>
 
             </div>
 
-            <div class="painel">
-                <h3>Temperatura (°C)</h3>
-                <div class="legenda">
-                    <span><i class="bolinha vermelho"></i> Máxima (26°C)</span>
-                    <span><i class="bolinha azul"></i> Mínima (20°C)</span>
-                </div>
-                <div class="grafico-wrapper">
-                    <canvas id="graficoTempoReal"></canvas>
-                </div>
-            </div>
-        </div>
 
-        <!-- ========== TELA 2: VISÃO GERAL ========== -->
-        <div class="vista" id="vistaGeral">
-            <div class="filtros">
-                <div class="filtro">
-                    <label>Empresa</label>
-                    <div class="campo">SpTech Research</div>
-                </div>
-                <div class="filtro">
-                    <label>Filial</label>
-                    <select>
-                        <option selected>Paulista</option>
-                        <option>Morumbi</option>
-                    </select>
-                </div>
-            </div>
+            <!-- CONTEÚDO PRINCIPAL + MÉTRICAS -->
 
-            <div class="cards">
-                <div class="card">
-                    <div class="titulo">Status</div>
-                    <div class="valor status-atencao">Atenção</div>
-                </div>
-                <div class="card">
-                    <div class="titulo">Fora da faixa</div>
-                    <div class="valor">1/5</div>
-                </div>
-                <div class="card">
-                    <div class="titulo">Sensores online</div>
-                    <div class="valor">5/5</div>
-                </div>
-                <div class="card">
-                    <div class="titulo">Pico de excursão</div>
-                    <div class="valor status-critico">28,3 °C</div>
-                    <div class="detalhe-excursao">
-                        <span>+2,3 °C</span> acima do limite
+            <div class="area-dashboard">
+
+                <div class="conteudo-principal">
+
+                    <div class="cards">
+
+                        <div class="card">
+                            <div class="titulo">Temperatura atual</div>
+                            <div class="valor" id="temperaturaAtual">22.8 °C</div>
+                        </div>
+
+                        <div class="card">
+                            <div class="titulo">Status</div>
+                            <div class="valor status-normal" id="statusAtual">Normal</div>
+                        </div>
+
+                        <div class="card">
+                            <div class="titulo">Última atualização</div>
+                            <div class="valor">Há 1 min 33 seg </div>
+                        </div>
+
                     </div>
+
+                    <div class="painel">
+                        <h3>Temperatura (°C)</h3>
+
+                        <div class="legenda">
+                            <span><i class="bolinha vermelho"></i> Máxima (26°C)</span>
+                            <span><i class="bolinha azul"></i> Mínima (20°C)</span>
+                        </div>
+
+                        <div class="grafico-wrapper">
+                            <canvas id="graficoTempoReal"></canvas>
+                        </div>
+                    </div>
+
                 </div>
+
+
+                <!-- MÉTRICA LATERAL: TEMPO REAL -->
+
+                <aside class="metricas-laterais">
+
+                    <div class="metrica">
+
+                        <div class="metrica-titulo">
+                            Status da sala
+                        </div>
+
+                        <div class="metrica-faixas duas-faixas">
+                            <div class="faixa faixa-normal selecionada" id="faixaNormalTempoReal">
+                                NORMAL
+                            </div>
+
+                            <div class="faixa faixa-alerta" id="faixaAlertaTempoReal">
+                                ALERTA
+                            </div>
+                        </div>
+
+                        <div class="metrica-resultado normal" id="resultadoStatusTempoReal">
+                            <span class="indicador"></span>
+                            <span id="textoStatusTempoReal">NORMAL</span>
+                        </div>
+
+                        <div class="metrica-descricao" id="descricaoStatusTempoReal">
+                            Temperatura dentro dos limites permitidos
+                        </div>
+
+                    </div>
+
+                </aside>
 
             </div>
 
-            <div class="painel">
-                <h3>Temperatura (°C)</h3>
-                <div class="legenda">
-                    <span><i class="bolinha vermelho"></i> Máxima (26°C)</span>
-                    <span><i class="bolinha azul"></i> Mínima (20°C)</span>
-                </div>
-                <div class="grafico-wrapper">
-                    <canvas id="graficoGeral"></canvas>
-                </div>
-            </div>
         </div>
+
 
         <!-- ========== TELA 3: HISTÓRICO ========== -->
+
         <div class="vista" id="vistaHistorico">
+
             <div class="filtros">
+
                 <div class="filtro">
                     <label>Empresa</label>
                     <div class="campo">SpTech Research</div>
                 </div>
+
                 <div class="filtro">
                     <label>Filial</label>
                     <select>
@@ -178,60 +326,76 @@
                         <option>Morumbi</option>
                     </select>
                 </div>
+
                 <div class="filtro">
                     <label>Sala</label>
-                    <select>
-                        <option>1</option>
-                        <option>2</option>
-                        <option>3</option>
-                        <option>4</option>
-                        <option>5</option>
+                    <select id="selectSalaHistorico">
+                        <option value="1" selected>Sala 1</option>
+                        <option value="2">Sala 2</option>
+                        <option value="3">Sala 3</option>
+                        <option value="4">Sala 4</option>
+                        <option value="5">Sala 5</option>
                     </select>
                 </div>
+
                 <div class="filtro">
                     <label>Dia</label>
-                    <select>
-                        <option>Hoje</option>
-                        <option selected>há 1 dia</option>
-                        <option>há 2 dias</option>
+                    <select id="selectDiaHistorico">
+                        <option value="0">Hoje</option>
+                        <option value="1" selected>há 1 dia</option>
+                        <option value="2">há 2 dias</option>
                     </select>
                 </div>
+
             </div>
+
 
             <div class="cards">
+
                 <div class="card">
                     <div class="titulo">Máxima do período</div>
-                    <div class="valor">27.0 °C</div>
+                    <div class="valor" id="maximaHistorico">28.4 °C</div>
                 </div>
+
                 <div class="card">
                     <div class="titulo">Mínima do período</div>
-                    <div class="valor">18.8 °C</div>
+                    <div class="valor" id="minimaHistorico">18.8 °C</div>
                 </div>
+
                 <div class="card">
                     <div class="titulo">Tempo fora da faixa</div>
-                    <div class="valor">2h 20min</div>
+                    <div class="valor" id="tempoForaHistorico">2h 30min</div>
                 </div>
+
                 <div class="card">
                     <div class="titulo">Excursões</div>
-                    <div class="valor">2</div>
+                    <div class="valor" id="excursoesHistorico">2</div>
                 </div>
+
             </div>
 
+
             <div class="painel">
+
                 <h3>Temperatura (°C)</h3>
+
                 <div class="legenda">
                     <span><i class="bolinha vermelho"></i> Máxima (26°C)</span>
                     <span><i class="bolinha azul"></i> Mínima (20°C)</span>
                 </div>
+
                 <div class="grafico-wrapper">
                     <canvas id="graficoHistorico"></canvas>
                 </div>
+
             </div>
+
         </div>
 
     </div>
 
     <script src="script.js"></script>
+
 </body>
 
 </html>

@@ -122,18 +122,53 @@ const config = {
 
 const myChart = new Chart(document.getElementById('graficoTempoReal'), config);
 
+// DADOS DA SALA 2
+const temperaturasSala2 = [
+    22.1, 23.1, 23.4, 23.0,
+    24.3, 24.0, 24.6, 24.8,
+    24.0, 23.2, 24.8, 24.3,
+    25.5, 26.8, 25.9, 28.4
+];
+
+const temperaturasSala1 = [...data.datasets[0].data];
+
+const dadosTempoReal = [
+    temperaturasSala1,
+    temperaturasSala2
+];
 
 // ===== GRÁFICO 2: VISÃO GERAL (colunas) =====
 const labels2 = ['Sala 1', 'Sala 2', 'Sala 3', 'Sala 4', 'Sala 5'];
+
+const temperaturasSalas = [22.8, 28.4, 24.1, 26, 23.5];   // temperatura de cada sala
+const coresBarras = [];       // lista vazia, vamos preencher com as cores
+let salasForaDaFaixa = 0;     // contador de salas fora da faixa
+let salasNoLimite = 0;        // contador de salas exatamente no limite
+let salasNormais = 0;         // contador de salas normais
+
+// for = repete o bloco para cada sala da lista
+for (let i = 0; i < temperaturasSalas.length; i++) {
+    const temp = temperaturasSalas[i];   // temperatura da sala atual
+
+    if (temp > 26 || temp < 20) {            // || significa "ou"
+        coresBarras.push('red');             // push = adiciona na lista
+        salasForaDaFaixa++;                  // ++ soma 1 no contador
+    } else if (temp == 26 || temp == 20) {   // exatamente no limite
+        coresBarras.push('yellow');
+        salasNoLimite++;
+    } else {                                 // dentro da faixa
+        coresBarras.push('green');
+        salasNormais++;
+    }
+}
 
 const data2 = {
     labels: labels2,
     datasets: [{
         type: 'bar',
         label: 'Temperatura',
-        data: [22.4, 28.4, 24.1, 26, 23.5],
-        // verde = dentro da faixa | amarelo = fora da faixa
-        backgroundColor: ['green', 'darkred', 'green', 'orange', 'green'],
+        data: temperaturasSalas,
+        backgroundColor: coresBarras,   // agora vem da lista calculada acima
         barPercentage: 0.2,
         categoryPercentage: 0.8,
         borderColor: 'cyan',
@@ -159,7 +194,7 @@ const data3 = {
     labels: labels3,
     datasets: [{
         label: 'Temperatura',
-        data: [22.1, 23.1, 25.4, 27.0, 25.3, 24.0, 21.6, 22.8, 24.0, 22.2, 18.8, 20.3],
+        data: [22.1, 22.8, 23.5, 21.7, 18.8, 21.3, 23.0, 23.8, 24.5, 28.4, 24.8, 23.2],
         borderColor: 'orange',
         backgroundColor: 'orange',
         tension: 0.1
@@ -188,3 +223,63 @@ const config3 = {
 
 const myChart3 = new Chart(document.getElementById('graficoHistorico'), config3);
 
+
+// HISTÓRICO MOCKADO
+// O gráfico e os KPIs ficam fixos em Sala 1 / há 1 dia.
+// Os seletores continuam visíveis, mas não alteram os dados.
+
+
+// TROCA DE SALAS - TEMPO REAL
+
+document.getElementById('selectSalaTempoReal').addEventListener('change', function () {
+
+    const indice = Number(this.value) - 1;
+
+    // Somente Sala 1 e Sala 2 possuem dados funcionais.
+    if (indice > 1) {
+        return;
+    }
+
+    myChart.data.datasets[0].data = dadosTempoReal[indice];
+
+    myChart.update();
+
+    // KPIs
+
+    const temperaturasAtuais = ['22.8 °C', '28.4 °C'];
+    const statusSalas = ['Normal', 'Alerta'];
+    const classesStatus = ['status-normal', 'status-atencao'];
+
+    document.getElementById('temperaturaAtual').innerHTML = temperaturasAtuais[indice];
+
+    document.getElementById('statusAtual').innerHTML = statusSalas[indice];
+
+    document.getElementById('statusAtual').className = 'valor ' + classesStatus[indice];
+
+
+    // MÉTRICA LATERAL
+
+    const resultados = ['NORMAL', 'ALERTA'];
+    const classesResultados = ['metrica-resultado normal', 'metrica-resultado alerta'];
+
+    const descricoes = [
+        'Temperatura dentro dos limites permitidos',
+        'Temperatura acima do limite máximo permitido'
+    ];
+
+    document.getElementById('resultadoStatusTempoReal').className = classesResultados[indice];
+
+    document.getElementById('textoStatusTempoReal').innerHTML = resultados[indice];
+
+    document.getElementById('descricaoStatusTempoReal').innerHTML = descricoes[indice];
+
+
+    // DESTAQUE DA FAIXA
+
+    document.getElementById('faixaNormalTempoReal').className =
+        ['faixa faixa-normal selecionada', 'faixa faixa-normal'][indice];
+
+    document.getElementById('faixaAlertaTempoReal').className =
+        ['faixa faixa-alerta', 'faixa faixa-alerta selecionada'][indice];
+
+});

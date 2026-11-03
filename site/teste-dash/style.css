@@ -1,3 +1,4 @@
+
 * {
     margin: 0;
     padding: 0;
@@ -14,6 +15,7 @@ body {
 
 
 /* ---------- Header (igual ao do site) ---------- */
+
 .header {
     position: fixed;
     top: 0;
@@ -114,17 +116,22 @@ body {
     opacity: 1;
 }
 
+
+/* ---------- Container ---------- */
+
 .container {
-    
     margin: 0 auto;
     background: #171f2b;
     border: 1px solid #222b3a;
     border-radius: 8px;
-    padding: 20px;
-    height: 830px;
-    width: 1300px;
+    padding: 25px;
+    min-height: 900px;
+    width: min(1550px, 100%);
 }
+
+
 /* ---------- Abas ---------- */
+
 .abas {
     display: flex;
     gap: 8px;
@@ -153,7 +160,9 @@ body {
     border-bottom-color: #e8620c;
 }
 
-/* Só a vista com a classe "ativa" aparece */
+
+/* ---------- Visibilidade das telas ---------- */
+
 .vista {
     display: none;
 }
@@ -163,8 +172,8 @@ body {
 }
 
 
-
 /* ---------- Filtros ---------- */
+
 .filtros {
     display: flex;
     gap: 12px;
@@ -208,7 +217,9 @@ body {
     background: #171f2b;
 }
 
+
 /* ---------- Cards ---------- */
+
 .cards {
     display: flex;
     gap: 12px;
@@ -223,15 +234,13 @@ body {
     padding: 16px;
 }
 
-.cards{
+.cards {
     flex: 1;
     background-color: #08253f;
     border: 1px solid #1565af;
     border-radius: 6px;
-    padding: 16px;   
+    padding: 16px;
 }
-
-
 
 .card .titulo {
     font-size: 13px;
@@ -250,11 +259,7 @@ body {
 }
 
 .status-atencao {
-    color: #f2d200;
-}
-
-.status-critico {
-    color: #c40000;
+    color: #f20000;
 }
 
 .detalhe-excursao {
@@ -268,7 +273,9 @@ body {
     font-weight: 600;
 }
 
+
 /* ---------- Painel do gráfico ---------- */
+
 .painel {
     background: #171f2b;
     border: 1px solid #1565af;
@@ -316,4 +323,167 @@ body {
     position: relative;
     height: 320px;
     width: 100%;
+}
+
+
+/* 
+   NOVAS MÉTRICAS LATERAIS
+ */
+
+
+/* ---------- Organização das duas colunas ---------- */
+
+.area-dashboard {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 320px;
+    gap: 20px;
+    align-items: start;
+}
+
+.conteudo-principal {
+    min-width: 0;
+}
+
+
+/* ---------- Coluna lateral ---------- */
+
+.metricas-laterais {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+
+/* ---------- Painel de cada métrica ---------- */
+
+.metrica {
+    background: #171f2b;
+    border: 2px solid #222b3a;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.metrica-titulo {
+    background: #08253f;
+    border-bottom: 1px solid #1565af;
+    padding: 18px 15px;
+    font-size: 18px;
+    font-weight: 600;
+    color: #fff;
+}
+
+
+/* ---------- Faixas coloridas ---------- */
+
+.metrica-faixas {
+    display: grid;
+    width: 100%;
+}
+
+.duas-faixas {
+    grid-template-columns: 1fr 1fr;
+}
+
+.tres-faixas {
+    grid-template-columns: 1fr 1fr 1fr;
+}
+
+.faixa {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    min-height: 90px;
+    padding: 12px 5px;
+    font-size: 13px;
+    font-weight: 700;
+    color: #fff;
+    opacity: 0.65;
+    transition: 0.3s;
+}
+
+.faixa.selecionada {
+    opacity: 1;
+    border-bottom: 4px solid #fff;
+}
+
+
+/* Verde */
+
+.faixa-normal {
+    background: #168447;
+}
+
+/* Amarelo */
+
+.faixa-limite {
+    background: #d69a20;
+}
+
+/* Vermelho */
+
+.faixa-alerta {
+    background: #c62828;
+}
+
+
+/* ---------- Resultado atual ---------- */
+
+.metrica-resultado {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 20px 15px 8px;
+    font-size: 21px;
+    font-weight: 700;
+}
+
+.indicador {
+    width: 13px;
+    height: 13px;
+    border-radius: 50%;
+    display: inline-block;
+}
+
+
+/* Resultado normal */
+
+.metrica-resultado.normal {
+    color: #16c75a;
+}
+
+.metrica-resultado.normal .indicador {
+    background: #16c75a;
+}
+
+
+/* Resultado em alerta */
+
+.metrica-resultado.alerta {
+    color: #ff4545;
+}
+
+.metrica-resultado.alerta .indicador {
+    background: #ff4545;
+}
+
+
+/* Resultado no limite */
+
+.metrica-resultado.limite {
+    color: #f2c500;
+}
+
+.metrica-resultado.limite .indicador {
+    background: #f2c500;
+}
+
+
+/* ---------- Descrição da métrica ---------- */
+
+.metrica-descricao {
+    padding: 5px 15px 20px;
+    font-size: 14px;
+    line-height: 1.6;
+    color: #aaaabb;
 }
