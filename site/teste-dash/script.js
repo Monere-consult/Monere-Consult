@@ -188,27 +188,27 @@ const myChart2 = new Chart(document.getElementById('graficoGeral'), config2);
 
 // ===== GRÁFICO 3: HISTÓRICO (linha) =====
 const labels3 = ['00:00', '02:00', '04:00', '06:00', '08:00', '10:00',
-                 '12:00', '14:00', '16:00', '18:00', '20:00', '22:00'];
+                 '12:00', '14:00', '16:00', '18:00', '20:00', '22:00', '23:59'];
 
 const data3 = {
     labels: labels3,
     datasets: [{
         label: 'Temperatura',
-        data: [22.1, 22.8, 23.5, 21.7, 18.8, 21.3, 23.0, 23.8, 24.5, 28.4, 24.8, 23.2],
+        data: [22.1, 22.8, 23.5, 21.7, 18.8, 21.3, 23.0, 23.8, 24.5, 28.4, 24.8, 23.2, 23.0],
         borderColor: 'orange',
         backgroundColor: 'orange',
         tension: 0.1
     },
     {
         label: 'Máxima',
-        data: [26, 26, 26, 26, 26, 26, 26, 26, 26, 26, 26, 26],
+        data: [26, 26, 26, 26, 26, 26, 26, 26, 26, 26, 26, 26, 26, 20],
         borderColor: 'red',
         borderDash: [6, 6],
         pointRadius: 0
     },
     {
         label: 'Mínima',
-        data: [20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20],
+        data: [20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20],
         borderColor: 'blue',
         borderDash: [6, 6],
         pointRadius: 0
