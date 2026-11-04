@@ -1,4 +1,5 @@
-‌<!doctype html>
+
+<!doctype html>
 <html>
 
 <head>
@@ -9,10 +10,12 @@
 <body>
 
     <h1>Monere Consult Graphics</h1>
+
     <div style="display: flex;">
         <div style="width: 50%;">
             <canvas id="sensorAnalogico"></canvas>
         </div>
+
         <div style="width: 50%;">
             <canvas id="sensorAnalogico2"></canvas>
         </div>
@@ -22,11 +25,30 @@
         var sensorAnalogico = new Chart(document.getElementById('sensorAnalogico').getContext('2d'), {
             type: 'line',
             data: {
-                datasets: [{
-                    label: 'Sensor sala 01',
-                    borderColor: 'blue',
-                    backgroundColor: 'red'
-                }]
+                labels: ['', ''],
+                datasets: [
+                    {
+                        label: 'Sensor sala 01',
+                        borderColor: 'blue',
+                        backgroundColor: 'red',
+                        data: [null, null],
+                        borderWidth: 2
+                    },
+                    {
+                        label: 'Temperatura mínima (20°C)',
+                        data: [20, 20],
+                        borderColor: 'green',
+                        borderWidth: 2,
+                        pointRadius: 0
+                    },
+                    {
+                        label: 'Temperatura máxima (26°C)',
+                        data: [26, 26],
+                        borderColor: 'red',
+                        borderWidth: 2,
+                        pointRadius: 0
+                    }
+                ]
             },
             options: {
                 scales: {
@@ -36,22 +58,43 @@
                     y: {
                         title: {
                             display: true,
-                            text: '(C°)'
+                            text: 'Temperatura (°C)'
                         },
-                        beginAtZero: true,
-                    },
-                },
+                        min: 15,
+                        max: 35
+                    }
+                }
             }
         });
 
-          var sensorAnalogico2 = new Chart(document.getElementById('sensorAnalogico2').getContext('2d'), {
+
+        var sensorAnalogico2 = new Chart(document.getElementById('sensorAnalogico2').getContext('2d'), {
             type: 'line',
             data: {
-                datasets: [{
-                    label: 'Sensor sala 02',
-                    borderColor: 'red',
-                    backgroundColor: 'blue'
-                }]
+                labels: ['', ''],
+                datasets: [
+                    {
+                        label: 'Sensor sala 02',
+                        borderColor: 'blue',
+                        backgroundColor: 'red',
+                        data: [null, null],
+                        borderWidth: 2
+                    },
+                    {
+                        label: 'Temperatura mínima (20°C)',
+                        data: [20, 20],
+                        borderColor: 'green',
+                        borderWidth: 2,
+                        pointRadius: 0
+                    },
+                    {
+                        label: 'Temperatura máxima (26°C)',
+                        data: [26, 26],
+                        borderColor: 'red',
+                        borderWidth: 2,
+                        pointRadius: 0
+                    }
+                ]
             },
             options: {
                 scales: {
@@ -61,11 +104,12 @@
                     y: {
                         title: {
                             display: true,
-                            text: '(C°)'
+                            text: 'Temperatura (°C)'
                         },
-                        beginAtZero: true,
-                    },
-                },
+                        min: 15,
+                        max: 35
+                    }
+                }
             }
         });
 
@@ -77,9 +121,11 @@
             fetch('http://localhost:3300/sensores/' + endpoint)
                 .then(response => response.json())
                 .then(valores => {
+
                     if (paginacao[endpoint] == null) {
                         paginacao[endpoint] = 0;
                     }
+
                     if (tempo[endpoint] == null) {
                         tempo[endpoint] = 0;
                     }
@@ -89,27 +135,35 @@
                     valores = valores.slice(ultimaPaginacao);
 
                     valores.forEach((valor) => {
-                        if (grafico.data.labels.length == 10 && grafico.data.datasets[0].data.length == 10) {
+
+                        if (grafico.data.labels.length >= 10) {
                             grafico.data.labels.shift();
                             grafico.data.datasets[0].data.shift();
+                            grafico.data.datasets[1].data.shift();
+                            grafico.data.datasets[2].data.shift();
                         }
 
                         grafico.data.labels.push(tempo[endpoint]++);
+
                         grafico.data.datasets[0].data.push(parseFloat(valor) + aumento);
+
+                        grafico.data.datasets[1].data.push(20);
+                        grafico.data.datasets[2].data.push(26);
+
                         grafico.update();
                     });
                 })
                 .catch(error => console.error('Erro ao obter dados:', error));
         }
 
+
         setInterval(() => {
             obterDados(sensorAnalogico, 'analogico', 0);
-            obterDados(sensorAnalogico2, 'simulado', 10);
+            obterDados(sensorAnalogico2, 'simulado', 7);
         }, 1000);
 
-
-
     </script>
+
 </body>
 
 </html>
