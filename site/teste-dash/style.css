@@ -1,4 +1,3 @@
-
 * {
     margin: 0;
     padding: 0;
@@ -222,22 +221,19 @@ body {
 
 .cards {
     display: flex;
+    flex: 1;
     gap: 12px;
     margin-bottom: 20px;
+    background-color: #08253f;
+    border: 1px solid #1565af;
+    border-radius: 6px;
+    padding: 16px;
 }
 
 .card {
     flex: 1;
     background: #171f2b;
     border: 1px solid #222b3a;
-    border-radius: 6px;
-    padding: 16px;
-}
-
-.cards {
-    flex: 1;
-    background-color: #08253f;
-    border: 1px solid #1565af;
     border-radius: 6px;
     padding: 16px;
 }
@@ -486,4 +482,33 @@ body {
     font-size: 14px;
     line-height: 1.6;
     color: #aaaabb;
+}
+
+
+/* ==========================================
+   TEMPO REAL: TROCA DE SALA SÓ COM CSS
+   ========================================== */
+
+/* Por padrão aparece a Sala 1, então tudo da Sala 2 fica escondido */
+
+#cardTempSala2,
+#cardStatusSala2,
+#metricaSala2 {
+    display: none;
+}
+
+/* Quando a "Sala 2" está escolhida no select (:has = "que tenha"), esconde tudo da Sala 1 */
+
+#vistaTempoReal:has(#opcaoSala2:checked) #cardTempSala1,
+#vistaTempoReal:has(#opcaoSala2:checked) #cardStatusSala1,
+#vistaTempoReal:has(#opcaoSala2:checked) #metricaSala1 {
+    display: none;
+}
+
+/* ...e mostra tudo da Sala 2 */
+
+#vistaTempoReal:has(#opcaoSala2:checked) #cardTempSala2,
+#vistaTempoReal:has(#opcaoSala2:checked) #cardStatusSala2,
+#vistaTempoReal:has(#opcaoSala2:checked) #metricaSala2 {
+    display: block;
 }

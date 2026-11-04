@@ -101,10 +101,10 @@
                         </div>
 
                         <div class="card">
-                            <div class="titulo">Pico de excursão na sala 2</div>
-                            <div class="valor status-critico">28,3 °C</div>
+                            <div class="titulo">Pico de excursão</div>
+                            <div class="valor status-critico">28,4 °C</div>
                             <div class="detalhe-excursao">
-                                <span>+2,3 °C</span> acima do limite
+                                <span>+2,4 °C</span> acima do limite
                             </div>
                         </div>
 
@@ -217,12 +217,14 @@
 
                 <div class="filtro">
                     <label>Sala</label>
-                    <select id="selectSalaTempoReal">
+                    <!-- onchange = quando trocar a sala, chama a função do script.js (troca só o gráfico) -->
+                    <!-- autocomplete="off" = o navegador não lembra a sala escolhida ao atualizar a página -->
+                    <select onchange="trocarSalaTempoReal(this.value)" autocomplete="off">
                         <option value="1" selected>Sala 1</option>
-                        <option value="2">Sala 2</option>
-                        <option value="3">Sala 3</option>
-                        <option value="4">Sala 4</option>
-                        <option value="5">Sala 5</option>
+                        <option value="2" id="opcaoSala2">Sala 2</option>
+                        <option value="3" disabled>Sala 3</option>
+                        <option value="4" disabled>Sala 4</option>
+                        <option value="5" disabled>Sala 5</option>
                     </select>
                 </div>
 
@@ -235,21 +237,32 @@
 
                 <div class="conteudo-principal">
 
+                    <!-- Cada sala tem seus próprios cards. O CSS mostra só os da sala escolhida -->
                     <div class="cards">
 
-                        <div class="card">
+                        <div class="card" id="cardTempSala1">
                             <div class="titulo">Temperatura atual</div>
-                            <div class="valor" id="temperaturaAtual">22.8 °C</div>
+                            <div class="valor">22.8 °C</div>
                         </div>
 
-                        <div class="card">
+                        <div class="card" id="cardTempSala2">
+                            <div class="titulo">Temperatura atual</div>
+                            <div class="valor">28.4 °C</div>
+                        </div>
+
+                        <div class="card" id="cardStatusSala1">
                             <div class="titulo">Status</div>
-                            <div class="valor status-normal" id="statusAtual">Normal</div>
+                            <div class="valor status-normal">Normal</div>
+                        </div>
+
+                        <div class="card" id="cardStatusSala2">
+                            <div class="titulo">Status</div>
+                            <div class="valor status-atencao">Alerta</div>
                         </div>
 
                         <div class="card">
                             <div class="titulo">Última atualização</div>
-                            <div class="valor">Há 1 min 33 seg </div>
+                            <div class="valor">Há 1 min 33 seg</div>
                         </div>
 
                     </div>
@@ -270,33 +283,62 @@
                 </div>
 
 
-                <!-- MÉTRICA LATERAL: TEMPO REAL -->
+                <!-- MÉTRICA LATERAL: TEMPO REAL (uma para cada sala) -->
 
                 <aside class="metricas-laterais">
 
-                    <div class="metrica">
+                    <!-- SALA 1: normal -->
+                    <div class="metrica" id="metricaSala1">
 
                         <div class="metrica-titulo">
                             Status da sala
                         </div>
 
                         <div class="metrica-faixas duas-faixas">
-                            <div class="faixa faixa-normal selecionada" id="faixaNormalTempoReal">
+                            <div class="faixa faixa-normal selecionada">
                                 NORMAL
                             </div>
 
-                            <div class="faixa faixa-alerta" id="faixaAlertaTempoReal">
+                            <div class="faixa faixa-alerta">
                                 ALERTA
                             </div>
                         </div>
 
-                        <div class="metrica-resultado normal" id="resultadoStatusTempoReal">
+                        <div class="metrica-resultado normal">
                             <span class="indicador"></span>
-                            <span id="textoStatusTempoReal">NORMAL</span>
+                            NORMAL
                         </div>
 
-                        <div class="metrica-descricao" id="descricaoStatusTempoReal">
+                        <div class="metrica-descricao">
                             Temperatura dentro dos limites permitidos
+                        </div>
+
+                    </div>
+
+                    <!-- SALA 2: alerta -->
+                    <div class="metrica" id="metricaSala2">
+
+                        <div class="metrica-titulo">
+                            Status da sala
+                        </div>
+
+                        <div class="metrica-faixas duas-faixas">
+                            <div class="faixa faixa-normal">
+                                NORMAL
+                            </div>
+
+                            <div class="faixa faixa-alerta selecionada">
+                                ALERTA
+                            </div>
+                        </div>
+
+                        <div class="metrica-resultado alerta">
+                            <span class="indicador"></span>
+                            ALERTA
+                        </div>
+
+                        <div class="metrica-descricao">
+                            Temperatura acima do limite máximo permitido
                         </div>
 
                     </div>
@@ -308,7 +350,7 @@
         </div>
 
 
-        <!-- ========== TELA 3: HISTÓRICO ========== -->
+        <!-- ========== TELA 3: HISTÓRICO (fixo em Sala 1 / há 1 dia) ========== -->
 
         <div class="vista" id="vistaHistorico">
 
@@ -329,7 +371,7 @@
 
                 <div class="filtro">
                     <label>Sala</label>
-                    <select id="selectSalaHistorico">
+                    <select>
                         <option value="1" selected>Sala 1</option>
                         <option value="2">Sala 2</option>
                         <option value="3">Sala 3</option>
@@ -340,7 +382,8 @@
 
                 <div class="filtro">
                     <label>Dia</label>
-                    <select id="selectDiaHistorico">
+                    <select>
+                        <option value="0">Hoje</option>
                         <option value="1" selected>há 1 dia</option>
                         <option value="2">há 2 dias</option>
                     </select>
@@ -353,22 +396,22 @@
 
                 <div class="card">
                     <div class="titulo">Máxima do período</div>
-                    <div class="valor" id="maximaHistorico">28.4 °C</div>
+                    <div class="valor">28.4 °C</div>
                 </div>
 
                 <div class="card">
                     <div class="titulo">Mínima do período</div>
-                    <div class="valor" id="minimaHistorico">18.8 °C</div>
+                    <div class="valor">18.8 °C</div>
                 </div>
 
                 <div class="card">
                     <div class="titulo">Tempo fora da faixa</div>
-                    <div class="valor" id="tempoForaHistorico">2h 30min</div>
+                    <div class="valor">2h 30min</div>
                 </div>
 
                 <div class="card">
                     <div class="titulo">Excursões</div>
-                    <div class="valor" id="excursoesHistorico">2</div>
+                    <div class="valor">2</div>
                 </div>
 
             </div>
