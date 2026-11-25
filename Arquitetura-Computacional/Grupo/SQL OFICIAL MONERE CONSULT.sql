@@ -93,7 +93,7 @@ INSERT INTO sensor VALUES
 
 
 select * from sensor;
-SELECT * FROM medidaSensor;	
+SELECT * FROM medidaSensor order by momento desc limit 10;	
 
 
 
