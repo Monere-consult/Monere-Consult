@@ -1,0 +1,514 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    padding: 100px 40px 30px;
+    background: #1e1e1e;
+    color: #fff;
+    font-family: 'Montserrat', Arial, sans-serif;
+}
+
+
+/* ---------- Header (igual ao do site) ---------- */
+
+.header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 65px;
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 22px;
+    background-color: #08253f;
+    border-bottom: 2px solid #1565af;
+    font-family: 'Poppins', Arial, sans-serif;
+}
+
+.header .logo {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+    text-decoration: none;
+}
+
+.header .logo img {
+    height: 50px;
+    width: auto;
+    display: block;
+}
+
+.header .titulo {
+    font-size: 24px;
+    font-weight: 700;
+    line-height: 1;
+}
+
+.header .titulo-azul {
+    color: #00ffff;
+}
+
+.header .titulo-branco {
+    color: #fff;
+}
+
+.header .icone {
+    display: flex;
+    align-items: center;
+    gap: 36px;
+}
+
+.header .navibar {
+    display: flex;
+    align-items: center;
+    gap: 28px;
+    list-style: none;
+}
+
+.header .navibar a {
+    color: #fff;
+    text-decoration: none;
+    font-size: 16px;
+    font-weight: 500;
+    transition: color 0.3s ease;
+}
+
+.header .navibar a:hover {
+    color: #00ffff;
+}
+
+.header .icone-login {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.header .icone-login img {
+    width: 40px;
+    height: 40px;
+    display: block;
+}
+
+.header .icone-login::after {
+    content: attr(data-tooltip);
+    position: absolute;
+    top: 100%;
+    right: 0;
+    margin-top: 10px;
+    padding: 4px 10px;
+    border-radius: 6px;
+    background: #1565af;
+    color: #fff;
+    font-size: 12px;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.2s ease;
+}
+
+.header .icone-login:hover::after {
+    opacity: 1;
+}
+
+
+/* ---------- Container ---------- */
+
+.container {
+    margin: 0 auto;
+    background: #171f2b;
+    border: 1px solid #222b3a;
+    border-radius: 8px;
+    padding: 25px;
+    min-height: 900px;
+    width: min(1550px, 100%);
+}
+
+
+/* ---------- Abas ---------- */
+
+.abas {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 20px;
+    border-bottom: 1px solid #222b3a;
+}
+
+.aba {
+    background: none;
+    border: none;
+    border-bottom: 3px solid transparent;
+    color: #aaaabb;
+    font-family: inherit;
+    font-size: 14px;
+    font-weight: 600;
+    padding: 10px 18px;
+    cursor: pointer;
+}
+
+.aba:hover {
+    color: #fff;
+}
+
+.aba.ativa {
+    color: #fff;
+    border-bottom-color: #e8620c;
+}
+
+
+/* ---------- Visibilidade das telas ---------- */
+
+.vista {
+    display: none;
+}
+
+.vista.ativa {
+    display: block;
+}
+
+
+/* ---------- Filtros ---------- */
+
+.filtros {
+    display: flex;
+    gap: 12px;
+    margin-bottom: 14px;
+    padding: 16px;
+    border: 1px solid #222b3a;
+    border-radius: 6px;
+    background: #171f2b;
+}
+
+.filtro {
+    width: 230px;
+}
+
+.filtro label {
+    display: block;
+    font-size: 12px;
+    font-weight: 300;
+    color: #aaaabb;
+    margin-bottom: 4px;
+}
+
+.filtro select,
+.filtro .campo {
+    width: 100%;
+    background: #171f2b;
+    color: #fff;
+    border: 1px solid #222b3a;
+    border-radius: 6px;
+    padding: 12px;
+    font-family: inherit;
+    font-size: 15px;
+    font-weight: 600;
+}
+
+.filtro select {
+    cursor: pointer;
+}
+
+.filtro select option {
+    background: #171f2b;
+}
+
+
+/* ---------- Cards ---------- */
+
+.cards {
+    display: flex;
+    flex: 1;
+    gap: 12px;
+    margin-bottom: 20px;
+    background-color: #08253f;
+    border: 1px solid #1565af;
+    border-radius: 6px;
+    padding: 16px;
+}
+
+.card {
+    flex: 1;
+    background: #171f2b;
+    border: 1px solid #222b3a;
+    border-radius: 6px;
+    padding: 16px;
+}
+
+.card .titulo {
+    font-size: 13px;
+    font-weight: 300;
+    color: #ccdddd;
+    margin-bottom: 8px;
+}
+
+.card .valor {
+    font-size: 22px;
+    font-weight: 600;
+}
+
+.status-normal {
+    color: #0a8a0a;
+}
+
+.status-atencao {
+    color: #f20000;
+}
+
+.detalhe-excursao {
+    font-size: 11px;
+    color: #aaaabb;
+    margin-top: 6px;
+}
+
+.detalhe-excursao span {
+    color: #ff4545;
+    font-weight: 600;
+}
+
+
+/* ---------- Painel do gráfico ---------- */
+
+.painel {
+    background: #171f2b;
+    border: 1px solid #1565af;
+    border-radius: 6px;
+    padding: 16px;
+}
+
+.painel h3 {
+    margin: 0 0 6px;
+    font-size: 15px;
+    font-weight: 600;
+}
+
+.legenda {
+    display: flex;
+    justify-content: center;
+    gap: 22px;
+    font-size: 11px;
+    font-weight: 300;
+    margin-bottom: 8px;
+}
+
+.legenda span {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.bolinha {
+    width: 11px;
+    height: 11px;
+    border-radius: 50%;
+    display: inline-block;
+}
+
+.vermelho {
+    background: #d71920;
+}
+
+.azul {
+    background: #1f4fe0;
+}
+
+.grafico-wrapper {
+    position: relative;
+    height: 320px;
+    width: 100%;
+}
+
+
+/* 
+   NOVAS MÉTRICAS LATERAIS
+ */
+
+
+/* ---------- Organização das duas colunas ---------- */
+
+.area-dashboard {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 320px;
+    gap: 20px;
+    align-items: start;
+}
+
+.conteudo-principal {
+    min-width: 0;
+}
+
+
+/* ---------- Coluna lateral ---------- */
+
+.metricas-laterais {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+
+/* ---------- Painel de cada métrica ---------- */
+
+.metrica {
+    background: #171f2b;
+    border: 2px solid #222b3a;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.metrica-titulo {
+    background: #08253f;
+    border-bottom: 1px solid #1565af;
+    padding: 18px 15px;
+    font-size: 18px;
+    font-weight: 600;
+    color: #fff;
+}
+
+
+/* ---------- Faixas coloridas ---------- */
+
+.metrica-faixas {
+    display: grid;
+    width: 100%;
+}
+
+.duas-faixas {
+    grid-template-columns: 1fr 1fr;
+}
+
+.tres-faixas {
+    grid-template-columns: 1fr 1fr 1fr;
+}
+
+.faixa {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    min-height: 90px;
+    padding: 12px 5px;
+    font-size: 13px;
+    font-weight: 700;
+    color: #fff;
+    opacity: 0.65;
+    transition: 0.3s;
+}
+
+.faixa.selecionada {
+    opacity: 1;
+    border-bottom: 4px solid #fff;
+}
+
+
+/* Verde */
+
+.faixa-normal {
+    background: #168447;
+}
+
+/* Amarelo */
+
+.faixa-limite {
+    background: #d69a20;
+}
+
+/* Vermelho */
+
+.faixa-alerta {
+    background: #c62828;
+}
+
+
+/* ---------- Resultado atual ---------- */
+
+.metrica-resultado {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 20px 15px 8px;
+    font-size: 21px;
+    font-weight: 700;
+}
+
+.indicador {
+    width: 13px;
+    height: 13px;
+    border-radius: 50%;
+    display: inline-block;
+}
+
+
+/* Resultado normal */
+
+.metrica-resultado.normal {
+    color: #16c75a;
+}
+
+.metrica-resultado.normal .indicador {
+    background: #16c75a;
+}
+
+
+/* Resultado em alerta */
+
+.metrica-resultado.alerta {
+    color: #ff4545;
+}
+
+.metrica-resultado.alerta .indicador {
+    background: #ff4545;
+}
+
+
+/* Resultado no limite */
+
+.metrica-resultado.limite {
+    color: #f2c500;
+}
+
+.metrica-resultado.limite .indicador {
+    background: #f2c500;
+}
+
+
+/* ---------- Descrição da métrica ---------- */
+
+.metrica-descricao {
+    padding: 5px 15px 20px;
+    font-size: 14px;
+    line-height: 1.6;
+    color: #aaaabb;
+}
+
+
+/* ==========================================
+   TEMPO REAL: TROCA DE SALA SÓ COM CSS
+   ========================================== */
+
+/* Por padrão aparece a Sala 1, então tudo da Sala 2 fica escondido */
+
+#cardTempSala2,
+#cardStatusSala2,
+#metricaSala2 {
+    display: none;
+}
+
+/* Quando a "Sala 2" está escolhida no select (:has = "que tenha"), esconde tudo da Sala 1 */
+
+#vistaTempoReal:has(#opcaoSala2:checked) #cardTempSala1,
+#vistaTempoReal:has(#opcaoSala2:checked) #cardStatusSala1,
+#vistaTempoReal:has(#opcaoSala2:checked) #metricaSala1 {
+    display: none;
+}
+
+/* ...e mostra tudo da Sala 2 */
+
+#vistaTempoReal:has(#opcaoSala2:checked) #cardTempSala2,
+#vistaTempoReal:has(#opcaoSala2:checked) #cardStatusSala2,
+#vistaTempoReal:has(#opcaoSala2:checked) #metricaSala2 {
+    display: block;
+}

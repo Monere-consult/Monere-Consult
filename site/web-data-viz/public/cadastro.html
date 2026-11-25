@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cadastro - Monere Consult</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="css/style-cadastro.css">
+  <link rel="stylesheet" href="css/header.css">
+</head>
+
+<body>
+
+  <header class="header">
+
+    <a href="../index.html#inicio" class="logo">
+      <img src="../img/Monere Consult logo.svg" alt="Logo Monere Consult">
+
+      <h1 class="titulo">
+        <span class="titulo-azul">Monere</span>
+        <span class="titulo-branco">Consult</span>
+      </h1>
+    </a>
+
+    <div class="icone">
+
+      <ul class="navibar">
+        <li><a href="../index.html#inicio">Início</a></li>
+        <li><a href="../index.html#sobre-nos">Sobre nós</a></li>
+        <li><a href="../index.html#solucoes">Soluções</a></li>
+        <li><a href="../index.html#simulador">Simulador</a></li>
+        <li><a href="../index.html#equipe">Nossa equipe</a></li>
+      </ul>
+
+      <a href="../Tela de Login/tela_login.html" class="icone-login" data-tooltip="Login" aria-label="Login">
+        <img src="../img/icone.svg" alt="">
+      </a>
+
+    </div>
+
+  </header>
+
+  <main>
+
+    <div class="caixa-imagem">
+      <img src="../Tela de Login/assets/img/foto-direito.png" alt="Monitoramento de temperatura para animais">
+    </div>
+
+    <div class="caixa-login">
+
+      <div class="logo"><b>Monere</b> Consult</div>
+
+      <h1>Faça seu cadastro!</h1>
+
+      <form>
+
+        <label for="ipt_nome">Nome:</label>
+
+        <div class="campo">
+          <span>👤</span>
+          <input type="text" id="ipt_nome" placeholder="Digite seu nome">
+        </div>
+
+        <div id="div_nomeInvalido"></div>
+
+        <label for="ipt_email">Email:</label>
+
+        <div class="campo">
+          <span>✉</span>
+          <input type="text" id="ipt_email" placeholder="Digite seu e-mail">
+        </div>
+
+        <div id="div_emailInvalido"></div>
+
+        <label for="ipt_senha">Senha:</label>
+
+        <div class="campo">
+          <input type="password" id="ipt_senha" placeholder="Crie uma senha">
+        </div>
+
+        <div id="div_forte"></div>
+
+        <div id="div_fraca"></div>
+
+        <label for="ipt_confirmarSenha">Confirme sua senha:</label>
+
+        <div class="campo">
+          <input type="password" id="ipt_confirmarSenha" placeholder="Digite a senha novamente">
+        </div>
+
+        <div id="div_msg"></div>
+
+        <div id="div_senhaDif"></div>
+
+        <button type="button" class="botao-cadastro" onclick="cadastrar()">Cadastre-se</button>
+
+      </form>
+
+    </div>
+
+  </main>
+  
+  <script>
+    
+    
+    function cadastrar() {
+      
+      
+      // declara varáveis (.trim serve para tirar os espaços do começo e final)
+      var nomeVar = ipt_nome.value.trim();
+    var emailVar = ipt_email.value.trim();
+    var senhaVar = ipt_senha.value.trim();
+    var confirmarSenhaVar = ipt_confirmarSenha.value.trim();
+    
+    // Variáveis de controle das validações
+    var nomeInvalido = true;
+    var emailInvalido = true;
+    var senhaInvalida = true;
+    var cfmSenhaInvalido = true;
+    
+    // Variáveis que identificam os requisitos da senha
+    var temMaius = false;
+    var temMinus = false;
+    var temNum = false;
+    var temSimb = false;
+    var numerosPermitidos = "0123456789";
+    var simbolos = "!@#$%&*_-./";
+    
+    var contarCaractere = 0;
+    
+    
+    // nome
+    
+    var nomeSoLetras = true;
+    var contarNome = 0;
+    
+    while (contarNome < nomeVar.length) {
+      var c = nomeVar[contarNome];
+
+      // Verifica se o caractere é uma letra
+      if (c !== " " && c.toLowerCase() === c.toUpperCase()) {
+        nomeSoLetras = false;
+      }
+      
+      // Verifica se existem dois espaços seguidos
+      if (c === " " && nomeVar[contarNome + 1] === " ") {
+        nomeSoLetras = false;
+      }
+      
+      contarNome++;
+    }
+    
+    if (nomeVar.length >= 3 && nomeVar.length <= 45 && nomeSoLetras) {
+      nomeInvalido = false;
+      div_nomeInvalido.innerHTML = "";
+    } else {
+      div_nomeInvalido.innerHTML = "Digite um nome válido.";
+    }
+    
+    
+    
+    // email
+    
+    // !email.includes(" ") verifica se o email não possui espaços
+    
+    // split("@") divide o texto toda vez que encontra um @
+    
+    // length conta quantas partes foram geradas (== 2 significa que devem existir exatamente duas partes)
+    
+    // Verifica se o e-mail termina com um dos domínios permitidos.
+    
+    
+    
+    // email
+    
+    // split("@") divide o email em partes quando encontra um @
+    var partesEmail = emailVar.split("@");
+    
+    // Recupera a parte antes e depois do @
+    var usuarioEmail = partesEmail[0];
+    var dominioEmail = partesEmail[1];
+    
+    // Verifica se o email possui um dos domínios permitidos
+    if (
+      !emailVar.includes(" ") &&
+      partesEmail.length == 2 &&
+      usuarioEmail !== "" &&
+      dominioEmail !== "" &&
+      !usuarioEmail.startsWith(".") &&
+      !usuarioEmail.endsWith(".") &&
+      !usuarioEmail.includes("..") &&
+      !dominioEmail.includes("..") &&
+      (
+        dominioEmail === "gmail.com" ||
+        dominioEmail === "hotmail.com" ||
+        dominioEmail === "outlook.com" ||
+        dominioEmail === "sptech.school"
+      )
+    ) {
+      emailInvalido = false;
+      div_emailInvalido.innerHTML = "";
+    } else {
+      div_emailInvalido.innerHTML = "Digite um email válido.";
+    }
+    
+
+    // Senha
+    
+    // while percorre toda a senha e identifica se ela possui pelo menos uma varra maiúscula, uma minúscula, um número e um símbolo.
+    while (contarCaractere < senhaVar.length) {
+      var caractere = senhaVar[contarCaractere];
+      if (caractere >= "A" && caractere <= "Z") temMaius = true;
+      if (caractere >= "a" && caractere <= "z") temMinus = true;
+      if (numerosPermitidos.includes(caractere)) temNum = true;
+      if (simbolos.includes(caractere)) temSimb = true;
+      contarCaractere++;
+    }
+    
+    // Verifica se a senha atende a todos os requisitos
+    if (temMaius && temMinus && temNum && temSimb && senhaVar.length >= 8 && senhaVar.length <= 45) {
+      div_forte.innerHTML = "Senha forte";
+      senhaInvalida = false;
+      div_fraca.innerHTML = "";
+    } else {
+      div_fraca.innerHTML = "Senha fraca";
+      senhaInvalida = true;
+      div_forte.innerHTML = "";
+    }
+    
+    // Verifica se a confirmação corresponde à senha original
+    if (confirmarSenhaVar === senhaVar && senhaVar !== "") {
+      cfmSenhaInvalido = false;
+      div_senhaDif.innerHTML = ""
+      div_msg.innerHTML = ""
+    } else {
+      div_senhaDif.innerHTML = "As senhas são diferentes.";
+      div_msg.innerHTML = ""
+    }
+    
+    // verifica se nome, email e senha são válidos
+    if (nomeInvalido || emailInvalido || senhaInvalida || cfmSenhaInvalido) {
+      div_msg.innerHTML = "Preencha  os dados corretamente."
+    } else {
+      // tudo certo: mostra mensagem de sucesso
+      div_forte.innerHTML = " ";
+      div_msg.style.color = "green";
+      div_msg.innerHTML = "Cadastro realizado com sucesso! Redirecionando...";
+      
+      // // vai para a tela de login
+      //     window.location.href = "../Tela de Login/tela_login.html";
+
+      // Enviando o valor da nova input
+      fetch("/usuarios/cadastrar", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          // crie um atributo que recebe o valor recuperado aqui
+          // Agora vá para o arquivo routes/usuario.js
+          nomeServer: nomeVar,
+          emailServer: emailVar,
+          senhaServer: senhaVar,
+          // idEmpresaVincularServer: idEmpresaVincular
+        }),
+      })
+      .then(function (resposta) {
+          console.log("resposta: ", resposta);
+          
+          if (resposta.ok) {
+            
+            div_msg.innerHTML = `Cadastro realizado com sucesso! Redirecionando para tela de Login...`;
+            
+            setTimeout(() => {
+              window.location = "tela_login.html";
+            }, "2000");
+            
+            
+          } else {
+            throw "Houve um erro ao tentar realizar o cadastro!";
+          }
+        })
+        .catch(function (resposta) {
+          console.log(`#ERRO: ${resposta}`);
+          div_msg.innerHTML = "Erro ao realizar o cadastro.";
+        });
+        
+        return false;
+        
+        
+        
+      }
+  }
+  
+</script>
+
+</body>
+
+</html>
