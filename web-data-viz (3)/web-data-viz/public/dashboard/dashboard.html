@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard de Temperatura - Monere Consult</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../css/style-dashboard.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../css/header.css">
+    <script src="../js/sessao.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+
+<body onload="validarSessao()">
+
+    <header class="header">
+
+        <a href="../index.html#inicio" class="logo">
+            <img src="../assets/img/Monere Consult logo.svg" alt="Logo Monere Consult">
+            <h1 class="titulo">
+                <span class="titulo-azul">Monere</span> <span class="titulo-branco">Consult</span>
+            </h1>
+        </a>
+
+        <div class="icone">
+            <ul class="navibar">
+                <li><a href="../index.html#inicio">Início</a></li>
+                <li><a href="../index.html#sobre-nos">Sobre nós</a></li>
+                <li><a href="../index.html#solucoes">Soluções</a></li>
+                <li><a href="../index.html#simulador">Simulador</a></li>
+                <li><a href="../index.html#equipe">Nossa equipe</a></li>
+            </ul>
+
+            <a href="#" onclick="limparSessao(); return false;" class="icone-login" data-tooltip="Sair" aria-label="Sair">
+                <img src="../assets/img/icone.svg" alt="">
+            </a>
+        </div>
+
+    </header>
+
+    <div class="container">
+
+        <div class="abas">
+
+            <button class="aba ativa" id="botaoGeral" onclick="mostrarAba('vistaGeral', 'botaoGeral')">
+                Visão geral
+            </button>
+
+            <button class="aba" id="botaoTempoReal" onclick="mostrarAba('vistaTempoReal', 'botaoTempoReal')">
+                Tempo real
+            </button>
+
+            <button class="aba" id="botaoHistorico" onclick="mostrarAba('vistaHistorico', 'botaoHistorico')">
+                Histórico
+            </button>
+
+        </div>
+
+
+        <!-- ========== TELA 1: VISÃO GERAL ========== -->
+
+        <div class="vista ativa" id="vistaGeral">
+
+            <div class="filtros">
+                <div class="filtro">
+                    <label>Empresa</label>
+                    <div class="campo campo-empresa"></div>
+                </div>
+
+                <div class="filtro">
+                    <label>Filial</label>
+                    <select class="select-filial" onchange="trocarFilial(this.value)" autocomplete="off"></select>
+                </div>
+            </div>
+
+            <!-- CONTEÚDO PRINCIPAL + MÉTRICAS -->
+
+            <div class="area-dashboard">
+
+                <div class="conteudo-principal">
+
+                    <div class="cards">
+
+                        <div class="card">
+                            <div class="titulo">Status</div>
+                            <div class="valor" id="geralStatus">--</div>
+                        </div>
+
+                        <div class="card">
+                            <div class="titulo">Fora da faixa</div>
+                            <div class="valor" id="geralForaDaFaixa">--</div>
+                        </div>
+
+                        <div class="card">
+                            <div class="titulo">Sensores online</div>
+                            <div class="valor" id="geralSensoresOnline">--</div>
+                        </div>
+
+                        <div class="card">
+                            <div class="titulo" id="geralPicoTitulo">Pico de excursão (24h)</div>
+                            <div class="valor" id="geralPico">--</div>
+                            <div class="detalhe-excursao" id="geralPicoDetalhe"></div>
+                        </div>
+
+                    </div>
+
+                    <div class="painel">
+                        <h3>Temperatura (°C)</h3>
+
+                        <div class="legenda">
+                            <span><i class="bolinha vermelho"></i> Máxima (26°C)</span>
+                            <span><i class="bolinha azul"></i> Mínima (20°C)</span>
+                        </div>
+
+                        <div class="grafico-wrapper">
+                            <canvas id="graficoGeral"></canvas>
+                        </div>
+                    </div>
+
+                </div>
+
+
+                <!-- MÉTRICAS LATERAIS: VISÃO GERAL -->
+
+                <aside class="metricas-laterais">
+
+                    <div class="metrica">
+
+                        <div class="metrica-titulo">
+                            Status das salas
+                        </div>
+
+                        <div class="metrica-faixas duas-faixas">
+                            <div class="faixa faixa-normal" id="faixaSalasNormal">
+                                NORMAL
+                            </div>
+
+                            <div class="faixa faixa-alerta" id="faixaSalasAlerta">
+                                ALERTA
+                            </div>
+                        </div>
+
+                        <div class="metrica-resultado" id="resultadoSalas">
+                            <span class="indicador"></span>
+                            <span id="textoResultadoSalas">--</span>
+                        </div>
+
+                        <div class="metrica-descricao" id="descricaoSalas"></div>
+
+                    </div>
+
+
+                    <div class="metrica">
+
+                        <div class="metrica-titulo">
+                            Condição do gráfico
+                        </div>
+
+                        <div class="metrica-faixas tres-faixas">
+                            <div class="faixa faixa-normal" id="faixaGraficoNormal">
+                                NORMAL
+                            </div>
+
+                            <div class="faixa faixa-limite" id="faixaGraficoLimite">
+                                LIMITE
+                            </div>
+
+                            <div class="faixa faixa-alerta" id="faixaGraficoFora">
+                                FORA
+                            </div>
+                        </div>
+
+                        <div class="metrica-resultado" id="resultadoGrafico">
+                            <span class="indicador"></span>
+                            <span id="textoResultadoGrafico">--</span>
+                        </div>
+
+                        <div class="metrica-descricao" id="descricaoGrafico"></div>
+
+                    </div>
+
+                </aside>
+
+            </div>
+
+        </div>
+
+
+        <!-- ========== TELA 2: TEMPO REAL ========== -->
+
+        <div class="vista" id="vistaTempoReal">
+
+            <div class="filtros">
+
+                <div class="filtro">
+                    <label>Empresa</label>
+                    <div class="campo campo-empresa"></div>
+                </div>
+
+                <div class="filtro">
+                    <label>Filial</label>
+                    <select class="select-filial" onchange="trocarFilial(this.value)" autocomplete="off"></select>
+                </div>
+
+                <div class="filtro">
+                    <label>Sala</label>
+                    <!-- as salas são carregadas da API de acordo com a filial escolhida -->
+                    <select id="selectSalaTempoReal" onchange="trocarSalaTempoReal(this.value)" autocomplete="off"></select>
+                </div>
+
+            </div>
+
+
+            <!-- CONTEÚDO PRINCIPAL + MÉTRICAS -->
+
+            <div class="area-dashboard">
+
+                <div class="conteudo-principal">
+
+                    <div class="cards">
+
+                        <div class="card">
+                            <div class="titulo">Temperatura atual</div>
+                            <div class="valor" id="trTemperatura">--</div>
+                        </div>
+
+                        <div class="card">
+                            <div class="titulo">Status</div>
+                            <div class="valor" id="trStatus">--</div>
+                        </div>
+
+                        <div class="card">
+                            <div class="titulo">Última atualização</div>
+                            <div class="valor" id="trUltimaAtualizacao">--</div>
+                        </div>
+
+                    </div>
+
+                    <div class="painel">
+                        <h3>Temperatura (°C)</h3>
+
+                        <div class="legenda">
+                            <span><i class="bolinha vermelho"></i> Máxima (26°C)</span>
+                            <span><i class="bolinha azul"></i> Mínima (20°C)</span>
+                        </div>
+
+                        <div class="grafico-wrapper">
+                            <canvas id="graficoTempoReal"></canvas>
+                        </div>
+                    </div>
+
+                </div>
+
+
+                <!-- MÉTRICA LATERAL: TEMPO REAL -->
+
+                <aside class="metricas-laterais">
+
+                    <div class="metrica">
+
+                        <div class="metrica-titulo">
+                            Status da sala
+                        </div>
+
+                        <div class="metrica-faixas duas-faixas">
+                            <div class="faixa faixa-normal" id="faixaTrNormal">
+                                NORMAL
+                            </div>
+
+                            <div class="faixa faixa-alerta" id="faixaTrAlerta">
+                                ALERTA
+                            </div>
+                        </div>
+
+                        <div class="metrica-resultado" id="resultadoTr">
+                            <span class="indicador"></span>
+                            <span id="textoResultadoTr">--</span>
+                        </div>
+
+                        <div class="metrica-descricao" id="descricaoTr"></div>
+
+                    </div>
+
+                </aside>
+
+            </div>
+
+        </div>
+
+
+        <!-- ========== TELA 3: HISTÓRICO (dados estáticos: fixo em Sala 1 / há 1 dia) ========== -->
+
+        <div class="vista" id="vistaHistorico">
+
+            <div class="filtros">
+
+                <div class="filtro">
+                    <label>Empresa</label>
+                    <div class="campo campo-empresa"></div>
+                </div>
+
+                <div class="filtro">
+                    <label>Filial</label>
+                    <select class="select-filial" onchange="trocarFilial(this.value)" autocomplete="off"></select>
+                </div>
+
+                <div class="filtro">
+                    <label>Sala</label>
+                    <select>
+                        <option value="1" selected>Sala 1</option>
+                        <option value="2">Sala 2</option>
+                        <option value="3">Sala 3</option>
+                        <option value="4">Sala 4</option>
+                        <option value="5">Sala 5</option>
+                    </select>
+                </div>
+
+                <div class="filtro">
+                    <label>Dia</label>
+                    <select>
+                        <option value="0">Hoje</option>
+                        <option value="1" selected>há 1 dia</option>
+                        <option value="2">há 2 dias</option>
+                    </select>
+                </div>
+
+            </div>
+
+
+            <div class="cards">
+
+                <div class="card">
+                    <div class="titulo">Máxima do período</div>
+                    <div class="valor">28.4 °C</div>
+                </div>
+
+                <div class="card">
+                    <div class="titulo">Mínima do período</div>
+                    <div class="valor">18.8 °C</div>
+                </div>
+
+                <div class="card">
+                    <div class="titulo">Tempo fora da faixa</div>
+                    <div class="valor">2h 30min</div>
+                </div>
+
+                <div class="card">
+                    <div class="titulo">Excursões</div>
+                    <div class="valor">2</div>
+                </div>
+
+            </div>
+
+
+            <div class="painel">
+
+                <h3>Temperatura (°C)</h3>
+
+                <div class="legenda">
+                    <span><i class="bolinha vermelho"></i> Máxima (26°C)</span>
+                    <span><i class="bolinha azul"></i> Mínima (20°C)</span>
+                </div>
+
+                <div class="grafico-wrapper">
+                    <canvas id="graficoHistorico"></canvas>
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <script src="../js/dashboard.js"></script>
+
+</body>
+
+</html>

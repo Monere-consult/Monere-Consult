@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - Monere Consult</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="css/header.css">
+    <link rel="stylesheet" href="css/style-login.css">
+</head>
+
+<body>
+
+    <header class="header">
+
+        <a href="index.html#inicio" class="logo">
+            <img src="assets/img/Monere Consult logo.svg" alt="Logo Monere Consult">
+
+            <h1 class="titulo">
+                <span class="titulo-azul">Monere</span>
+                <span class="titulo-branco">Consult</span>
+            </h1>
+        </a>
+
+        <div class="icone">
+
+            <ul class="navibar">
+                <li><a href="index.html#inicio">Início</a></li>
+                <li><a href="index.html#sobre-nos">Sobre nós</a></li>
+                <li><a href="index.html#solucoes">Soluções</a></li>
+                <li><a href="index.html#simulador">Simulador</a></li>
+                <li><a href="index.html#equipe">Nossa equipe</a></li>
+            </ul>
+
+            <a href="login.html" class="icone-login"
+                data-tooltip="Login" aria-label="Login">
+                <img src="assets/img/icone.svg" alt="">
+            </a>
+
+        </div>
+
+    </header>
+
+    <main>
+
+        <div class="caixa-imagem">
+            <img src="assets/img/foto-direito.png"
+                alt="Monitoramento de temperatura para animais">
+        </div>
+
+        <div class="caixa-login">
+
+            <div class="logo"><b>Monere</b> Consult</div>
+
+            <h1>Faça seu login!</h1>
+
+            <form>
+                <label for="ipt_email">Email:</label>
+
+                <div class="campo">
+                    <span>✉</span>
+                    <input type="text" id="ipt_email" placeholder="Digite seu e-mail" >
+                </div>
+
+                <label for="ipt_senha">Senha:</label>
+
+                <div class="campo">
+                    <span>🔒</span>
+                   <input type="password" id="ipt_senha" placeholder="Digite sua senha" >
+                </div>
+                
+                <button type="button" class="botao-cadastro" onclick="logar()">Login</button>
+            </form>
+            
+            <div id="div_msg"></div>
+            <div id="div_msgCerto"></div>
+
+            <p class="cadastro">
+                Não tem uma conta?
+                <a href="cadastro.html">Cadastre-se</a>
+            </p>
+
+
+        </div>
+
+    </main>
+
+<script>
+    // Quantidade inicial de tentativas de login
+    let tentativas = 3;
+
+    function logar() {
+
+        let email = ipt_email.value.trim();
+        let senha = ipt_senha.value;
+
+        // Bloqueio por excesso de tentativas
+        if (tentativas < 1) {
+            div_msg.innerHTML = "Bloqueado temporariamente por excesso de tentativas";
+            div_msgCerto.innerHTML = "";
+            return false;
+        }
+
+        if (email == "" || senha == "") {
+            div_msg.innerHTML = "Preencha o e-mail e a senha.";
+            div_msgCerto.innerHTML = "";
+            return false;
+        }
+
+        fetch("/usuarios/autenticar", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                emailServer: email,
+                senhaServer: senha
+            })
+        }).then(function (resposta) {
+
+            if (resposta.ok) {
+
+                resposta.json().then(function (json) {
+                    // Guarda os dados do usuário na sessão (usado por js/sessao.js e pelo dashboard)
+                    sessionStorage.ID_USUARIO = json.id;
+                    sessionStorage.NOME_USUARIO = json.nome;
+                    sessionStorage.EMAIL_USUARIO = json.email;
+                    sessionStorage.TIPO_USUARIO = json.tipo;
+
+                    div_msg.innerHTML = "";
+                    div_msgCerto.innerHTML = "Entrou";
+
+                    setTimeout(function () {
+                        window.location.href = "dashboard/dashboard.html";
+                    }, 800);
+                });
+
+            } else {
+
+                // Diminui uma tentativa quando o login está errado
+                tentativas--;
+                div_msgCerto.innerHTML = "";
+
+                if (tentativas > 0) {
+                    div_msg.innerHTML = `Login incorreto, tente novamente (Restam ${tentativas} tentativas)`;
+                } else {
+                    div_msg.innerHTML = "Bloqueado temporariamente por excesso de tentativas";
+                }
+            }
+
+        }).catch(function (erro) {
+            console.log(`#ERRO: ${erro}`);
+            div_msgCerto.innerHTML = "";
+            div_msg.innerHTML = "Não foi possível conectar ao servidor.";
+        });
+
+        return false;
+    }
+</script>
+
+</body>
+
+</html>
+
+
