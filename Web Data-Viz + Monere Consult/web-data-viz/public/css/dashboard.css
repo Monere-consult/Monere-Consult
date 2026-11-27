@@ -549,10 +549,13 @@ body {
 /* Verde com aviso amarelo = na faixa, mas perto do limite */
 .sala.normal.risco {
     border-color: var(--amarelo);
+    background-color: rgba(255, 255, 0, 0.637);
+     
 }
 
 .sala.normal.risco .sala-info {
-    color: var(--amarelo);
+    color: white;
+    
 }
 
 /* Vermelho = fora da faixa (acima ou abaixo) */
