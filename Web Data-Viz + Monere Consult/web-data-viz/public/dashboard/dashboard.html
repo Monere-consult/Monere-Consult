@@ -1,0 +1,984 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard de Temperatura | Monere Consult</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../css/dashboard.css">
+    <link rel="icon" href="../assets/icon/favicon2.ico">
+    <script src="../js/sessao.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+
+<!-- validarSessao() está no sessao.js: se ninguém fez login, volta para a tela de login -->
+<body onload="validarSessao()">
+
+    <!-- ========== MENU LATERAL ========== -->
+
+    <aside class="sidebar">
+
+        <a href="../index.html#inicio" class="logo">
+            <img src="../assets/img/Monere Consult logo.svg" alt="Logo Monere Consult">
+            <span class="logo-texto">
+                <span class="titulo-azul">Monere</span> <span class="titulo-branco">Consult</span>
+            </span>
+        </a>
+
+        <span class="menu-rotulo">Monitoramento</span>
+
+        <nav class="menu">
+            <button class="aba ativa" id="botaoGeral" onclick="mostrarAba('vistaGeral', 'botaoGeral')">
+                <svg viewBox="0 0 24 24" aria-hidden="true">
+                    <rect x="3" y="3" width="7" height="9" rx="1.5" />
+                    <rect x="14" y="3" width="7" height="5" rx="1.5" />
+                    <rect x="14" y="12" width="7" height="9" rx="1.5" />
+                    <rect x="3" y="16" width="7" height="5" rx="1.5" />
+                </svg>
+                Visão geral
+            </button>
+        </nav>
+
+        <!-- Rodapé do menu: usuário logado, empresa/filial e sair -->
+        <div class="sidebar-rodape">
+            <div class="usuario">
+                <!-- b_usuario é preenchido pelo validarSessao() do sessao.js -->
+                <strong id="b_usuario"></strong>
+                <span id="empresaFilialMenu">Carregando...</span>
+            </div>
+            <a href="#" onclick="limparSessao(); return false;" class="sair">Sair</a>
+        </div>
+
+    </aside>
+
+
+    <!-- ========== ÁREA PRINCIPAL ========== -->
+
+    <main class="principal">
+
+
+        <!-- ========== TELA 1: VISÃO GERAL ========== -->
+
+        <section class="vista ativa" id="vistaGeral">
+
+            <div class="topo">
+                <div>
+                    <h1>Visão geral</h1>
+                    <p>Situação atual de todas as salas monitoradas</p>
+                </div>
+
+                <!-- Empresa e filial são fixas: vêm do usuário que fez login (rota /salas/filial) -->
+                <div class="filtros">
+                    <div class="filtro">
+                        <label>Empresa</label>
+                        <div class="campo" id="campoEmpresa">--</div>
+                    </div>
+
+                    <div class="filtro">
+                        <label>Filial</label>
+                        <div class="campo" id="campoFilial">--</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="atualizacao" id="atualizacaoGeral">
+                <span class="pulso"></span> Carregando dados...
+            </div>
+
+            <!-- 1º: KPIs gerais (calculados pelo JavaScript do final da página) -->
+            <div class="cards" id="cardsGerais"></div>
+
+            <!-- 2º: Quadro de salas — clique em uma sala para abrir o gráfico dela -->
+            <div class="painel">
+                <div class="painel-cabecalho">
+                    <div>
+                        <h3>Salas da filial</h3>
+                        <p class="painel-subtitulo">Ordenadas por prioridade · clique em uma sala para ver o gráfico e os detalhes</p>
+                    </div>
+
+                    <div class="legenda">
+                        <span><i class="bolinha vermelho"></i> Fora da faixa</span>
+                        <span><i class="bolinha amarelo"></i> Perto do limite</span>
+                        <span><i class="bolinha cinza"></i> Sensor sem comunicação</span>
+                        <span><i class="bolinha verde"></i> Na faixa (20–26 °C)</span>
+                    </div>
+                </div>
+
+                <!-- Montado pela função montarQuadroSalas(), no JavaScript do final da página -->
+                <div class="quadro-salas" id="quadroSalas">
+                    <p class="mensagem-vazia">Carregando salas...</p>
+                </div>
+            </div>
+
+        </section>
+
+
+        <!-- ========== TELA 2: SALA (abre ao clicar no card de uma sala) ========== -->
+
+        <section class="vista" id="vistaSala">
+
+            <button class="voltar" onclick="mostrarAba('vistaGeral', 'botaoGeral')">← Todas as salas</button>
+
+            <div class="topo">
+                <div>
+                    <h1 id="tituloSala">Sala</h1>
+                    <p id="subtituloSala"></p>
+                </div>
+
+                <div class="filtros">
+                    <div class="filtro">
+                        <label>Sala</label>
+                        <!-- Opções criadas pelo JavaScript do final da página -->
+                        <select id="selectSala" onchange="mostrarSala(Number(this.value))" autocomplete="off"></select>
+                    </div>
+
+                    <div class="filtro">
+                        <label>Período</label>
+                        <!-- Últimas 24 h, ontem, há 2 dias ... há 7 dias (criadas pelo JavaScript do final da página) -->
+                        <select id="selectDia" onchange="trocarDia(Number(this.value))" autocomplete="off"></select>
+                    </div>
+                </div>
+            </div>
+
+            <div class="atualizacao" id="atualizacaoSala">
+                <span class="pulso"></span> Dados ao vivo
+            </div>
+
+            <!-- 1º: KPIs da sala, situação AGORA (preenchidos pelo JavaScript do final da página) -->
+            <div class="cards" id="cardsSala"></div>
+
+            <!-- 2º: Gráfico de linha do período escolhido -->
+            <div class="painel">
+                <div class="painel-cabecalho">
+                    <div>
+                        <h3 id="tituloGrafico">Temperatura · últimas 24 horas</h3>
+                        <p class="painel-subtitulo" id="resumoGrafico"></p>
+                    </div>
+
+                    <div class="legenda">
+                        <span><i class="bolinha laranja"></i> Temperatura</span>
+                        <span><i class="faixa-legenda"></i> Faixa ideal (20–26 °C)</span>
+                    </div>
+                </div>
+
+                <div class="grafico-wrapper">
+                    <canvas id="graficoSala"></canvas>
+                </div>
+            </div>
+
+        </section>
+
+    </main>
+
+    <!-- ===== JAVASCRIPT DA DASHBOARD =====
+         Busca os dados na API (rotas /salas e /medidas) e preenche a tela.
+         Fica no final do body para o HTML já estar carregado quando o código rodar. -->
+    <script>
+        // =====================================================================
+        // DASHBOARD MONERE CONSULT
+        // Os dados vêm da API (rotas /salas e /medidas), que busca no banco MySQL.
+        // =====================================================================
+
+
+        // =====================================================================
+        // CONFIGURAÇÕES
+        // =====================================================================
+
+        var LIMITE_MINIMO = 20;          // abaixo disso a sala está fora da faixa
+        var LIMITE_MAXIMO = 26;          // acima disso a sala está fora da faixa
+        var MARGEM_RISCO = 0.5;          // até 0,5 °C dos limites = "perto do limite"
+        var MINUTOS_SEM_SINAL = 5;       // sem medida há mais de 5 minutos = sensor sem comunicação
+        var SEGUNDOS_ATUALIZACAO = 30;   // de quanto em quanto tempo a dashboard busca os dados de novo
+
+        // Cores iguais às do dashboard.css
+        var corVerde = '#16c75a';
+        var corVermelha = '#ff4545';
+        var corLaranja = '#ff9f1c';
+        var corTexto = '#aaaabb';
+        var corGrade = 'rgba(255, 255, 255, 0.06)';
+
+        // Dados que a dashboard usa (preenchidos pela API)
+        var idBioterio = 0;       // filial do usuário logado
+        var nomeEmpresa = '';
+        var nomeFilial = '';
+        var salas = [];           // lista de salas da filial
+
+        // Sala e período que estão abertos na tela da sala
+        var salaAtual = 0;
+        var diaAtual = 0;         // 0 = últimas 24 h, 1 = ontem ... 7 = há 7 dias
+
+
+        // =====================================================================
+        // TROCA DE TELA (Visão geral <-> Sala)
+        // =====================================================================
+
+        function mostrarAba(telaSelecionada, botaoSelecionado) {
+
+            // esconde todas as telas
+            var telas = document.querySelectorAll('.vista');
+            for (var i = 0; i < telas.length; i++) {
+                telas[i].classList.remove('ativa');
+            }
+
+            // tira o destaque de todos os botões do menu
+            var botoes = document.querySelectorAll('.menu .aba');
+            for (var i = 0; i < botoes.length; i++) {
+                botoes[i].classList.remove('ativa');
+            }
+
+            // mostra a tela escolhida e destaca o botão
+            document.getElementById(telaSelecionada).classList.add('ativa');
+            document.getElementById(botaoSelecionado).classList.add('ativa');
+
+            // ajusta o tamanho do gráfico quando a tela aparece
+            graficoSala.resize();
+
+            // volta para o topo da página
+            window.scrollTo(0, 0);
+        }
+
+
+        // =====================================================================
+        // FUNÇÕES DE APOIO (formatação de textos)
+        // =====================================================================
+
+        // 22.8 -> "22,8 °C"   |   null -> "-- °C"
+        function formatarTemp(valor) {
+            if (valor == null) {
+                return '-- °C';
+            }
+            return valor.toFixed(1).replace('.', ',') + ' °C';
+        }
+
+        // 2.4 -> "2,4"
+        function formatarNumero(valor) {
+            return valor.toFixed(1).replace('.', ',');
+        }
+
+        // 96 -> "1h 36min"
+        function formatarMinutos(minutos) {
+            if (minutos < 60) {
+                return minutos + ' min';
+            }
+            return Math.floor(minutos / 60) + 'h ' + (minutos % 60) + 'min';
+        }
+
+        // Data de "diasAtras" dias antes de hoje -> "25/11"
+        function dataDoDia(diasAtras) {
+            var data = new Date();
+            data.setDate(data.getDate() - diasAtras);
+
+            var dia = String(data.getDate()).padStart(2, '0');
+            var mes = String(data.getMonth() + 1).padStart(2, '0');
+            return dia + '/' + mes;
+        }
+
+        // Nome do dia da semana de "diasAtras" dias antes de hoje -> "quarta"
+        function diaDaSemana(diasAtras) {
+            var nomes = ['domingo', 'segunda', 'terça', 'quarta', 'quinta', 'sexta', 'sábado'];
+            var data = new Date();
+            data.setDate(data.getDate() - diasAtras);
+            return nomes[data.getDay()];
+        }
+
+        // Procura uma sala na lista pelo id
+        function buscarSalaPorId(id) {
+            for (var i = 0; i < salas.length; i++) {
+                if (salas[i].id == id) {
+                    return salas[i];
+                }
+            }
+            return null;
+        }
+
+        // Monta o HTML de um card de KPI
+        function criarCard(classe, titulo, valor, classeValor, detalhe) {
+            return '<div class="card ' + classe + '">' +
+                       '<div class="titulo">' + titulo + '</div>' +
+                       '<div class="valor ' + classeValor + '">' + valor + '</div>' +
+                       '<div class="detalhe">' + detalhe + '</div>' +
+                   '</div>';
+        }
+
+
+        // =====================================================================
+        // REGRAS DE STATUS DA SALA
+        // =====================================================================
+
+        // Ex.: 25,5 °C a 26,0 °C ou 20,0 °C a 20,5 °C
+        function estaPertoDoLimite(sala) {
+            if (sala.status != 'normal') {
+                return false;
+            }
+            if (sala.temperatura >= LIMITE_MAXIMO - MARGEM_RISCO || sala.temperatura <= LIMITE_MINIMO + MARGEM_RISCO) {
+                return true;
+            }
+            return false;
+        }
+
+        function estaForaDaFaixa(sala) {
+            if (sala.status == 'acima' || sala.status == 'abaixo') {
+                return true;
+            }
+            return false;
+        }
+
+        // Texto curto que aparece no card de cada sala
+        function textoDaSala(sala) {
+            if (estaForaDaFaixa(sala)) {
+                if (sala.minutos == null) {
+                    return 'Fora da faixa';
+                }
+                return 'Fora da faixa · ' + formatarMinutos(sala.minutos);
+            }
+            if (sala.status == 'offline') {
+                if (sala.minutos == null) {
+                    return 'Sem dados';
+                }
+                return 'Sem sinal · ' + formatarMinutos(sala.minutos);
+            }
+            if (estaPertoDoLimite(sala)) {
+                return 'Perto do limite';
+            }
+            return 'Na faixa';
+        }
+
+        // Transforma uma linha que veio da API (rota /salas/listar) no objeto "sala" usado pela dashboard
+        function criarSala(linha) {
+            var sala = {
+                id: linha.id,
+                nome: linha.nome,
+                temperatura: null,
+                status: '',
+                minutos: null,    // há quanto tempo está fora da faixa / sem sinal
+                desde: ''         // horário em que isso começou
+            };
+
+            // o MySQL devolve DECIMAL como texto ("22.80"), por isso o Number()
+            if (linha.temperatura != null) {
+                sala.temperatura = Number(linha.temperatura);
+            }
+
+            // 1) Sensor sem comunicação: nunca mandou medida ou a última é mais antiga que 5 minutos
+            if (linha.minutos_sem_leitura == null || linha.minutos_sem_leitura > MINUTOS_SEM_SINAL) {
+                sala.status = 'offline';
+                sala.minutos = linha.minutos_sem_leitura;
+                sala.desde = linha.hora_ultima_leitura;
+
+            // 2) Fora da faixa: acima de 26 °C ou abaixo de 20 °C
+            } else if (sala.temperatura > LIMITE_MAXIMO) {
+                sala.status = 'acima';
+                sala.minutos = linha.minutos_desde_faixa;
+                sala.desde = linha.hora_ultima_na_faixa;
+
+            } else if (sala.temperatura < LIMITE_MINIMO) {
+                sala.status = 'abaixo';
+                sala.minutos = linha.minutos_desde_faixa;
+                sala.desde = linha.hora_ultima_na_faixa;
+
+            // 3) Na faixa
+            } else {
+                sala.status = 'normal';
+            }
+
+            return sala;
+        }
+
+
+        // =====================================================================
+        // BUSCA NA API
+        // =====================================================================
+
+        // 1º passo: descobre a empresa e a filial do usuário logado
+        function buscarFilial() {
+            var idUsuario = sessionStorage.ID_USUARIO;
+
+            fetch('/salas/filial/' + idUsuario).then(function (resposta) {
+
+                if (resposta.ok) {
+                    resposta.json().then(function (lista) {
+
+                        if (lista.length == 0) {
+                            mostrarMensagem('Seu usuário não está ligado a nenhuma empresa ou filial.');
+                            return;
+                        }
+
+                        idBioterio = lista[0].idBioterio;
+                        nomeEmpresa = lista[0].empresa;
+                        nomeFilial = lista[0].filial;
+
+                        document.getElementById('campoEmpresa').innerHTML = nomeEmpresa;
+                        document.getElementById('campoFilial').innerHTML = nomeFilial;
+                        document.getElementById('empresaFilialMenu').innerHTML = nomeEmpresa + ' · ' + nomeFilial;
+                        document.getElementById('subtituloSala').innerHTML = nomeEmpresa + ' · Filial ' + nomeFilial;
+
+                        // 2º passo: com a filial em mãos, busca as salas
+                        buscarSalas(true);
+
+                        // e depois continua buscando de tempos em tempos
+                        setInterval(function () {
+                            buscarSalas(false);
+                        }, SEGUNDOS_ATUALIZACAO * 1000);
+                    });
+                } else {
+                    console.log('Erro ao buscar a filial: ', resposta.status);
+                    mostrarMensagem('Não foi possível carregar a filial. Tente novamente.');
+                }
+
+            }).catch(function (erro) {
+                console.log(erro);
+                mostrarMensagem('Não foi possível conectar com o servidor.');
+            });
+        }
+
+        // 2º passo: busca as salas da filial com a última temperatura de cada uma
+        // primeiraVez = true só no carregamento da página (para montar os selects)
+        function buscarSalas(primeiraVez) {
+
+            fetch('/salas/listar/' + idBioterio).then(function (resposta) {
+
+                if (resposta.ok) {
+                    resposta.json().then(function (lista) {
+
+                        // transforma cada linha da API em uma sala
+                        salas = [];
+                        for (var i = 0; i < lista.length; i++) {
+                            salas.push(criarSala(lista[i]));
+                        }
+
+                        montarKpisGerais();
+                        montarQuadroSalas();
+
+                        if (primeiraVez) {
+                            preencherSelects();
+                        }
+
+                        // se a tela da sala estiver aberta, atualiza ela também
+                        if (document.getElementById('vistaSala').classList.contains('ativa')) {
+                            mostrarSala(salaAtual);
+                        }
+
+                        var agora = new Date().toLocaleTimeString('pt-BR');
+                        document.getElementById('atualizacaoGeral').innerHTML =
+                            '<span class="pulso"></span> Dados ao vivo · atualizado às ' + agora;
+                    });
+                } else {
+                    console.log('Erro ao buscar as salas: ', resposta.status);
+                }
+
+            }).catch(function (erro) {
+                console.log(erro);
+            });
+        }
+
+        // Mostra um aviso no lugar do quadro de salas
+        function mostrarMensagem(texto) {
+            document.getElementById('quadroSalas').innerHTML = '<p class="mensagem-vazia">' + texto + '</p>';
+            document.getElementById('atualizacaoGeral').innerHTML = texto;
+        }
+
+
+        // =====================================================================
+        // TELA INICIAL: KPIs GERAIS DA FILIAL
+        // Mesma ordem de cores do quadro: vermelho → amarelo → cinza
+        // =====================================================================
+
+        // "2 acima · 1 abaixo da faixa" — só mostra a parte que não for zero
+        function textoAcimaAbaixo(acima, abaixo) {
+            if (acima > 0 && abaixo > 0) {
+                return acima + ' acima · ' + abaixo + ' abaixo da faixa';
+            }
+            if (acima > 0) {
+                return 'Acima do limite máximo (26 °C)';
+            }
+            return 'Abaixo do limite mínimo (20 °C)';
+        }
+
+        function montarKpisGerais() {
+            var total = salas.length;
+
+            // conta as salas de cada situação
+            var acima = 0;
+            var abaixo = 0;
+            var perto = 0;
+            var offline = 0;
+            var maiorTempoSemSinal = null;   // há quanto tempo está o sensor mais antigo sem sinal
+
+            for (var i = 0; i < salas.length; i++) {
+                var sala = salas[i];
+
+                if (sala.status == 'acima') {
+                    acima++;
+                } else if (sala.status == 'abaixo') {
+                    abaixo++;
+                } else if (sala.status == 'offline') {
+                    offline++;
+                    if (sala.minutos != null && (maiorTempoSemSinal == null || sala.minutos > maiorTempoSemSinal)) {
+                        maiorTempoSemSinal = sala.minutos;
+                    }
+                } else if (estaPertoDoLimite(sala)) {
+                    perto++;
+                }
+            }
+
+            var fora = acima + abaixo;
+            var cards = '';
+
+            // 1) Salas fora da faixa agora (vermelho)
+            if (fora > 0) {
+                cards += criarCard('card-alerta', 'Salas fora da faixa agora',
+                    fora + ' <small>de ' + total + '</small>', 'status-atencao', textoAcimaAbaixo(acima, abaixo));
+            } else {
+                cards += criarCard('card-normal', 'Salas fora da faixa agora',
+                    '0 <small>de ' + total + '</small>', 'status-normal', 'Todas dentro de 20 °C a 26 °C');
+            }
+
+            // 2) Salas perto do limite (amarelo)
+            if (perto > 0) {
+                cards += criarCard('card-limite', 'Salas perto do limite',
+                    perto + ' <small>de ' + total + '</small>', 'status-limite', 'Até 0,5 °C de sair da faixa');
+            } else {
+                cards += criarCard('card-normal', 'Salas perto do limite',
+                    '0 <small>de ' + total + '</small>', 'status-normal', 'Todas com folga dentro da faixa');
+            }
+
+            // 3) Sensores sem comunicação (cinza)
+            if (offline > 0) {
+                var detalheOffline = 'Sensor nunca enviou dados';
+                if (maiorTempoSemSinal != null) {
+                    detalheOffline = 'Sem comunicação há ' + formatarMinutos(maiorTempoSemSinal);
+                }
+                cards += criarCard('card-offline', 'Sensores sem comunicação',
+                    offline + ' <small>de ' + total + '</small>', 'status-offline', detalheOffline);
+            } else {
+                cards += criarCard('card-normal', 'Sensores sem comunicação',
+                    '0 <small>de ' + total + '</small>', 'status-normal', 'Todos enviando dados');
+            }
+
+            document.getElementById('cardsGerais').innerHTML = cards;
+        }
+
+
+        // =====================================================================
+        // TELA INICIAL: QUADRO COM TODAS AS SALAS
+        // Ordem de prioridade: vermelho → amarelo → cinza → verde
+        // =====================================================================
+
+        function criarCardSala(sala) {
+            var classes = 'sala ' + sala.status;
+            if (estaPertoDoLimite(sala)) {
+                classes = classes + ' risco';
+            }
+
+            return '<button class="' + classes + '" onclick="abrirSala(' + sala.id + ')">' +
+                       '<span class="sala-nome">' + sala.nome + '</span>' +
+                       '<span class="sala-temp">' + formatarTemp(sala.temperatura) + '</span>' +
+                       '<span class="sala-info">' + textoDaSala(sala) + '</span>' +
+                   '</button>';
+        }
+
+        function montarQuadroSalas() {
+
+            if (salas.length == 0) {
+                document.getElementById('quadroSalas').innerHTML = '<p class="mensagem-vazia">Nenhuma sala cadastrada nesta filial.</p>';
+                return;
+            }
+
+            // separa as salas em 4 grupos, um para cada cor
+            var vermelhas = '';
+            var amarelas = '';
+            var cinzas = '';
+            var verdes = '';
+
+            for (var i = 0; i < salas.length; i++) {
+                var sala = salas[i];
+
+                if (estaForaDaFaixa(sala)) {
+                    vermelhas += criarCardSala(sala);
+                } else if (estaPertoDoLimite(sala)) {
+                    amarelas += criarCardSala(sala);
+                } else if (sala.status == 'offline') {
+                    cinzas += criarCardSala(sala);
+                } else {
+                    verdes += criarCardSala(sala);
+                }
+            }
+
+            // junta os grupos na ordem de prioridade
+            document.getElementById('quadroSalas').innerHTML = vermelhas + amarelas + cinzas + verdes;
+        }
+
+
+        // =====================================================================
+        // TELA DA SALA (abre ao clicar no card de uma sala)
+        // =====================================================================
+
+        // Desenha a FAIXA IDEAL (20 °C a 26 °C) como uma área verde clara no fundo do gráfico
+        var faixaIdeal = {
+            id: 'faixaIdeal',
+            beforeDatasetsDraw: function (chart) {
+                var ctx = chart.ctx;
+                var area = chart.chartArea;
+
+                var yMaxima = chart.scales.y.getPixelForValue(LIMITE_MAXIMO);
+                var yMinima = chart.scales.y.getPixelForValue(LIMITE_MINIMO);
+
+                ctx.save();
+
+                // área sombreada
+                ctx.fillStyle = 'rgba(22, 199, 90, 0.08)';
+                ctx.fillRect(area.left, yMaxima, area.right - area.left, yMinima - yMaxima);
+
+                // bordas tracejadas
+                ctx.setLineDash([6, 6]);
+                ctx.lineWidth = 1.5;
+                ctx.strokeStyle = 'rgba(22, 199, 90, 0.7)';
+
+                ctx.beginPath();
+                ctx.moveTo(area.left, yMaxima);
+                ctx.lineTo(area.right, yMaxima);
+                ctx.moveTo(area.left, yMinima);
+                ctx.lineTo(area.right, yMinima);
+                ctx.stroke();
+
+                ctx.restore();
+            }
+        };
+
+        // Cor padrão dos textos dos gráficos (eixos)
+        Chart.defaults.color = corTexto;
+        Chart.defaults.font.family = "'Montserrat', Arial, sans-serif";
+
+        var graficoSala = new Chart(document.getElementById('graficoSala'), {
+            type: 'line',
+            data: {
+                labels: [],
+                datasets: [{
+                    label: 'Temperatura média',
+                    data: [],
+                    borderColor: corLaranja,
+                    backgroundColor: corLaranja,
+                    borderWidth: 2.5,
+                    pointRadius: 3,
+                    tension: 0.3
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: { display: false },
+                    tooltip: {
+                        callbacks: {
+                            label: function (item) {
+                                return ' Média: ' + formatarTemp(item.parsed.y);
+                            }
+                        }
+                    }
+                },
+                scales: {
+                    x: { grid: { color: corGrade } },
+                    y: {
+                        min: 16,
+                        max: 30,
+                        grid: { color: corGrade },
+                        ticks: {
+                            callback: function (valor) {
+                                return valor + ' °C';
+                            }
+                        }
+                    }
+                }
+            },
+            plugins: [faixaIdeal]
+        });
+
+        // Clique no card da sala: abre a tela da sala já nas últimas 24 h
+        function abrirSala(id) {
+            diaAtual = 0;
+            document.getElementById('selectDia').value = 0;
+            mostrarAba('vistaSala', 'botaoGeral');
+            mostrarSala(id);
+        }
+
+        // Preenche os KPIs (situação AGORA) e o gráfico da sala
+        function mostrarSala(id) {
+            var sala = buscarSalaPorId(id);
+            if (sala == null) {
+                return;
+            }
+            salaAtual = sala.id;
+
+            document.getElementById('selectSala').value = sala.id;
+            document.getElementById('tituloSala').innerHTML = sala.nome;
+
+            // linha de atualização (última leitura)
+            var atualizacao = document.getElementById('atualizacaoSala');
+            if (sala.status == 'offline') {
+                atualizacao.classList.add('sem-sinal');
+                if (sala.desde == null) {
+                    atualizacao.innerHTML = '<span class="pulso"></span> Este sensor ainda não enviou nenhuma medida';
+                } else {
+                    atualizacao.innerHTML = '<span class="pulso"></span> Sensor sem comunicação · última leitura às ' + sala.desde;
+                }
+            } else {
+                atualizacao.classList.remove('sem-sinal');
+                var agora = new Date().toLocaleTimeString('pt-BR');
+                atualizacao.innerHTML = '<span class="pulso"></span> Dados ao vivo · atualizado às ' + agora;
+            }
+
+            // ----- KPIs da sala -----
+            var cards = '';
+
+            // 1) Temperatura
+            if (sala.status == 'offline') {
+                var detalheTemp = 'Nenhuma medida recebida';
+                if (sala.desde != null) {
+                    detalheTemp = 'às ' + sala.desde;
+                }
+                cards += criarCard('card-offline', 'Última temperatura recebida', formatarTemp(sala.temperatura), 'status-offline', detalheTemp);
+            } else if (estaForaDaFaixa(sala)) {
+                cards += criarCard('card-alerta', 'Temperatura atual', formatarTemp(sala.temperatura), 'status-atencao', 'Faixa ideal: 20 °C a 26 °C');
+            } else {
+                cards += criarCard('card-normal', 'Temperatura atual', formatarTemp(sala.temperatura), '', 'Faixa ideal: 20 °C a 26 °C');
+            }
+
+            // 2) Situação
+            if (sala.status == 'acima') {
+                cards += criarCard('card-alerta', 'Situação', 'Fora da faixa', 'status-atencao',
+                    '<span class="destaque-alerta">+' + formatarNumero(sala.temperatura - LIMITE_MAXIMO) + ' °C</span> acima do limite máximo');
+            } else if (sala.status == 'abaixo') {
+                cards += criarCard('card-alerta', 'Situação', 'Fora da faixa', 'status-atencao',
+                    '<span class="destaque-alerta">−' + formatarNumero(LIMITE_MINIMO - sala.temperatura) + ' °C</span> abaixo do limite mínimo');
+            } else if (sala.status == 'offline') {
+                cards += criarCard('card-offline', 'Situação', 'Sem sinal', 'status-offline', 'Não dá para saber a temperatura atual');
+            } else if (estaPertoDoLimite(sala)) {
+                cards += criarCard('card-limite', 'Situação', 'Perto do limite', 'status-limite', 'Ainda na faixa, mas a até 0,5 °C de sair');
+            } else {
+                cards += criarCard('card-normal', 'Situação', 'Na faixa', 'status-normal', 'Temperatura dentro dos limites');
+            }
+
+            // 3) Alerta ativo — há quanto tempo a sala está com problema
+            if (estaForaDaFaixa(sala)) {
+                if (sala.minutos == null) {
+                    cards += criarCard('card-alerta', 'Alerta ativo', 'Sim', 'status-atencao', 'Não esteve na faixa nas medidas registradas');
+                } else {
+                    cards += criarCard('card-alerta', 'Alerta ativo há', formatarMinutos(sala.minutos), 'status-atencao', 'última vez na faixa às ' + sala.desde);
+                }
+            } else if (sala.status == 'offline') {
+                if (sala.minutos == null) {
+                    cards += criarCard('card-offline', 'Sem comunicação', '--', 'status-offline', 'Sensor sem medidas');
+                } else {
+                    cards += criarCard('card-offline', 'Sem comunicação há', formatarMinutos(sala.minutos), 'status-offline', 'desde ' + sala.desde);
+                }
+            } else {
+                cards += criarCard('card-normal', 'Alerta ativo', 'Nenhum', 'status-normal', 'Sala funcionando normalmente');
+            }
+
+            // 4) Ocorrências nas últimas 24 h — começa como "carregando" e é preenchido pela API
+            cards += '<div class="card" id="cardOcorrencias">' +
+                         '<div class="titulo">Ocorrências nas últimas 24 h</div>' +
+                         '<div class="valor">...</div>' +
+                         '<div class="detalhe">Carregando</div>' +
+                     '</div>';
+
+            document.getElementById('cardsSala').innerHTML = cards;
+
+            buscarOcorrencias(sala.id);
+            atualizarGrafico();
+        }
+
+        // Uma hora "saiu da faixa" se a máxima passou de 26 °C ou a mínima ficou abaixo de 20 °C
+        function horaForaDaFaixa(linha) {
+            if (Number(linha.maxima) > LIMITE_MAXIMO || Number(linha.minima) < LIMITE_MINIMO) {
+                return true;
+            }
+            return false;
+        }
+
+        // KPI 4: quantas vezes a sala saiu da faixa nas últimas 24 h
+        function buscarOcorrencias(idSala) {
+
+            fetch('/medidas/porHora/' + idSala + '/0').then(function (resposta) {
+
+                if (resposta.ok) {
+                    resposta.json().then(function (lista) {
+
+                        // se o usuário já trocou de sala, ignora esta resposta
+                        if (idSala != salaAtual) {
+                            return;
+                        }
+
+                        var ocorrencias = 0;      // quantas vezes SAIU da faixa
+                        var horasFora = 0;        // quantas horas teve temperatura fora da faixa
+                        var horaAnteriorFora = false;
+
+                        for (var i = 0; i < lista.length; i++) {
+                            var fora = horaForaDaFaixa(lista[i]);
+
+                            if (fora) {
+                                horasFora++;
+                                // só conta uma nova ocorrência quando a hora anterior estava normal
+                                if (horaAnteriorFora == false) {
+                                    ocorrencias++;
+                                }
+                            }
+                            horaAnteriorFora = fora;
+                        }
+
+                        var card = document.getElementById('cardOcorrencias');
+                        if (ocorrencias > 0) {
+                            card.className = 'card card-alerta';
+                            card.innerHTML =
+                                '<div class="titulo">Ocorrências nas últimas 24 h</div>' +
+                                '<div class="valor">' + ocorrencias + '</div>' +
+                                '<div class="detalhe">' + horasFora + 'h com temperatura fora da faixa</div>';
+                        } else {
+                            card.className = 'card card-normal';
+                            card.innerHTML =
+                                '<div class="titulo">Ocorrências nas últimas 24 h</div>' +
+                                '<div class="valor">0</div>' +
+                                '<div class="detalhe">Não saiu da faixa</div>';
+                        }
+                    });
+                } else {
+                    console.log('Erro ao buscar as ocorrências: ', resposta.status);
+                }
+
+            }).catch(function (erro) {
+                console.log(erro);
+            });
+        }
+
+        // Troca o período do gráfico (0 = últimas 24 h, 1 = ontem ... 7 = há 7 dias)
+        function trocarDia(diasAtras) {
+            diaAtual = diasAtras;
+            atualizarGrafico();
+        }
+
+        // Busca as temperaturas por hora da sala/período escolhidos e desenha o gráfico
+        function atualizarGrafico() {
+            var idSala = salaAtual;
+            var dia = diaAtual;
+
+            // título do gráfico
+            var titulo = 'Temperatura · últimas 24 horas';
+            if (dia == 1) {
+                titulo = 'Temperatura · ontem, ' + diaDaSemana(1) + ' ' + dataDoDia(1);
+            } else if (dia > 1) {
+                titulo = 'Temperatura · ' + diaDaSemana(dia) + ', ' + dataDoDia(dia);
+            }
+            document.getElementById('tituloGrafico').innerHTML = titulo;
+
+            fetch('/medidas/porHora/' + idSala + '/' + dia).then(function (resposta) {
+
+                if (resposta.ok) {
+                    resposta.json().then(function (lista) {
+
+                        // se o usuário já trocou de sala ou de período, ignora esta resposta
+                        if (idSala != salaAtual || dia != diaAtual) {
+                            return;
+                        }
+
+                        var horas = [];          // eixo X: "14h", "15h"...
+                        var medias = [];         // eixo Y: temperatura média de cada hora
+                        var coresPontos = [];    // ponto vermelho = naquela hora saiu da faixa
+
+                        var maxima = null;
+                        var minima = null;
+                        var horasFora = 0;
+
+                        for (var i = 0; i < lista.length; i++) {
+                            var linha = lista[i];
+
+                            // dia_hora vem como "2026-11-27 14": as posições 11 e 12 são a hora
+                            horas.push(linha.dia_hora.substring(11, 13) + 'h');
+                            medias.push(Number(linha.media));
+
+                            if (horaForaDaFaixa(linha)) {
+                                coresPontos.push(corVermelha);
+                                horasFora++;
+                            } else {
+                                coresPontos.push(corLaranja);
+                            }
+
+                            // maior e menor temperatura do período
+                            if (maxima == null || Number(linha.maxima) > maxima) {
+                                maxima = Number(linha.maxima);
+                            }
+                            if (minima == null || Number(linha.minima) < minima) {
+                                minima = Number(linha.minima);
+                            }
+                        }
+
+                        // resumo embaixo do título
+                        var resumo = '';
+                        if (lista.length == 0) {
+                            resumo = 'Nenhuma medida registrada neste período';
+                        } else {
+                            resumo = 'Máxima ' + formatarTemp(maxima) + ' · Mínima ' + formatarTemp(minima) + ' · ';
+                            if (horasFora == 0) {
+                                resumo += 'Sempre dentro da faixa';
+                            } else {
+                                resumo += horasFora + 'h fora da faixa';
+                            }
+                            if (lista.length < 24) {
+                                resumo += ' · ' + (24 - lista.length) + 'h sem dados';
+                            }
+                        }
+                        document.getElementById('resumoGrafico').innerHTML = resumo;
+
+                        // atualiza o gráfico
+                        graficoSala.data.labels = horas;
+                        graficoSala.data.datasets[0].data = medias;
+                        graficoSala.data.datasets[0].pointBackgroundColor = coresPontos;
+                        graficoSala.data.datasets[0].pointBorderColor = coresPontos;
+                        graficoSala.update();
+                    });
+                } else {
+                    console.log('Erro ao buscar as medidas: ', resposta.status);
+                }
+
+            }).catch(function (erro) {
+                console.log(erro);
+            });
+        }
+
+
+        // =====================================================================
+        // PREENCHE OS SELECTS (salas e períodos)
+        // =====================================================================
+
+        function preencherSelects() {
+            var opcoesSalas = '';
+            for (var i = 0; i < salas.length; i++) {
+                opcoesSalas += '<option value="' + salas[i].id + '">' + salas[i].nome + '</option>';
+            }
+            document.getElementById('selectSala').innerHTML = opcoesSalas;
+
+            // Últimas 24 horas, Ontem, Há 2 dias ... Há 7 dias
+            var opcoesDias = '<option value="0">Últimas 24 horas</option>';
+            for (var d = 1; d <= 7; d++) {
+                var nome = 'Há ' + d + ' dias';
+                if (d == 1) {
+                    nome = 'Ontem';
+                }
+                opcoesDias += '<option value="' + d + '">' + nome + ' (' + dataDoDia(d) + ')</option>';
+            }
+            document.getElementById('selectDia').innerHTML = opcoesDias;
+        }
+
+
+        // =====================================================================
+        // INÍCIO: só busca os dados se alguém fez login
+        // =====================================================================
+
+        if (sessionStorage.ID_USUARIO != undefined) {
+            buscarFilial();
+        }
+    </script>
+
+</body>
+
+</html>

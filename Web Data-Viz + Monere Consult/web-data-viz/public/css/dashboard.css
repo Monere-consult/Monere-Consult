@@ -668,3 +668,12 @@ body {
         grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
     }
 }
+
+
+/* Aviso que aparece no lugar do quadro ("Carregando salas...", "Nenhuma sala cadastrada...") */
+.mensagem-vazia {
+    grid-column: 1 / -1;
+    padding: 20px 0;
+    font-size: 14px;
+    color: var(--texto-suave);
+}
