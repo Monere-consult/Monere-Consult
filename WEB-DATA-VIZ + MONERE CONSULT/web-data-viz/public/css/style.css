@@ -37,7 +37,7 @@ rgba(13, 16, 38, 0.15) 92%,
 rgba(13, 16, 38, 0.55) 96%,
 #0D1026 100%
 ),
-url('img/fundo_azulado.svg');
+url('../assets/img/fundo_azulado.svg');
 
 background-repeat: no-repeat;
 background-size: cover;
