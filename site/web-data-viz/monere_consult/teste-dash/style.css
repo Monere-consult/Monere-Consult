@@ -4,159 +4,190 @@
     box-sizing: border-box;
 }
 
+:root {
+    --fundo: #121821;
+    --superficie: #171f2b;
+    --borda: #222b3a;
+    --azul-escuro: #08253f;
+    --azul: #1565af;
+    --ciano: #00ffff;
+    --texto: #ffffff;
+    --texto-suave: #aaaabb;
+
+    --verde: #16c75a;
+    --amarelo: #f2c500;
+    --vermelho: #ff4545;
+    --frio: #4f8cff;
+    --laranja: #ff9f1c;
+    --cinza: #8c96a5;
+
+    --largura-menu: 250px;
+}
+
 body {
-    margin: 0;
-    padding: 100px 40px 30px;
-    background: #1e1e1e;
-    color: #fff;
+    background: var(--fundo);
+    color: var(--texto);
     font-family: 'Montserrat', Arial, sans-serif;
 }
 
 
-/* ---------- Header (igual ao do site) ---------- */
+/* ==========================================
+   MENU LATERAL
+   ========================================== */
 
-.header {
+.sidebar {
     position: fixed;
     top: 0;
     left: 0;
-    width: 100%;
-    height: 65px;
-    z-index: 1000;
+    bottom: 0;
+    width: var(--largura-menu);
     display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 0 22px;
-    background-color: #08253f;
-    border-bottom: 2px solid #1565af;
+    flex-direction: column;
+    gap: 6px;
+    padding: 22px 16px;
+    background: var(--azul-escuro);
+    border-right: 2px solid var(--azul);
     font-family: 'Poppins', Arial, sans-serif;
+    z-index: 1000;
 }
 
-.header .logo {
+.logo {
     display: flex;
     align-items: center;
-    gap: 18px;
+    gap: 12px;
+    padding: 0 6px 22px;
+    margin-bottom: 10px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
     text-decoration: none;
 }
 
-.header .logo img {
-    height: 50px;
+.logo img {
+    height: 40px;
     width: auto;
-    display: block;
 }
 
-.header .titulo {
-    font-size: 24px;
+.logo-texto {
+    font-size: 20px;
     font-weight: 700;
     line-height: 1;
 }
 
-.header .titulo-azul {
-    color: #00ffff;
+.titulo-azul {
+    color: var(--ciano);
 }
 
-.header .titulo-branco {
-    color: #fff;
+.titulo-branco {
+    color: var(--texto);
 }
 
-.header .icone {
+.menu-rotulo {
+    margin: 14px 10px 4px;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: #7f8fa6;
+}
+
+.menu {
     display: flex;
-    align-items: center;
-    gap: 36px;
+    flex-direction: column;
+    gap: 4px;
 }
 
-.header .navibar {
-    display: flex;
-    align-items: center;
-    gap: 28px;
-    list-style: none;
-}
-
-.header .navibar a {
-    color: #fff;
-    text-decoration: none;
-    font-size: 16px;
-    font-weight: 500;
-    transition: color 0.3s ease;
-}
-
-.header .navibar a:hover {
-    color: #00ffff;
-}
-
-.header .icone-login {
-    position: relative;
-    display: flex;
-    align-items: center;
-}
-
-.header .icone-login img {
-    width: 40px;
-    height: 40px;
-    display: block;
-}
-
-.header .icone-login::after {
-    content: attr(data-tooltip);
-    position: absolute;
-    top: 100%;
-    right: 0;
-    margin-top: 10px;
-    padding: 4px 10px;
-    border-radius: 6px;
-    background: #1565af;
-    color: #fff;
-    font-size: 12px;
-    opacity: 0;
-    pointer-events: none;
-    transition: opacity 0.2s ease;
-}
-
-.header .icone-login:hover::after {
-    opacity: 1;
-}
-
-
-/* ---------- Container ---------- */
-
-.container {
-    margin: 0 auto;
-    background: #171f2b;
-    border: 1px solid #222b3a;
-    border-radius: 8px;
-    padding: 25px;
-    min-height: 900px;
-    width: min(1550px, 100%);
-}
-
-
-/* ---------- Abas ---------- */
-
-.abas {
-    display: flex;
-    gap: 8px;
-    margin-bottom: 20px;
-    border-bottom: 1px solid #222b3a;
-}
-
+/* .aba agora é um item do menu lateral (o script.js continua usando a classe .ativa) */
 .aba {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    width: 100%;
+    padding: 11px 12px;
     background: none;
     border: none;
-    border-bottom: 3px solid transparent;
-    color: #aaaabb;
+    border-left: 3px solid transparent;
+    border-radius: 6px;
+    color: #c9d3e0;
     font-family: inherit;
-    font-size: 14px;
-    font-weight: 600;
-    padding: 10px 18px;
+    font-size: 15px;
+    font-weight: 500;
+    text-align: left;
+    text-decoration: none;
     cursor: pointer;
+    transition: background 0.2s ease, color 0.2s ease;
+}
+
+.aba svg {
+    width: 20px;
+    height: 20px;
+    flex-shrink: 0;
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 2;
+    stroke-linecap: round;
+    stroke-linejoin: round;
 }
 
 .aba:hover {
-    color: #fff;
+    background: rgba(255, 255, 255, 0.06);
+    color: var(--texto);
 }
 
 .aba.ativa {
-    color: #fff;
-    border-bottom-color: #e8620c;
+    background: rgba(21, 101, 175, 0.35);
+    border-left-color: #e8620c;
+    color: var(--texto);
+}
+
+.sidebar-rodape {
+    margin-top: auto;
+    padding-top: 16px;
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.usuario {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    padding: 0 6px;
+}
+
+.usuario strong {
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.usuario span {
+    font-size: 12px;
+    color: var(--texto-suave);
+}
+
+.sair {
+    padding: 9px 12px;
+    border: 1px solid var(--azul);
+    border-radius: 6px;
+    color: var(--texto);
+    font-size: 14px;
+    text-align: center;
+    text-decoration: none;
+    transition: background 0.2s ease;
+}
+
+.sair:hover {
+    background: var(--azul);
+}
+
+
+/* ==========================================
+   ÁREA PRINCIPAL
+   ========================================== */
+
+.principal {
+    margin-left: var(--largura-menu);
+    padding: 28px 36px 40px;
+    max-width: calc(1500px + var(--largura-menu));
 }
 
 
@@ -167,7 +198,60 @@ body {
 }
 
 .vista.ativa {
-    display: block;
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+}
+
+
+/* ---------- Topo de cada tela: título + filtros ---------- */
+
+.topo {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    flex-wrap: wrap;
+    gap: 16px;
+}
+
+.topo h1 {
+    font-family: 'Poppins', Arial, sans-serif;
+    font-size: 26px;
+    font-weight: 600;
+}
+
+.topo p {
+    margin-top: 4px;
+    font-size: 14px;
+    color: var(--texto-suave);
+}
+
+.atualizacao {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-top: -8px;
+    font-size: 13px;
+    color: var(--texto-suave);
+}
+
+.pulso {
+    width: 9px;
+    height: 9px;
+    border-radius: 50%;
+    background: var(--verde);
+    box-shadow: 0 0 0 0 rgba(22, 199, 90, 0.6);
+    animation: pulso 2s infinite;
+}
+
+@keyframes pulso {
+    70% {
+        box-shadow: 0 0 0 8px rgba(22, 199, 90, 0);
+    }
+
+    100% {
+        box-shadow: 0 0 0 0 rgba(22, 199, 90, 0);
+    }
 }
 
 
@@ -175,36 +259,32 @@ body {
 
 .filtros {
     display: flex;
+    flex-wrap: wrap;
     gap: 12px;
-    margin-bottom: 14px;
-    padding: 16px;
-    border: 1px solid #222b3a;
-    border-radius: 6px;
-    background: #171f2b;
 }
 
 .filtro {
-    width: 230px;
+    width: 180px;
 }
 
 .filtro label {
     display: block;
     font-size: 12px;
-    font-weight: 300;
-    color: #aaaabb;
+    font-weight: 400;
+    color: var(--texto-suave);
     margin-bottom: 4px;
 }
 
 .filtro select,
 .filtro .campo {
     width: 100%;
-    background: #171f2b;
-    color: #fff;
-    border: 1px solid #222b3a;
+    background: var(--superficie);
+    color: var(--texto);
+    border: 1px solid var(--borda);
     border-radius: 6px;
-    padding: 12px;
+    padding: 10px 12px;
     font-family: inherit;
-    font-size: 15px;
+    font-size: 14px;
     font-weight: 600;
 }
 
@@ -212,86 +292,144 @@ body {
     cursor: pointer;
 }
 
+/* "Há 7 dias (19/11)" precisa de um pouco mais de espaço */
+.filtro:has(#selectDia) {
+    width: 210px;
+}
+
+.filtro select:focus {
+    outline: 2px solid var(--azul);
+}
+
 .filtro select option {
-    background: #171f2b;
+    background: var(--superficie);
 }
 
 
-/* ---------- Cards ---------- */
+/* ==========================================
+   KPIs (CARDS)
+   ========================================== */
 
 .cards {
-    display: flex;
-    flex: 1;
-    gap: 12px;
-    margin-bottom: 20px;
-    background-color: #08253f;
-    border: 1px solid #1565af;
-    border-radius: 6px;
-    padding: 16px;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+    gap: 14px;
 }
 
 .card {
-    flex: 1;
-    background: #171f2b;
-    border: 1px solid #222b3a;
-    border-radius: 6px;
-    padding: 16px;
+    position: relative;
+    overflow: hidden;
+    background: var(--superficie);
+    border: 1px solid var(--borda);
+    border-radius: 8px;
+    padding: 18px 18px 16px 22px;
+}
+
+/* Faixa colorida à esquerda indica a condição do card */
+.card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    width: 4px;
+    background: var(--azul);
+}
+
+.card-normal::before {
+    background: var(--verde);
+}
+
+.card-alerta::before {
+    background: var(--vermelho);
+}
+
+.card-offline::before {
+    background: var(--cinza);
+}
+
+.card-limite::before {
+    background: var(--amarelo);
 }
 
 .card .titulo {
     font-size: 13px;
-    font-weight: 300;
+    font-weight: 400;
     color: #ccdddd;
     margin-bottom: 8px;
 }
 
 .card .valor {
-    font-size: 22px;
-    font-weight: 600;
+    font-size: 28px;
+    font-weight: 700;
+    line-height: 1.1;
+}
+
+.card .valor small {
+    font-size: 15px;
+    font-weight: 400;
+    color: var(--texto-suave);
+}
+
+.card .detalhe {
+    margin-top: 8px;
+    font-size: 12px;
+    color: var(--texto-suave);
 }
 
 .status-normal {
-    color: #0a8a0a;
+    color: var(--verde);
 }
 
 .status-atencao {
-    color: #f20000;
+    color: var(--vermelho);
 }
 
-.detalhe-excursao {
-    font-size: 11px;
-    color: #aaaabb;
-    margin-top: 6px;
+.status-offline {
+    color: var(--cinza);
 }
 
-.detalhe-excursao span {
-    color: #ff4545;
+.status-limite {
+    color: var(--amarelo);
+}
+
+.destaque-alerta {
+    color: var(--vermelho);
     font-weight: 600;
 }
 
 
-/* ---------- Painel do gráfico ---------- */
+/* ==========================================
+   PAINÉIS (GRÁFICO E ALERTAS)
+   ========================================== */
 
 .painel {
-    background: #171f2b;
-    border: 1px solid #1565af;
-    border-radius: 6px;
-    padding: 16px;
+    background: var(--superficie);
+    border: 1px solid var(--borda);
+    border-radius: 8px;
+    padding: 18px 20px;
+}
+
+.painel-cabecalho {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-bottom: 14px;
 }
 
 .painel h3 {
-    margin: 0 0 6px;
-    font-size: 15px;
+    font-size: 16px;
     font-weight: 600;
 }
 
 .legenda {
     display: flex;
-    justify-content: center;
-    gap: 22px;
-    font-size: 11px;
-    font-weight: 300;
-    margin-bottom: 8px;
+    flex-wrap: wrap;
+    gap: 18px;
+    font-size: 12px;
+    color: #ccdddd;
 }
 
 .legenda span {
@@ -307,208 +445,225 @@ body {
     display: inline-block;
 }
 
+.verde {
+    background: var(--verde);
+}
+
+.amarelo {
+    background: var(--amarelo);
+}
+
 .vermelho {
-    background: #d71920;
+    background: var(--vermelho);
+}
+
+.laranja {
+    background: var(--laranja);
 }
 
 .azul {
-    background: #1f4fe0;
+    background: var(--frio);
+}
+
+.cinza {
+    background: var(--cinza);
+}
+
+.faixa-legenda {
+    width: 18px;
+    height: 11px;
+    border-radius: 2px;
+    background: rgba(22, 199, 90, 0.18);
+    border-top: 1px dashed var(--verde);
+    border-bottom: 1px dashed var(--verde);
 }
 
 .grafico-wrapper {
     position: relative;
-    height: 320px;
+    height: 360px;
     width: 100%;
-}
-
-
-/* 
-   NOVAS MÉTRICAS LATERAIS
- */
-
-
-/* ---------- Organização das duas colunas ---------- */
-
-.area-dashboard {
-    display: grid;
-    grid-template-columns: minmax(0, 1fr) 320px;
-    gap: 20px;
-    align-items: start;
-}
-
-.conteudo-principal {
-    min-width: 0;
-}
-
-
-/* ---------- Coluna lateral ---------- */
-
-.metricas-laterais {
-    display: flex;
-    flex-direction: column;
-    gap: 16px;
-}
-
-
-/* ---------- Painel de cada métrica ---------- */
-
-.metrica {
-    background: #171f2b;
-    border: 2px solid #222b3a;
-    border-radius: 8px;
-    overflow: hidden;
-}
-
-.metrica-titulo {
-    background: #08253f;
-    border-bottom: 1px solid #1565af;
-    padding: 18px 15px;
-    font-size: 18px;
-    font-weight: 600;
-    color: #fff;
-}
-
-
-/* ---------- Faixas coloridas ---------- */
-
-.metrica-faixas {
-    display: grid;
-    width: 100%;
-}
-
-.duas-faixas {
-    grid-template-columns: 1fr 1fr;
-}
-
-.tres-faixas {
-    grid-template-columns: 1fr 1fr 1fr;
-}
-
-.faixa {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    min-height: 90px;
-    padding: 12px 5px;
-    font-size: 13px;
-    font-weight: 700;
-    color: #fff;
-    opacity: 0.65;
-    transition: 0.3s;
-}
-
-.faixa.selecionada {
-    opacity: 1;
-    border-bottom: 4px solid #fff;
-}
-
-
-/* Verde */
-
-.faixa-normal {
-    background: #168447;
-}
-
-/* Amarelo */
-
-.faixa-limite {
-    background: #d69a20;
-}
-
-/* Vermelho */
-
-.faixa-alerta {
-    background: #c62828;
-}
-
-
-/* ---------- Resultado atual ---------- */
-
-.metrica-resultado {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    padding: 20px 15px 8px;
-    font-size: 21px;
-    font-weight: 700;
-}
-
-.indicador {
-    width: 13px;
-    height: 13px;
-    border-radius: 50%;
-    display: inline-block;
-}
-
-
-/* Resultado normal */
-
-.metrica-resultado.normal {
-    color: #16c75a;
-}
-
-.metrica-resultado.normal .indicador {
-    background: #16c75a;
-}
-
-
-/* Resultado em alerta */
-
-.metrica-resultado.alerta {
-    color: #ff4545;
-}
-
-.metrica-resultado.alerta .indicador {
-    background: #ff4545;
-}
-
-
-/* Resultado no limite */
-
-.metrica-resultado.limite {
-    color: #f2c500;
-}
-
-.metrica-resultado.limite .indicador {
-    background: #f2c500;
-}
-
-
-/* ---------- Descrição da métrica ---------- */
-
-.metrica-descricao {
-    padding: 5px 15px 20px;
-    font-size: 14px;
-    line-height: 1.6;
-    color: #aaaabb;
 }
 
 
 /* ==========================================
-   TEMPO REAL: TROCA DE SALA SÓ COM CSS
+   VISÃO GERAL: QUADRO DE SALAS
    ========================================== */
 
-/* Por padrão aparece a Sala 1, então tudo da Sala 2 fica escondido */
-
-#cardTempSala2,
-#cardStatusSala2,
-#metricaSala2 {
-    display: none;
+.painel-subtitulo {
+    margin-top: 3px;
+    font-size: 12px;
+    color: var(--texto-suave);
 }
 
-/* Quando a "Sala 2" está escolhida no select (:has = "que tenha"), esconde tudo da Sala 1 */
-
-#vistaTempoReal:has(#opcaoSala2:checked) #cardTempSala1,
-#vistaTempoReal:has(#opcaoSala2:checked) #cardStatusSala1,
-#vistaTempoReal:has(#opcaoSala2:checked) #metricaSala1 {
-    display: none;
+.quadro-salas {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 12px;
 }
 
-/* ...e mostra tudo da Sala 2 */
+.sala {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    padding: 14px;
+    border: 2px solid transparent;
+    border-radius: 8px;
+    color: var(--texto);
+    font-family: inherit;
+    text-align: left;
+    cursor: pointer;
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
 
-#vistaTempoReal:has(#opcaoSala2:checked) #cardTempSala2,
-#vistaTempoReal:has(#opcaoSala2:checked) #cardStatusSala2,
-#vistaTempoReal:has(#opcaoSala2:checked) #metricaSala2 {
-    display: block;
+.sala:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.35);
+}
+
+.sala-nome {
+    font-size: 14px;
+    font-weight: 700;
+}
+
+.sala-temp {
+    font-size: 26px;
+    font-weight: 700;
+    line-height: 1.15;
+}
+
+.sala-info {
+    font-size: 12px;
+    font-weight: 600;
+}
+
+/* Verde = na faixa */
+.sala.normal {
+    background: rgba(22, 199, 90, 0.14);
+    border-color: rgba(22, 199, 90, 0.55);
+}
+
+.sala.normal .sala-info {
+    color: var(--verde);
+}
+
+/* Amarelo = na faixa, mas perto do limite */
+.sala.normal.risco {
+    background: rgba(242, 197, 0, 0.18);
+    border-color: var(--amarelo);
+}
+
+.sala.normal.risco .sala-temp,
+.sala.normal.risco .sala-info {
+    color: #ffd84d;
+}
+
+/* Vermelho = fora da faixa (acima ou abaixo) */
+.sala.acima,
+.sala.abaixo {
+    background: rgba(255, 69, 69, 0.22);
+    border-color: var(--vermelho);
+}
+
+.sala.acima .sala-temp,
+.sala.abaixo .sala-temp,
+.sala.acima .sala-info,
+.sala.abaixo .sala-info {
+    color: #ff6b6b;
+}
+
+/* Cinza = sensor sem comunicação */
+.sala.offline {
+    background: rgba(140, 150, 165, 0.12);
+    border: 2px dashed var(--cinza);
+}
+
+.sala.offline .sala-temp,
+.sala.offline .sala-info {
+    color: var(--cinza);
+}
+
+
+/* ==========================================
+   DASHBOARD DA SALA
+   ========================================== */
+
+.voltar {
+    align-self: flex-start;
+    padding: 7px 14px;
+    background: none;
+    border: 1px solid var(--borda);
+    border-radius: 6px;
+    color: var(--texto-suave);
+    font-family: inherit;
+    font-size: 13px;
+    cursor: pointer;
+}
+
+.voltar:hover {
+    color: var(--texto);
+    border-color: var(--azul);
+}
+
+.atualizacao.sem-sinal .pulso {
+    background: var(--cinza);
+    animation: none;
+}
+
+
+/* ==========================================
+   TELAS MENORES: o menu vira uma barra no topo
+   ========================================== */
+
+@media (max-width: 900px) {
+
+    .sidebar {
+        position: static;
+        width: 100%;
+        flex-direction: row;
+        flex-wrap: wrap;
+        align-items: center;
+        padding: 12px 16px;
+        border-right: none;
+        border-bottom: 2px solid var(--azul);
+    }
+
+    .logo {
+        padding: 0;
+        margin: 0 12px 0 0;
+        border: none;
+    }
+
+    .menu-rotulo,
+    .usuario {
+        display: none;
+    }
+
+    .menu {
+        flex-direction: row;
+    }
+
+    .aba {
+        width: auto;
+        border-left: none;
+        border-bottom: 3px solid transparent;
+    }
+
+    .aba.ativa {
+        border-bottom-color: #e8620c;
+    }
+
+    .sidebar-rodape {
+        margin: 0 0 0 auto;
+        padding: 0;
+        border: none;
+    }
+
+    .principal {
+        margin-left: 0;
+        padding: 20px 16px 32px;
+    }
+
+    .quadro-salas {
+        grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+    }
 }
